@@ -1,5 +1,7 @@
 # covid-information-manager
 
+# Fork về Github, rồi clone về nhé mọi người
+
 ### Steps when working with Git/Github:
     - ALWAYS pull from master to update newest source code
     - Checkout new branch to work on your feature. Convention: feature/[feature-name], fix/[bug-name],…
