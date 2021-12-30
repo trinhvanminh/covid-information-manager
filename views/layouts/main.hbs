@@ -10,6 +10,11 @@
 </head>
 <body>
     <div class="app">
+        {{#if message}}
+            <div class="alert alert-primary" role="alert">
+                {{message}}
+            </div>
+        {{/if}}
         <div class="header">
             {{>header}}
         </div>
