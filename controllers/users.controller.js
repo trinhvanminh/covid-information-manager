@@ -13,9 +13,10 @@ class usersController {
       ])
       .then((data) => {
         if (data.rowCount == 0) {
-          console.log("mat khau khong chinh xac");
+          console.log("khong ton tai user");
           res.render("./auth/login", {
             message: "tai khoan hoac mk khong chinh xac",
+            type: "warning",
           });
         } else {
           // Load hash from your password DB.
@@ -24,11 +25,15 @@ class usersController {
             .then((match) => {
               if (match) {
                 console.log("login thanh cong");
-                res.render("home", { message: "login thanh cong" });
+                res.render("home", {
+                  message: "login thanh cong",
+                  type: "success",
+                });
               } else {
                 console.log("sai mat khau");
                 res.render("./auth/login", {
                   message: "tai khoan hoac mk khong chinh xac",
+                  type: "warning",
                 });
               }
             })
@@ -48,7 +53,10 @@ class usersController {
     // confirm mat khau
     if (password1 !== password2) {
       console.log("use js to handle");
-      res.render("./auth/register", { message: "mat khau khong khop" });
+      res.render("./auth/register", {
+        message: "mat khau khong khop",
+        type: "warning",
+      });
     } else {
       // if exist username
       require("../db")
@@ -56,7 +64,10 @@ class usersController {
         .then((data) => {
           if (data.rowCount >= 1) {
             console.log("login khong thanh cong");
-            res.render("./auth/register", { message: "da ton tai username" });
+            res.render("./auth/register", {
+              message: "da ton tai username",
+              type: "warning",
+            });
           } else {
             bcrypt.hash(password1, 10).then((hash) => {
               // Store hash in your password DB.
@@ -69,9 +80,13 @@ class usersController {
                   if (data.rowCount === 1) {
                     res.render("./auth/register", {
                       message: "Register thanh cong",
+                      type: "success",
                     });
                   } else {
-                    res.render("./auth/register", { message: "Loi insert db" });
+                    res.render("./auth/register", {
+                      message: "Loi insert db",
+                      type: "danger",
+                    });
                   }
                 });
             });
