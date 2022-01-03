@@ -1,9 +1,15 @@
 const bcrypt = require("bcrypt");
+const { redirect } = require("express/lib/response");
+const { createTokens } = require("../jwt");
 
 class usersController {
   //[GET] /auth/login
   loginView(req, res, next) {
-    res.render("./auth/login");
+    if (req.authenticated) {
+      res.redirect("/");
+    } else {
+      res.render("./auth/login");
+    }
   }
   //[POST] /auth/login
   login(req, res, rext) {
@@ -25,10 +31,11 @@ class usersController {
             .then((match) => {
               if (match) {
                 console.log("login thanh cong");
-                res.render("home", {
-                  message: "login thanh cong",
-                  type: "success",
+                const accessToken = createTokens({
+                  username: req.body.username,
                 });
+                res.cookie("access-token", accessToken);
+                res.redirect("/");
               } else {
                 console.log("sai mat khau");
                 res.render("./auth/login", {
@@ -93,6 +100,14 @@ class usersController {
           }
         });
     }
+  }
+  // [GET] /auth/logout
+  logout(req, res, next) {
+    if (req.cookies["access-token"]) {
+      res.clearCookie("access-token");
+    }
+    res.redirect("/");
+    return;
   }
 }
 

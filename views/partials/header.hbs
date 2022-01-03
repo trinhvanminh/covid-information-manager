@@ -1,2 +1,7 @@
+<h1>this is header</h1>
+{{#unless authenticated}}
 <a class="btn btn-primary" href="/auth/login">login</a>
 <a class="btn btn-secondary" href="/auth/register">register</a>
+{{else}}
+<a class="btn btn-secondary" href="/auth/logout">Logout</a>
+{{/unless}}
