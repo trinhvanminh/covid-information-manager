@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt");
-const { redirect } = require("express/lib/response");
 const { createTokens } = require("../jwt");
 
 class usersController {
