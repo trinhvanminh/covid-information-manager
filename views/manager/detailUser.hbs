@@ -1,0 +1,17 @@
+
+{{#unless data}}
+<h1>Chưa có dữ liệu kìa bạn ơi</h1>
+{{else}}
+<h1>Thông tin chi tiết </h1>
+<a class="btn btn-primary" href="/manager/related-covid/list/" role="button">Go back</a><ul class="covid-list">
+  {{#with data}}
+  <li>{{id}}</li>
+  <li>{{hoten}}</li> 
+  <li>{{cccd}}</li> 
+  <li>{{diachi}}</li> 
+  <li>{{trangthai}}</li> 
+  <li>{{dieutri_id}}</li> 
+{{/with}}
+</ul>
+{{/unless}}
+

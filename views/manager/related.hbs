@@ -2,20 +2,41 @@
 {{#unless data}}
 <h1>Chưa có dữ liệu kìa bạn ơi</h1>
 {{else}}
+<h1>List danh sách người liên quan </h1>
+<nav class="navbar navbar-light bg-light">
+  <form class="form-inline" action="", method="GET">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+<a class="btn btn-primary" href="/manager/related-covid/add" role="button">Add new user</a>
 <ul class="covid-list">
-  {{#each data}}
-    <li>
-        <ul>
-            <li><b>id:</b> {{this.id}}</li>
-            <li><b>hoten:</b> {{this.hoten}}</li>
-            <li><b>cccd:</b> {{this.cccd}}</li>
-            <li><b>diachi:</b> {{this.diachi}}</li>
-            <li><b>trangthai:</b> {{this.trangthai}}</li>
-            <li><b>lichsu:</b> {{this.lichsu}}</li>
-            <li><b>dieutri_id:</b> {{this.dieutri_id}}</li>
-        </ul>
-    </li>
-  {{/each}}
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Cccd</th>
+      <th scope="col">Address</th>
+      <th scope="col">Status</th>
+      <th scope="col">History</th>
+      <th scope="col">Điều trị</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each data}}
+    <tr>
+      <th scope="row">{{this.id}}</th>
+      <td><a href="/manager/related-covid/list/{{this.id}}">{{this.hoten}}</a></td>
+      <td>{{this.cccd}}</td>
+      <td>{{this.diachi}}</td>
+      <td>{{this.trangthai}}</td>
+      <td>{{this.lichsu}}</td>
+      <td>{{this.dieutri_id}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
 </ul>
 {{/unless}}
 

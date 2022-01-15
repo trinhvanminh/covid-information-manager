@@ -8,5 +8,10 @@ router.get(
   verifyToken,
   managerController.relatedCovidView
 );
-
+router.get(
+  "/related-covid/list/:id",
+  verifyToken,
+  managerController.detailCovidUser
+);
+router.get("/related-covid/add/", verifyToken, managerController.addCovidUser);
 module.exports = router;
