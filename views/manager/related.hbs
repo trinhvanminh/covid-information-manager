@@ -1,0 +1,21 @@
+
+{{#unless data}}
+<h1>Chưa có dữ liệu kìa bạn ơi</h1>
+{{else}}
+<ul class="covid-list">
+  {{#each data}}
+    <li>
+        <ul>
+            <li><b>id:</b> {{this.id}}</li>
+            <li><b>hoten:</b> {{this.hoten}}</li>
+            <li><b>cccd:</b> {{this.cccd}}</li>
+            <li><b>diachi:</b> {{this.diachi}}</li>
+            <li><b>trangthai:</b> {{this.trangthai}}</li>
+            <li><b>lichsu:</b> {{this.lichsu}}</li>
+            <li><b>dieutri_id:</b> {{this.dieutri_id}}</li>
+        </ul>
+    </li>
+  {{/each}}
+</ul>
+{{/unless}}
+

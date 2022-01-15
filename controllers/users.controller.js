@@ -51,7 +51,11 @@ class usersController {
   }
   // [GET] /auth/register
   registerView(req, res, next) {
-    res.render("./auth/register");
+    if (req.authenticated) {
+      res.redirect("/");
+    } else {
+      res.render("./auth/register");
+    }
   }
   // [POST] /auth/register
   register(req, res, rext) {
