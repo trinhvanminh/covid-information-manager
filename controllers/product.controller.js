@@ -21,16 +21,18 @@ class ListProductController {
       res.redirect("/");
     } else {
       // Xử lý edit product to database here!
-      // Đưa data cần edit vào lại trang add product - để người dùng có thể sửa
       //   const { id } = req.params; Lấy cái ID ở trên params/path
       //   const product = await Product.findById(id); Lấy cái product ở trên database - này là code cũ mongoDB
       // Thay code tìm bằng Postgres nha bạn
       //   res.render("./products/addProduct", { product });
-    //   Data test cái UI sửa
+      //   Data test cái UI sửa
       const product = {
-        a: "hi",
+        productName: "Sản phẩm 1",
+        images: [],
+        price: 10000,
+        quantitative: "Cây",
       };
-      res.render("./products/addProduct", { product });
+      res.render("./products/editProduct", { product });
     }
   }
 }
