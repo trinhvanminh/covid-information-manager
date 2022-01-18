@@ -13,51 +13,44 @@
       <table class="table">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Package ID</th>
-            <th scope="col">Tên Gói</th>
-            <th width="25%" scope="col">Danh Sách Sản Phẩm</th>
-            <th scope="col">Giới hạn số lượng</th>
-            <th scope="col">Giới Hạn</th>
-            <th scope="col">Thời Gian GH</th>
-            <th width="10%" scope="col">Chức Năng</th>
+            <th scope="col">Product ID</th>
+            <th scope="col">Tên Sản Phẩm</th>
+            <th scope="col">Hình Ảnh Sản Phẩm</th>
+            <th scope="col">Số Lượng</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Định Lượng</th>
           </tr>
         </thead>
         <tbody>
           {{#each dataListProduct}}
             <tr>
               <th scope="row">{{this.id}}</th>
-              <td>{{this.packageName}}</td>
+              <td>{{this.productName}}</td>
               <td>
-                <ul>
-                  {{#each this.listProduct}}
-                    <li>{{this}}</li>
-                  {{/each}}
-                </ul>
+                {{#each images}}
+                  <img src="{{this}}" alt="hinhanh" width="100" height="100" />
+                {{/each}}
               </td>
-              <td>{{this.limitQuantity}}</td>
-              <td>{{this.limitPerson}}</td>
-              <td>{{this.limitTime}}</td>
-              <td>
-                <div class="list-product-action">
-                  <a
-                    class="btn btn-primary package-list-btn btn-sm"
-                    href="/package-product/view/{{this.id}}"
-                    role="button"
-                  >View</a>
-                  <a
-                    class="btn btn-primary package-list-btn btn-sm"
-                    href="/package-product/edit/{{this.id}}"
-                    role="button"
-                  >Edit</a>
-                  <a
-                    class="btn btn-primary package-list-btn btn-sm"
-                    href="/package-product/delete/{{this.id}}"
-                    role="button"
-                  >Delete</a>
-                </div>
-              </td>
+              <td>{{this.quantity}}</td>
+              <td>{{this.price}} vnd</td>
+              <td>{{this.quantitative}}</td>
             </tr>
           {{/each}}
+          <tr>
+            <th scope="row">P-01</th>
+            <td>Rượu Volka</td>
+            <td>
+              <img
+                src="https://minhcaumart.vn/media/com_eshop/products/Ru%20Vodka%20Men%20500ml.jpg"
+                alt="hinhanh"
+                width="100"
+                height="100"
+              />
+            </td>
+            <td>3</td>
+            <td>69000 vnd</td>
+            <td>Chai</td>
+          </tr>
         </tbody>
       </table>
     </div>
