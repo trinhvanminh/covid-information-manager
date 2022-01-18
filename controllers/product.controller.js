@@ -5,6 +5,17 @@ class ListProductController {
   listProduct(req, res, next) {
     res.render("./products/listProducts");
   }
+
+  addProduct(req, res, next) {
+    // res.render("./products/addProduct");
+    if (!req.authenticated) {
+      res.redirect("/");
+    }
+    else{
+        res.render("./products/addProduct");
+        // Xử lý add product to database here!
+    }
+  }
 }
 
 module.exports = new ListProductController();
