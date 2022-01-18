@@ -30,17 +30,23 @@
           </a>
           <button
             type="button"
+            {{! href="/" }}
             class="w3-col s3 main-feature-item"
-            data-bs-toggle="modal"
-            data-bs-target="#modal-validation-login"
+            data-toggle="modal"
+            data-target="#exampleModal"
           >
             <i class="fa fa-heart w3-text-red w3-jumbo"></i>
             <p>Add Covider</p>
           </button>
-          <a href="/xxx" class="w3-col s3 main-feature-item">
+          <button
+            data-toggle="modal"
+            type="button"
+            data-target="#exampleModal"
+            class="w3-col s3 main-feature-item"
+          >
             <i class="fa fa-camera w3-text-yellow w3-jumbo"></i>
             <p>Change State Of Covider</p>
-          </a>
+          </button>
           <a href="/xxx" class="w3-col s3 main-feature-item">
             <i class="fa fa-battery-full w3-text-green w3-jumbo"></i>
             <p>Utensils Necessary</p>
@@ -52,18 +58,33 @@
             <i class="fa fa-shield w3-text-orange w3-jumbo"></i>
             <p>Utensils Necessary Packages</p>
           </a>
-          <a href="/xxx" class="w3-col s3 main-feature-item">
+          <button
+            data-toggle="modal"
+            type="button"
+            data-target="#exampleModal"
+            class="w3-col s3 main-feature-item"
+          >
             <i class="fa fa-cloud w3-text-blue w3-jumbo"></i>
             <p>Statistical information</p>
-          </a>
-          <a href="/xxx" class="w3-col s3 main-feature-item">
+          </button>
+          <button
+            data-toggle="modal"
+            type="button"
+            data-target="#exampleModal"
+            class="w3-col s3 main-feature-item"
+          >
             <i class="fa fa-globe w3-text-amber w3-jumbo"></i>
             <p>Payment Management</p>
-          </a>
-          <a href="/xxx" class="w3-col s3 main-feature-item">
+          </button>
+          <button
+            data-toggle="modal"
+            type="button"
+            data-target="#exampleModal"
+            class="w3-col s3 main-feature-item"
+          >
             <i class="fa fa-hdd-o w3-text-cyan w3-jumbo"></i>
             <p>Storage</p>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -71,7 +92,7 @@
     {{! Modal keu dang nhap }}
     <div
       class="modal fade"
-      id="modal-validation-login"
+      id="exampleModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -79,25 +100,31 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Opp! Looks like you
-              are not logged in</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Oop! Looks like you
+              are not logged in!</h5>
             <button
               type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
+              class="close"
+              data-dismiss="modal"
               aria-label="Close"
-            ></button>
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
-            Vui lòng đăng nhập để sử dụng các dịch vụ bên dưới
+            Vui lòng đăng nhập để được sử dụng các dịch vụ của chúng tôi
           </div>
           <div class="modal-footer">
             <button
               type="button"
               class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >Cancel</button>
-            <a href="#" role="button" class="btn btn-primary">Login</a>
+              data-dismiss="modal"
+            >Close</button>
+            <a
+              href="/auth/login"
+              role="button"
+              class="btn btn-primary"
+            >Login</a>
           </div>
         </div>
       </div>
