@@ -19,6 +19,7 @@
 .main-feature-item {
   display: flex;
   flex-direction: column;
+  border: none;
 }
 
 .main-feature-item i,
