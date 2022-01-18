@@ -10,6 +10,11 @@ class PackageProductController {
   viewPackageProduct(req, res) {
     res.render("./productPackages/viewPackageProduct");
   }
+
+  // POST Add Package Product /
+  addPackageProduct(req, res) {
+    res.render("./productPackages/addPackageProduct");
+  }
 }
 
 module.exports = new PackageProductController();
