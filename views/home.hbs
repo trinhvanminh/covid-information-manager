@@ -1,80 +1,242 @@
-<h1>Example App: Home</h1>
 {{#unless authenticated}}
-<h2>Login để thấy nhiều thứ hay ho và hấp dẫn, nhớ đăng ký kênh cho lần sau</h2>
+  <div class="container-fluid full-screen">
+    <div class="header-show">
+      <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+        <div class="w3-display-left w3-text-black" style="padding:48px">
+          <span class="w3-jumbo w3-hide-small">NOW OR NEVER</span><br />
+          <span class="w3-xxlarge w3-hide-large w3-hide-medium">Start something
+            that matters</span><br />
+          <span class="w3-large">Mỗi người dân hãy là một chiến sỹ trong công
+            tác phòng, chống dịch covid-19.</span>
+          <p><a
+              href="#"
+              class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off"
+            >Hãy chung tay bảo vệ và đánh lùi covid</a></p>
+        </div>
+      </header>
+    </div>
+
+    <div class="w3-container" style="padding:128px 16px" id="about">
+      <h3 class="w3-center">ABOUT THE PROJECT</h3>
+      <p class="w3-center w3-large">Key features of our project</p>
+      <div class="w3-row-padding w3-center" style="margin-top:64px">
+        <div class="w3-quarter">
+          <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
+          <p class="w3-large">Support</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore.</p>
+        </div>
+        <div class="w3-quarter">
+          <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
+          <p class="w3-large">
+            Reputation</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore.</p>
+        </div>
+        <div class="w3-quarter">
+          <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
+          <p class="w3-large">
+            Quick update</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore.</p>
+        </div>
+        <div class="w3-quarter">
+          <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
+          <p class="w3-large">Correct</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="w3-container w3-light-grey" style="padding:128px 16px">
+      <div class="w3-row-padding">
+        <div class="w3-col m6">
+          <h3>We know what you need!</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod<br />tempor incididunt ut labore et dolore.</p>
+          <p><a href="/work" class="w3-button w3-black"><i
+                class="fa fa-th"
+              ></i>
+              View Our Works</a></p>
+        </div>
+        <div class="w3-col m6">
+          <img
+            class="w3-image w3-round-large"
+            src="https://moh.gov.vn/image/journal/article?img_id=1172485"
+            alt="SolieuCovid"
+            width="700"
+            height="394"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="w3-container" style="padding:128px 16px" id="team">
+      <h3 class="w3-center">MY TEAM</h3>
+      <p class="w3-center w3-large">The ones who runs this project</p>
+      <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <div class="w3-card">
+            <img
+              src="https://toigingiuvedep.vn/wp-content/uploads/2021/05/hinh-chibi-buon-dep-nhat.jpg"
+              alt="John"
+              style="width:100%"
+              class="team-avatar"
+            />
+            <div class="w3-container">
+              <h3>Trịnh Văn Minh</h3>
+              <p class="w3-opacity">Developer</p>
+              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse
+                sodales pellentesque elementum.</p>
+              <p><button class="w3-button w3-light-grey w3-block"><i
+                    class="fa fa-envelope"
+                  ></i>
+                  Contact</button></p>
+            </div>
+          </div>
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <div class="w3-card">
+            <img
+              src="http://anhnendep.net/wp-content/uploads/2018/10/hinh-anh-chibi-nam-cute-lanh-lung-de-thuong-02.jpg"
+              alt="Jane"
+              style="width:100%"
+              class="team-avatar"
+            />
+            <div class="w3-container">
+              <h3>Lê Quang Nam</h3>
+              <p class="w3-opacity">Developer</p>
+              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse
+                sodales pellentesque elementum.</p>
+              <p><button class="w3-button w3-light-grey w3-block"><i
+                    class="fa fa-envelope"
+                  ></i>
+                  Contact</button></p>
+            </div>
+          </div>
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <div class="w3-card">
+            <img
+              src="https://hedieuhanh.com/wp-content/uploads/2019/08/anh-chibi-boy_120351444.png"
+              alt="Mike"
+              style="width:100%"
+              class="team-avatar"
+            />
+            <div class="w3-container">
+              <h3>Mike Ross</h3>
+              <p class="w3-opacity">Web Designer</p>
+              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse
+                sodales pellentesque elementum.</p>
+              <p><button class="w3-button w3-light-grey w3-block"><i
+                    class="fa fa-envelope"
+                  ></i>
+                  Contact</button></p>
+            </div>
+          </div>
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <div class="w3-card">
+            <img
+              src="https://i.pinimg.com/564x/a2/2d/1d/a22d1d8a789a904187dba0f5240a5907.jpg"
+              alt="Dan"
+              style="width:100%"
+              class="team-avatar"
+            />
+            <div class="w3-container">
+              <h3>Dan Star</h3>
+              <p class="w3-opacity">Designer</p>
+              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse
+                sodales pellentesque elementum.</p>
+              <p><button class="w3-button w3-light-grey w3-block"><i
+                    class="fa fa-envelope"
+                  ></i>
+                  Contact</button></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 {{else}}
-<h2>1.2 Phân hệ Quản lý</h2>
-<b>1.2.1 Quản lý danh sách người liên quan Covid-19</b>
-<ul>
+  <h2>1.2 Phân hệ Quản lý</h2>
+  <b>1.2.1 Quản lý danh sách người liên quan Covid-19</b>
+  <ul>
     <li>✓ Người liên quan Covid-19 bao gồm các thông tin cơ bản sau:
-        <ul>
-            <li>o Họ tên</li>
-            <li>o Số CMND / Căn cước công dân</li>
-            <li>o Năm sinh</li>
-            <li>o Địa chỉ nơi ở (Tỉnh / Thành phố, Quận / Huyện và Phường / Xã)</li>
-            <li>o Trạng thái hiện tại (F0 / F1 / F2 / F3)</li>
-            <li>o Nơi đang điều trị / cách ly (cơ sở điều trị / cách ly)</li>
-            <li>o Có liên quan với Người liên quan Covid-19 nào.</li>
-            <li>o Lịch sử quá trình được quản lý (thay đổi trạng thái, chuyển nơi điều trị,…).</li>
-        </ul>
+      <ul>
+        <li>o Họ tên</li>
+        <li>o Số CMND / Căn cước công dân</li>
+        <li>o Năm sinh</li>
+        <li>o Địa chỉ nơi ở (Tỉnh / Thành phố, Quận / Huyện và Phường / Xã)</li>
+        <li>o Trạng thái hiện tại (F0 / F1 / F2 / F3)</li>
+        <li>o Nơi đang điều trị / cách ly (cơ sở điều trị / cách ly)</li>
+        <li>o Có liên quan với Người liên quan Covid-19 nào.</li>
+        <li>o Lịch sử quá trình được quản lý (thay đổi trạng thái, chuyển nơi
+          điều trị,…).</li>
+      </ul>
     </li>
     <li><a href="/manager/related-covid/list">✓ Hiển thị danh sách</a></li>
-    <li>✓ Xem chi tiết thông tin của người liên quan bao gồm danh sách người liên đới.</li>
+    <li>✓ Xem chi tiết thông tin của người liên quan bao gồm danh sách người
+      liên đới.</li>
     <li>✓ Tìm kiếm</li>
     <li>✓ Sắp xếp theo nhiều tiêu chí.</li>
-</ul>
-<b>1.2.2 Thêm người liên quan Covid-19 vào hệ thống</b>
-<ul>
+  </ul>
+  <b>1.2.2 Thêm người liên quan Covid-19 vào hệ thống</b>
+  <ul>
     <li>✓ Form thêm với đầy đủ thông tin cần thiết.</li>
     <li>✓ Có validation đầy đủ.</li>
-</ul>
-<b>1.2.3 Thay đổi trạng thái người liên quan Covid-19</b>
-<ul>
-    <li>✓ Chuyển trạng thái cần thiết như: F2 -> F1, F2 -> F0,… với các thông tin phù hợp (người liên quan phải thay đổi trạng thái theo).</li>
+  </ul>
+  <b>1.2.3 Thay đổi trạng thái người liên quan Covid-19</b>
+  <ul>
+    <li>✓ Chuyển trạng thái cần thiết như: F2 -> F1, F2 -> F0,… với các thông
+      tin phù hợp (người liên quan phải thay đổi trạng thái theo).</li>
     <li>✓ Chuyển nơi điều trị / cách ly (ràng buộc về sức chứa).</li>
-</ul>
-<b>1.2.4 Quản lý các sản phẩm nhu yếu phẩm</b>
-<ul>
+  </ul>
+  <b>1.2.4 Quản lý các sản phẩm nhu yếu phẩm</b>
+  <ul>
     <li>
-        ✓ Sản phẩm nhu yếu phẩm gồm các thông tin cơ bản
-        <ul>
-            <li>o Tên sản phẩm</li>
-            <li>o Hình ảnh sản phẩm (nhiều hình)</li>
-            <li>o Giá tiền</li>
-            <li>o Đơn vị định lượng</li>
-        </ul>
+      ✓ Sản phẩm nhu yếu phẩm gồm các thông tin cơ bản
+      <ul>
+        <li>o Tên sản phẩm</li>
+        <li>o Hình ảnh sản phẩm (nhiều hình)</li>
+        <li>o Giá tiền</li>
+        <li>o Đơn vị định lượng</li>
+      </ul>
     </li>
     <li>✓ Hiển thị danh sách</li>
     <li>✓ Tìm kiếm, Sắp xếp, Lọc</li>
     <li>✓ Thêm, xóa, sửa (luôn kiểm tra ràng buộc)</li>
-</ul>
-<b>1.2.5 Quản lý các gói Nhu yếu phẩm</b>
-<ul>
+  </ul>
+  <b>1.2.5 Quản lý các gói Nhu yếu phẩm</b>
+  <ul>
     <li>
-        <ul>
-            ✓ Gói Nhu yếu phẩm gồm các thông tin cơ bản sau:
-            <li>o Tên gói</li>
-            <li>o Danh sách các sản phẩm trong gói (tối thiểu 2 sản phẩm)</li>
-            <li>o Mức giới hạn số lượng mỗi sản phẩm trong gói</li>
-            <li>o Mức giới hạn gói cho mỗi người theo thời gian</li>
-            <li>o Thời gian giới hạn (ngày, tuần, tháng)</li>
-        </ul>
+      <ul>
+        ✓ Gói Nhu yếu phẩm gồm các thông tin cơ bản sau:
+        <li>o Tên gói</li>
+        <li>o Danh sách các sản phẩm trong gói (tối thiểu 2 sản phẩm)</li>
+        <li>o Mức giới hạn số lượng mỗi sản phẩm trong gói</li>
+        <li>o Mức giới hạn gói cho mỗi người theo thời gian</li>
+        <li>o Thời gian giới hạn (ngày, tuần, tháng)</li>
+      </ul>
     </li>
     <li>✓ Hiển thị danh sách</li>
     <li>✓ Xem chi tiết: có thể xem chi tiết mỗi sản phẩm trong gói</li>
     <li>✓ Tìm kiếm, sắp xếp, lọc</li>
     <li>✓ Thêm, xóa, sửa (luôn kiểm tra ràng buộc)</li>
-</ul>
-<b>1.2.6 Thống kê thông tin</b>
-<ul>
+  </ul>
+  <b>1.2.6 Thống kê thông tin</b>
+  <ul>
     <li>✓ Thống kê số lượng người ở từng trạng thái theo thời gian.</li>
     <li>✓ Thống kê các thông tin có thể như: số chuyển trạng thái, khỏi bệnh,…</li>
     <li>✓ Thống kê tiêu thụ các gói Nhu yếu phẩm</li>
     <li>✓ Thống kê tiêu thụ sản phẩm</li>
     <li>✓ Thống kê dư nợ, thanh toán</li>
-</ul>
-<b>1.2.7 Quản lý Thanh toán</b>
-<ul>
+  </ul>
+  <b>1.2.7 Quản lý Thanh toán</b>
+  <ul>
     <li>✓ Thay đổi hạn mức thanh toán tối thiểu</li>
     <li>✓ Duyệt danh sách và gửi thông báo nhắc thanh toán</li>
-</ul>
+  </ul>
 {{/unless}}
