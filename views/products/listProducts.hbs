@@ -53,19 +53,19 @@
           {{#each data}}
             <tr>
               <th scope="row">{{this.id}}</th>
-              <td>{{this.name}}</td>
+              <td>{{this.product-name}}</td>
               <td>
                 {{#each this.images}}
                   <img
                     src="{{this}}"
-                    alt="{{this}}"
+                    alt="hinhanh"
                     width="100px"
                     height="100px"
                   />
                 {{/each}}
               </td>
               <td>{{this.price}}</td>
-              <td>{{this.unit}}</td>
+              <td>{{this.quantitative}}</td>
               <td>
                 <div class="list-product-action">
                   <a
