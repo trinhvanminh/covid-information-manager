@@ -1,0 +1,116 @@
+<div class="container-fluid">
+  <div class="banner-list-covider">
+    <img
+      src="https://nhuxuan.thanhhoa.gov.vn/portal/Photos/2021-08-26/67871893154d1d2dz2.jpg"
+      alt="khaulenh"
+    />
+  </div>
+  <div class="detail-covider-header">
+    <h1>Thêm nhu yếu phẩm cần thiết cho điều trị covid </h1>
+    <a
+      class="btn btn-primary button detail-covider-back"
+      href="/list-product"
+      role="button"
+    >Go back list</a>
+  </div>
+  <form class="add-covider" method="POST" action="">
+    <div class="form-group">
+      <label for="formGroupExampleInput">Tên Sản Phẩm</label>
+      <input
+        type="text"
+        class="form-control"
+        id="formGroupExampleInput"
+        placeholder="Trịnh Văn Minh"
+        name="product-name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Số CMND / Căn cước công dân</label>
+      <input
+        type="text"
+        class="form-control"
+        id="formGroupExampleInput2"
+        placeholder="245xxxxxx"
+        name="cccd"
+      />
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Giá Tiền</label>
+      <input
+        type="text"
+        class="form-control"
+        id="formGroupExampleInput2"
+        placeholder="YYYY/MM/dd"
+        name="price"
+      />
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Địa chỉ nơi ở</label>
+      <input
+        type="text"
+        class="form-control"
+        id="formGroupExampleInput2"
+        placeholder="162 đường số 8, ...."
+        name="diachi"
+      />
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Trạng thái hiện tại </label>
+      <select name="trangthai">
+        <option value="F0">
+          F0
+        </option>
+        <option value="F1">
+          F1
+        </option>
+        <option value="F2">
+          F2
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Nơi đang điều trị: </label>
+      {{#unless DSnoidieutri}}
+        link tới chổ thêm nơi điều trị
+      {{else}}
+        <select name="dieutri_id">
+          {{#each DSnoidieutri}}
+            <option value="{{this.DieuTri_id}}">
+              <p>{{this.ten}} / {{this.diachi}}</p>
+            </option>
+          {{/each}}
+        </select>
+      {{/unless}}
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Có liên quan với bệnh nhân</label>
+      {{#unless DSNguoi}}
+        link tới chổ thêm nguoi
+      {{else}}
+        <select name="Nguoi_id">
+          <option>
+            -- Chọn người liên quan
+          </option>
+          {{#each DSNguoi}}
+            <option value="{{this.Nguoi_id}}">
+              <p>{{this.hoten}} / {{this.cccd}} / {{this.diachi}}</p>
+            </option>
+          {{/each}}
+        </select>
+      {{/unless}}
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Lịch sử quá trình được quản lý</label>
+      <input
+        type="text"
+        class="form-control"
+        id="formGroupExampleInput2"
+        placeholder="F0 thành F1,..."
+        name="lichsu"
+      />
+    </div>
+    <input type="hidden" value="{{maxNguoiId}}" name="maxNguoiId" />
+    <button type="submit" class="btn btn-primary add-covider-submit">Thêm Bệnh
+      Nhân</button>
+  </form>
+</div>
