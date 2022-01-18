@@ -26,3 +26,17 @@
   justify-content: center;
   margin-top: 10px;
 }
+
+/* Detail Covider */
+
+.detail-covider-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.detail-covider-back{
+    width: 200px;
+    height: 35px;
+    margin: auto 0;
+}

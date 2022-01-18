@@ -1,17 +1,26 @@
-
 {{#unless data}}
-<h1>Chưa có dữ liệu kìa bạn ơi</h1>
+  <div class="container-fluid">
+    <h1>No Data</h1>
+  </div>
 {{else}}
-<h1>Thông tin chi tiết </h1>
-<a class="btn btn-primary" href="/manager/related-covid/list/" role="button">Go back</a><ul class="covid-list">
-  {{#with data}}
-  <li><b>Nguoi_id: </b>{{Nguoi_id}}</li>
-  <li><b>hoten: </b>{{hoten}}</li> 
-  <li><b>cccd: </b>{{cccd}}</li> 
-  <li><b>diachi: </b>{{diachi}}</li> 
-  <li><b>trangthai: </b>{{trangthai}}</li> 
-  <li><b>ten: </b>{{ten}}</li> 
-{{/with}}
-</ul>
+  <div class="container-fluid">
+    <div class="detail-covider-header">
+      <h1>Thông tin chi tiết người bị covid</h1>
+      <a
+        class="btn btn-primary button detail-covider-back"
+        href="/manager/related-covid/list/"
+        role="button"
+      >Go back list</a>
+    </div>
+    <ul class="covid-list">
+      {{#with data}}
+        <li><b>Nguoi_id: </b>{{Nguoi_id}}</li>
+        <li><b>hoten: </b>{{hoten}}</li>
+        <li><b>cccd: </b>{{cccd}}</li>
+        <li><b>diachi: </b>{{diachi}}</li>
+        <li><b>trangthai: </b>{{trangthai}}</li>
+        <li><b>ten: </b>{{ten}}</li>
+      {{/with}}
+    </ul>
+  </div>
 {{/unless}}
-
