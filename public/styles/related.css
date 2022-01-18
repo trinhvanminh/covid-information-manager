@@ -2,6 +2,14 @@
   display: flex;
 }
 
+.banner-list-covider{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
 .covid-list-btn-add {
   height: 35px;
   margin: 10px 0;
@@ -29,28 +37,36 @@
 
 /* Detail Covider */
 
-.detail-covider-header{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+.detail-covider-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
-.detail-covider-back{
-    width: 200px;
-    height: 35px;
-    margin: auto 0;
+.detail-covider-back {
+  width: 200px;
+  height: 35px;
+  margin: auto 0;
 }
 
-.detail-covid-table{
-    width: 100%;
-    margin: 20px 0 50px 0;
+.detail-covid-table {
+  width: 100%;
+  margin: 20px 0 50px 0;
 }
 
-.detail-covider-lienquan{
-    width: 100%;
-    margin: 20px 0 50px 0;
+.detail-covider-lienquan {
+  width: 100%;
+  margin: 20px 0 50px 0;
 }
 
-.detail-covider-lienquan-header{
-    
+/* Add Covider  */
+.add-covider {
+  margin: 20px 0 50px 0;
+}
+
+.add-covider-submit {
+  display: flex;
+  width: 160px;
+  height: 35px;
+  margin: 40px auto;
 }
