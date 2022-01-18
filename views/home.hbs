@@ -28,10 +28,15 @@
             <i class="fa fa-bolt w3-text-orange w3-jumbo"></i>
             <p>List Covider</p>
           </a>
-          <a href="/related-covid/add" class="w3-col s3 main-feature-item">
+          <button
+            type="button"
+            class="w3-col s3 main-feature-item"
+            data-bs-toggle="modal"
+            data-bs-target="#modal-validation-login"
+          >
             <i class="fa fa-heart w3-text-red w3-jumbo"></i>
             <p>Add Covider</p>
-          </a>
+          </button>
           <a href="/xxx" class="w3-col s3 main-feature-item">
             <i class="fa fa-camera w3-text-yellow w3-jumbo"></i>
             <p>Change State Of Covider</p>
@@ -59,6 +64,41 @@
             <i class="fa fa-hdd-o w3-text-cyan w3-jumbo"></i>
             <p>Storage</p>
           </a>
+        </div>
+      </div>
+    </div>
+
+    {{! Modal keu dang nhap }}
+    <div
+      class="modal fade"
+      id="modal-validation-login"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Opp! Looks like you
+              are not logged in</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Vui lòng đăng nhập để sử dụng các dịch vụ bên dưới
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >Cancel</button>
+            <a href="#" role="button" class="btn btn-primary">Login</a>
+          </div>
         </div>
       </div>
     </div>
@@ -235,7 +275,10 @@
             <i class="fa fa-bolt w3-text-orange w3-jumbo"></i>
             <p>List Covider</p>
           </a>
-          <a href="/related-covid/add" class="w3-col s3 main-feature-item">
+          <a
+            href="/manager/related-covid/add"
+            class="w3-col s3 main-feature-item"
+          >
             <i class="fa fa-heart w3-text-red w3-jumbo"></i>
             <p>Add Covider</p>
           </a>
