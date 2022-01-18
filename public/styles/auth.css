@@ -1,0 +1,9 @@
+/* Login  */
+.login-header {
+  display: flex;
+}
+
+.login-header-title {
+  margin: 30px auto;
+  font-weight: 800;
+}
