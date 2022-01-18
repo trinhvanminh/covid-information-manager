@@ -26,7 +26,7 @@ COMMIT;
 
 DROP TABLE IF EXISTS "NoiDieuTri" CASCADE;
 CREATE TABLE "NoiDieuTri" (
-  "id" SERIAL PRIMARY KEY,
+  "DieuTri_id" SERIAL PRIMARY KEY,
   "ten" varchar(50) NOT NULL,
   "diachi" varchar(255) not null,
   "succhua" int4 NOT NULL
@@ -48,7 +48,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS "Nguoi" CASCADE;
 CREATE TABLE "Nguoi" (
-    "id" SERIAL PRIMARY KEY,
+    "Nguoi_id" SERIAL PRIMARY KEY,
     "hoten" varchar(50) NOT NULL,
 	"cccd" varchar(12) UNIQUE, 
 	"diachi" varchar(255) not null,
@@ -75,6 +75,7 @@ DROP TABLE IF EXISTS "NguoiLienQuan" CASCADE;
 CREATE TABLE "NguoiLienQuan" (
   nguoi_id int,
    nlq_id int,
+   thoigian date,
 	PRIMARY KEY (nguoi_id, nlq_id)
 )
 ;
@@ -83,8 +84,8 @@ CREATE TABLE "NguoiLienQuan" (
 -- Records of NguoiLienQuan
 -- ----------------------------
 BEGIN;
-INSERT INTO "NguoiLienQuan" (nguoi_id, nlq_id) 
-VALUES (1, 2),(2, 1);
+INSERT INTO "NguoiLienQuan" (nguoi_id, nlq_id, thoigian) 
+VALUES (1, 2, '2022/1/18'),(1, 3, '2022/1/10');
 COMMIT;
 
 
@@ -95,7 +96,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS "SP" CASCADE;
 CREATE TABLE "SP" (
-  "id" SERIAL PRIMARY KEY,
+  "SP_id" SERIAL PRIMARY KEY,
    "ten" varchar(50) NOT NULL,
 	"gia" int not null,
 	"donvi" varchar(20) default 'sp'
@@ -119,7 +120,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS "Goi" CASCADE;
 CREATE TABLE "Goi" (
-  "id" SERIAL PRIMARY KEY,
+  "Goi_id" SERIAL PRIMARY KEY,
    "ten" varchar(50) NOT NULL,
 	"gioihan_goi" int default 1,
 	"thoigian" varchar(6) default 'tuan'
@@ -161,7 +162,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS "HinhAnh" CASCADE;
 CREATE TABLE "HinhAnh" (
-   "id" serial primary key,
+   "HinhAnh_id" serial primary key,
    "sp_id" int,
    "link" varchar(2083)
 )
@@ -183,26 +184,26 @@ COMMIT;
 -- ----------------------------
 -- Foreign Keys structure for table NguoiLienQuan
 -- ----------------------------
-ALTER TABLE "NguoiLienQuan" ADD CONSTRAINT "FK_Nguoi_NguoiId" FOREIGN KEY (nguoi_id) REFERENCES "Nguoi"("id") ON DELETE CASCADE;
-ALTER TABLE "NguoiLienQuan" ADD CONSTRAINT "FK_Nguoi_NlqId" FOREIGN KEY (nlq_id) REFERENCES "Nguoi"("id") ON DELETE CASCADE;
+ALTER TABLE "NguoiLienQuan" ADD CONSTRAINT "FK_Nguoi_NguoiId" FOREIGN KEY (nguoi_id) REFERENCES "Nguoi"("Nguoi_id") ON DELETE CASCADE;
+ALTER TABLE "NguoiLienQuan" ADD CONSTRAINT "FK_Nguoi_NlqId" FOREIGN KEY (nlq_id) REFERENCES "Nguoi"("Nguoi_id") ON DELETE CASCADE;
 
 
 -- ----------------------------
 -- Foreign Keys structure for table Nguoi
 -- ----------------------------
-ALTER TABLE "Nguoi" ADD CONSTRAINT "FK_Nguoi_NoiDieuTri" FOREIGN KEY ("dieutri_id") REFERENCES "NoiDieuTri"("id") on delete SET NULL;
+ALTER TABLE "Nguoi" ADD CONSTRAINT "FK_Nguoi_NoiDieuTri" FOREIGN KEY ("dieutri_id") REFERENCES "NoiDieuTri"("DieuTri_id") on delete SET NULL;
 
 -- ----------------------------
 -- Foreign Keys structure for table Goi_SP
 -- ----------------------------
-ALTER TABLE "Goi_SP" ADD CONSTRAINT "FK_Goi_SP_SP" FOREIGN KEY (sp_id) REFERENCES "SP"("id") ON DELETE CASCADE;
-ALTER TABLE "Goi_SP" ADD CONSTRAINT "FK_Goi_SP_Goi" FOREIGN KEY (goi_id) REFERENCES "Goi"("id") ON DELETE CASCADE;
+ALTER TABLE "Goi_SP" ADD CONSTRAINT "FK_Goi_SP_SP" FOREIGN KEY (sp_id) REFERENCES "SP"("SP_id") ON DELETE CASCADE;
+ALTER TABLE "Goi_SP" ADD CONSTRAINT "FK_Goi_SP_Goi" FOREIGN KEY (goi_id) REFERENCES "Goi"("Goi_id") ON DELETE CASCADE;
 
 
 -- ----------------------------
 -- Foreign Keys structure for table HinhAnh
 -- ----------------------------
-ALTER TABLE "HinhAnh" ADD CONSTRAINT "FK_HinhAnh_SP" FOREIGN KEY ("sp_id") REFERENCES "SP"("id") on delete CASCADE;
+ALTER TABLE "HinhAnh" ADD CONSTRAINT "FK_HinhAnh_SP" FOREIGN KEY ("sp_id") REFERENCES "SP"("SP_id") on delete CASCADE;
 
 
 
