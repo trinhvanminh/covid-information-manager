@@ -1,5 +1,3 @@
-const e = require("express");
-
 class ManagerController {
   // GET /
   relatedCovidView(req, res, next) {
@@ -14,6 +12,28 @@ class ManagerController {
             ["%" + req.query.q + "%"]
           )
           .then((data) => {
+            if (data.rowCount == 0) {
+              console.log("khong co du lieu");
+              res.render("manager/related", {
+                authenticated: req.authenticated,
+              });
+            } else {
+              res.render("manager/related", {
+                authenticated: req.authenticated,
+                data: data.rows,
+              });
+            }
+          })
+          .catch((err) => console.log(err));
+      } else if (req.query.sort && req.query.sort !== "") {
+        const queryString =
+          req.query.sort === "ASC"
+            ? 'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" ORDER BY "hoten" ASC'
+            : 'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" ORDER BY "hoten" DESC';
+        require("../db")
+          .query(queryString)
+          .then((data) => {
+            console.log(data);
             if (data.rowCount == 0) {
               console.log("khong co du lieu");
               res.render("manager/related", {

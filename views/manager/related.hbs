@@ -11,7 +11,13 @@
     <h1>List danh sách người liên quan Covid-19</h1>
     <div class="covid-list-nav">
       <nav class="navbar navbar-light bg-light">
-        <form class="form-inline" action="" , method="GET">
+        <form
+          id="search-sort-form"
+          class="form-inline"
+          action=""
+          ,
+          method="GET"
+        >
           <input
             class="form-control mr-sm-2"
             type="search"
@@ -26,20 +32,26 @@
           >Search</button>
         </form>
       </nav>
+
+      <form action="" method="GET">
+        <select
+          class="form-select covid-list-select"
+          aria-label="Default select example"
+          onchange="this.form.submit()"
+          name="sort"
+        >
+          <option selected>Sắp Xếp</option>
+          <option value="">Mặc Định</option>
+          <option value="ASC">Tên A-Z</option>
+          <option value="DESC">Tên Z-A</option>
+
+        </select>
+      </form>
       <a
         class="btn btn-primary covid-list-btn-add btn-sm"
         href="/manager/related-covid/add"
         role="button"
       >Add new user</a>
-      <select
-        class="form-select covid-list-select"
-        aria-label="Default select example"
-      >
-        <option selected>Sắp Xếp</option>
-        <option value="1">Mặc Định</option>
-        <option value="2">Tên A-Z</option>
-        <option value="3">Tên Z-A</option>
-      </select>
     </div>
     <ul class="covid-list">
       <table class="table table-striped table-hover">
