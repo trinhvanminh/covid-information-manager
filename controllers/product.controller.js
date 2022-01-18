@@ -1,11 +1,12 @@
 const e = require("express");
 
 class ListProductController {
-  // GET /
+  // GET List Product /
   listProduct(req, res) {
     res.render("./products/listProducts");
   }
 
+  //   POST Add Product
   addProduct(req, res) {
     // res.render("./products/addProduct");
     if (!req.authenticated) {
@@ -15,7 +16,7 @@ class ListProductController {
       // Xử lý add product to database here!
     }
   }
-
+  //   PATCH Edit Product
   editProduct(req, res) {
     if (!req.authenticated) {
       res.redirect("/");
@@ -35,6 +36,7 @@ class ListProductController {
       res.render("./products/editProduct", { product });
     }
   }
+  //   DELETE Delete Product
   deleteProduct(req, res) {
     if (!req.authenticated) {
       res.redirect("/");
