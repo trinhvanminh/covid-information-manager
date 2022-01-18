@@ -37,6 +37,16 @@
       </div>
     </div>
     {{#unless authenticated}}
+      <a
+        class="btn btn-primary button header-button"
+        href="/auth/login"
+      >Login</a>
+      <a
+        class="btn btn-secondary button header-button"
+        href="/auth/register"
+      >Register</a>
+
+    {{else}}
       <div class="header-user">
         <div class="header-user-avatar">
           <a href="/user">
@@ -50,15 +60,6 @@
         class="btn btn-secondary button header-button"
         href="/auth/logout"
       >Logout</a>
-    {{else}}
-      <a
-        class="btn btn-primary button header-button"
-        href="/auth/login"
-      >Login</a>
-      <a
-        class="btn btn-secondary button header-button"
-        href="/auth/register"
-      >Register</a>
     {{/unless}}
   </nav>
 </div>

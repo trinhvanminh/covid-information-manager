@@ -8,7 +8,10 @@ const createTokens = ({ username }) => {
 
 const verifyToken = (req, res, next) => {
   const accessToken = req.cookies["access-token"];
-  if (!accessToken) return next();
+  if (!accessToken) {
+    req.authenticated = false;
+    return next();
+  }
 
   try {
     const validToken = verify(accessToken, "privatekeygoeshere");

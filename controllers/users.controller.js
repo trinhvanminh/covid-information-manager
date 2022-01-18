@@ -110,7 +110,6 @@ class usersController {
       res.clearCookie("access-token");
     }
     res.redirect("/");
-    return;
   }
 }
 
