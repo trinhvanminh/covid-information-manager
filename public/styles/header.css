@@ -1,3 +1,7 @@
+.container-nav {
+  padding: 0;
+}
+
 .header-button {
   width: 100px;
   height: 40px;
@@ -14,6 +18,11 @@
   border-radius: 5px;
 }
 
+.nav-bar-background {
+  background-color: rgb(232, 249, 252);
+  border-radius: 3px;
+}
+
 .header-user-avatar img {
   width: 40px;
   height: 40px;
@@ -22,13 +31,13 @@
 }
 
 /* Footer */
-.footer-all{
-    background-color: rgb(70, 66, 66);
-    color: #fff;
+.footer-all {
+  background-color: rgb(70, 66, 66);
+  color: #fff;
 }
 
-.font-footer{
-    color: #fff;
+.font-footer {
+  color: #fff;
 }
 
 .form-control::placeholder {
