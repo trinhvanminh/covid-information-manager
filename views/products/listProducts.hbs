@@ -37,5 +37,93 @@
         <option value="3">Tên Z-A</option>
       </select>
     </div>
+    <div class="list-product-list">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Product ID</th>
+            <th scope="col">Tên Sản Phẩm</th>
+            <th width="30%" scope="col">Hình Ảnh</th>
+            <th scope="col">Giá Tiền</th>
+            <th scope="col">Đơn Vị Định Lượng</th>
+            <th width="10%" scope="col">Chức Năng</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data}}
+            <tr>
+              <th scope="row">{{this.id}}</th>
+              <td>{{this.name}}</td>
+              <td>
+                {{#each this.images}}
+                  <img
+                    src="{{this}}"
+                    alt="{{this}}"
+                    width="100px"
+                    height="100px"
+                  />
+                {{/each}}
+              </td>
+              <td>{{this.price}}</td>
+              <td>{{this.unit}}</td>
+              <td>
+                <div class="list-product-action">
+                  <a
+                    class="btn btn-primary covid-list-btn-add btn-sm"
+                    href="/list-product/edit/{{this.id}}"
+                    role="button"
+                  >Edit</a>
+                  <a
+                    class="btn btn-primary covid-list-btn-add btn-sm"
+                    href="/list-product/delete/{{this.id}}"
+                    role="button"
+                  >Delete</a>
+                </div>
+              </td>
+            </tr>
+          {{/each}}
+          <tr>
+            <th scope="row">P-01</th>
+            <td>Rượu Volka</td>
+            <td><img
+                src="https://minhcaumart.vn/media/com_eshop/products/Ru%20Vodka%20Men%2029.5%20300ml.jpg"
+                alt="Volka"
+                width="100px"
+                height="100px"
+              />
+              <img
+                src="https://www.cqmart.vn/images/thumbs/0001897_ruou-vodka-ha-noi-700ml-395-vol.png"
+                alt="Volka"
+                width="100px"
+                height="100px"
+              />
+              <img
+                src="https://www.cqmart.vn/images/thumbs/0001897_ruou-vodka-ha-noi-700ml-395-vol.png"
+                alt="Volka"
+                width="100px"
+                height="100px"
+              />
+              
+              </td>
+            <td>69000 vnd</td>
+            <td>Chai</td>
+            <td>
+              <div class="list-product-action">
+                <a
+                  class="btn btn-primary covid-list-btn-edit btn-sm list-product-button"
+                  href="/list-product/edit/:id"
+                  role="button"
+                >Edit</a>
+                <a
+                  class="btn btn-primary covid-list-btn-delete btn-sm list-product-button"
+                  href="/list-product/delete"
+                  role="button"
+                >Delete</a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
