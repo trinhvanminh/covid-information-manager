@@ -5,6 +5,11 @@ class PackageProductController {
   listPackageProduct(req, res) {
     res.render("./productPackages/listPackageProduct");
   }
+
+  // GET View Package Product /
+  viewPackageProduct(req, res) {
+    res.render("./productPackages/viewPackageProduct");
+  }
 }
 
 module.exports = new PackageProductController();
