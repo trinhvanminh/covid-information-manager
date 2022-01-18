@@ -12,7 +12,7 @@
         role="button"
       >Go back list</a>
     </div>
-    <ul class="covid-list">
+    {{!-- <ul class="covid-list">
       {{#with data}}
         <li><b>Nguoi_id: </b>{{Nguoi_id}}</li>
         <li><b>hoten: </b>{{hoten}}</li>
@@ -21,6 +21,94 @@
         <li><b>trangthai: </b>{{trangthai}}</li>
         <li><b>ten: </b>{{ten}}</li>
       {{/with}}
-    </ul>
+    </ul> --}}
+    <div class="detail-covid-table">
+      <table class="table table-bordered">
+        {{#with data}}
+          <thead>
+            <tr>
+              <th width="20%" scope="col">Mục</th>
+              <th scope="col">Thông Tin Người Bị Covid</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ID Covider</td>
+              <td>{{Nguoi_id}}</td>
+            </tr>
+            <tr>
+              <td>Họ và Tên</td>
+              <td>{{hoten}}</td>
+            </tr>
+            <tr>
+              <td>Số CMND/CCCD</td>
+              <td>{{cccd}}</td>
+            </tr>
+            <tr>
+              <td>Năm Sinh</td>
+              <td>Thiếu năm sinh này</td>
+            </tr>
+            <tr>
+              <td>Địa Chỉ Hiện Tại</td>
+              <td>{{diachi}}</td>
+            </tr>
+            <tr>
+              <td>Trạng thái hiện tại</td>
+              <td>{{trangthai}}</td>
+            </tr>
+            <tr>
+              <td>Nơi đang điều trị</td>
+              <td>?</td>
+            </tr>
+            <tr>
+              <td>Có liên quan với Covider ID</td>
+              <td>?</td>
+            </tr>
+            <tr>
+              <td>Lịch sử</td>
+              <td>{{lichsu}}</td>
+            </tr>
+          </tbody>
+        {{/with}}
+
+      </table>
+    </div>
+    <div class="detail-covider-lienquan">
+      <div class="detail-covider-lienquan-header">
+        <h1>Danh Sách Thông Tin Người Tiếp Xúc với bệnh nhân này: </h1>
+      </div>
+      <div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Họ và Tên</th>
+              <th scope="col">Số CMND/CCCD</th>
+              <th scope="col">Năm Sinh</th>
+              <th scope="col">Địa Chỉ Hiện Tại</th>
+              <th scope="col">Trạng thái hiện tại</th>
+              <th scope="col">Nơi đang điều trị</th>
+              <th scope="col">Có liên quan với Covider ID</th>
+              <th scope="col">Lịch sử</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each data}}
+              <tr>
+                <td>{{Nguoi_id}}</td>
+                <td>{{hoten}}</td>
+                <td>{{cccd}}</td>
+                <td>{{ngaysinh}}</td>
+                <td>{{diachi}}</td>
+                <td>{{trangthai}}</td>
+                <td>{{noi_dieutri}}</td>
+                <td>{{lienquan}}</td>
+                <td>{{lichsu}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 {{/unless}}
