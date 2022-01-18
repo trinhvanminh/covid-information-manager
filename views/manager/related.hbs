@@ -25,6 +25,12 @@
         href="/manager/related-covid/add"
         role="button"
       >Add new user</a>
+      <select class="form-select covid-list-select" aria-label="Default select example">
+        <option selected>Sắp Xếp</option>
+        <option value="1">Mặc Định</option>
+        <option value="2">Tên A-Z</option>
+        <option value="3">Tên Z-A</option>
+      </select>
     </div>
     <ul class="covid-list">
       <table class="table table-striped table-hover">
@@ -58,9 +64,18 @@
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a
+              class="page-link"
+              href="/manager/related-covid/list?page=1"
+            >1</a></li>
+          <li class="page-item"><a
+              class="page-link"
+              href="/manager/related-covid/list?page=2"
+            >2</a></li>
+          <li class="page-item"><a
+              class="page-link"
+              href="/manager/related-covid/list?page=3"
+            >3</a></li>
           <li class="page-item">
             <a class="page-link" href="#" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>

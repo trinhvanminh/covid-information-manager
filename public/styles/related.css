@@ -2,16 +2,27 @@
   display: flex;
 }
 
-.covid-list-btn-add{
-    height: 35px;
-    margin: 10px 0;
-    padding: 6px 10px;
-    font-size: 14px;
-    justify-content: center;
+.covid-list-btn-add {
+  height: 35px;
+  margin: 10px 0;
+  padding: 6px 10px;
+  font-size: 14px;
+  justify-content: center;
 }
 
-.covid-list-pagination{
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+.covid-list-select {
+  width: 150px;
+  height: 35px;
+  margin: 10px 20px;
+  padding: 6px 10px;
+  font-size: 14px;
+  justify-content: center;
+  background-color: rgb(18, 123, 254);
+  color: white;
+}
+
+.covid-list-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
