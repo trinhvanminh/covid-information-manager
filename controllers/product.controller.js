@@ -2,11 +2,11 @@ const e = require("express");
 
 class ListProductController {
   // GET /
-  listProduct(req, res, next) {
+  listProduct(req, res) {
     res.render("./products/listProducts");
   }
 
-  addProduct(req, res, next) {
+  addProduct(req, res) {
     // res.render("./products/addProduct");
     if (!req.authenticated) {
       res.redirect("/");
@@ -16,7 +16,7 @@ class ListProductController {
     }
   }
 
-  editProduct(req, res, next) {
+  editProduct(req, res) {
     if (!req.authenticated) {
       res.redirect("/");
     } else {
@@ -33,6 +33,17 @@ class ListProductController {
         quantitative: "Cây",
       };
       res.render("./products/editProduct", { product });
+    }
+  }
+  deleteProduct(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      // Xử lý delete product to database here!
+      //   const { id } = req.params; Lấy cái ID ở trên params/path
+      //   const product = await Product.findById(id); Lấy cái product ở trên database - này là code cũ mongoDB
+      // Thay code tìm bằng Postgres nha bạn - Delete here
+      res.render("./products/listProducts");
     }
   }
 }
