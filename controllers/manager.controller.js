@@ -1,14 +1,18 @@
+const e = require("express");
+
 class ManagerController {
   // GET /
   relatedCovidView(req, res, next) {
+    console.log(req);
     if (!req.authenticated) {
       res.redirect("/");
     } else {
       if (req.query.q) {
         require("../db")
-          .query('SELECT * FROM public."Nguoi" WHERE "hoten" LIKE $1;', [
-            "%" + req.query.q + "%",
-          ])
+          .query(
+            'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" WHERE "hoten" LIKE $1;',
+            ["%" + req.query.q + "%"]
+          )
           .then((data) => {
             if (data.rowCount == 0) {
               console.log("khong co du lieu");
@@ -25,8 +29,11 @@ class ManagerController {
           .catch((err) => console.log(err));
       } else {
         require("../db")
-          .query('select *  from public."Nguoi"')
+          .query(
+            'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id"'
+          )
           .then((data) => {
+            console.log(data);
             if (data.rowCount == 0) {
               console.log("khong co du lieu");
               res.render("manager/related", {
@@ -38,7 +45,8 @@ class ManagerController {
                 data: data.rows,
               });
             }
-          });
+          })
+          .catch((err) => console.log(err));
       }
     }
   }
@@ -47,7 +55,10 @@ class ManagerController {
       res.redirect("/");
     } else {
       require("../db")
-        .query('select *  from public."Nguoi" where "id"=$1', [req.params.id])
+        .query(
+          'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" where "Nguoi_id" = $1',
+          [req.params.id]
+        )
         .then((data) => {
           if (data.rowCount == 0) {
             console.log("khong co du lieu");

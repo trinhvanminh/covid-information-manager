@@ -16,23 +16,17 @@
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Name</th>
-      <th scope="col">Cccd</th>
-      <th scope="col">Address</th>
       <th scope="col">Status</th>
-      <th scope="col">History</th>
-      <th scope="col">Điều trị</th>
+      <th scope="col">Nơi điều trị</th>
     </tr>
   </thead>
   <tbody>
     {{#each data}}
     <tr>
-      <th scope="row">{{this.id}}</th>
-      <td><a href="/manager/related-covid/list/{{this.id}}">{{this.hoten}}</a></td>
-      <td>{{this.cccd}}</td>
-      <td>{{this.diachi}}</td>
+      <th scope="row">{{this.Nguoi_id}}</th>
+      <td><a href="/manager/related-covid/list/{{this.Nguoi_id}}">{{this.hoten}}</a></td>
       <td>{{this.trangthai}}</td>
-      <td>{{this.lichsu}}</td>
-      <td>{{this.dieutri_id}}</td>
+      <td>{{this.ten}}</td>
     </tr>
     {{/each}}
   </tbody>

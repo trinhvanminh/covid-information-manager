@@ -1,7 +1,7 @@
 const { sign, verify } = require("jsonwebtoken");
 const createTokens = ({ username }) => {
   const accessToken = sign({ username: username }, "privatekeygoeshere", {
-    expiresIn: "1h",
+    expiresIn: "10d",
   });
   return accessToken;
 };
@@ -15,8 +15,12 @@ const verifyToken = (req, res, next) => {
     if (validToken) {
       req.authenticated = true;
       return next();
+    } else {
+      res.clearCookie("access-token");
+      return res.redirect("/");
     }
   } catch (err) {
+    res.clearCookie("access-token");
     return res.redirect("/");
   }
 };
