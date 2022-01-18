@@ -14,4 +14,9 @@ router.get(
   managerController.detailCovidUser
 );
 router.get("/related-covid/add/", verifyToken, managerController.addCovidUser);
+router.post(
+  "/related-covid/add/",
+  verifyToken,
+  managerController.postCovidUser
+);
 module.exports = router;

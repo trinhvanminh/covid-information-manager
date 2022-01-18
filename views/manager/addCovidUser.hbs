@@ -1,6 +1,9 @@
 <div class="container-fluid">
   <div class="banner-list-covider">
-    <img src="https://nhuxuan.thanhhoa.gov.vn/portal/Photos/2021-08-26/c74cffad295d4dddz4.jpg" alt="khaulenh">
+    <img
+      src="https://nhuxuan.thanhhoa.gov.vn/portal/Photos/2021-08-26/c74cffad295d4dddz4.jpg"
+      alt="khaulenh"
+    />
   </div>
   <div class="detail-covider-header">
     <h1>Thêm thông tin người liên quan covid </h1>
@@ -49,21 +52,31 @@
     </div>
     <div class="form-group">
       <label for="formGroupExampleInput2">Trạng thái hiện tại </label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="FO"
-      />
+      <select name="trangthai">
+        <option value="F0">
+          F0
+        </option>
+        <option value="F1">
+          F1
+        </option>
+        <option value="F2">
+          F2
+        </option>
+      </select>
     </div>
     <div class="form-group">
-      <label for="formGroupExampleInput2">Nơi đang điều trị</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="Bệnh Viện Từ Dũ"
-      />
+      <label for="formGroupExampleInput2">Nơi đang điều trị: </label>
+      {{#unless DSnoidieutri}}
+        link tới chổ thêm nơi điều trị
+      {{else}}
+        <select name="dieutri_id">
+          {{#each DSnoidieutri}}
+            <option value="{{this.DieuTri_id}}">
+              <p>{{this.ten}} / {{this.diachi}}</p>
+            </option>
+          {{/each}}
+        </select>
+      {{/unless}}
     </div>
     <div class="form-group">
       <label for="formGroupExampleInput2">Có liên quan với bệnh nhân có ID</label>
@@ -83,6 +96,7 @@
         placeholder="F0 thành F1,..."
       />
     </div>
-    <button type="submit" class="btn btn-primary add-covider-submit">Thêm Bệnh Nhân</button>
+    <button type="submit" class="btn btn-primary add-covider-submit">Thêm Bệnh
+      Nhân</button>
   </form>
 </div>
