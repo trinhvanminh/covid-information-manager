@@ -1,35 +1,47 @@
 
 
 <h1>Thêm thông tin người liên quan covid </h1>
-  <form>
-  <div class="form-group">
-    <label for="formGroupExampleInput">Họ tên</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-  </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput2">Số CMND / Căn cước công dân</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-  </div>
+  <form action="" method="POST">
     <div class="form-group">
-    <label for="formGroupExampleInput2">Năm sinh</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-  </div>  
-  <div class="form-group">
-    <label for="formGroupExampleInput2">Địa chỉ nơi ở</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-  </div>  
-  <div class="form-group">
-    <label for="formGroupExampleInput2">Trạng thái hiện tại </label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-  </div>  
-  <div class="form-group">
-    <label for="formGroupExampleInput2">Nơi đang điều trị</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-  </div>  
-  <div class="form-group">
-    <label for="formGroupExampleInput2">Số CMND / Căn cước công dân</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-  </div>
+      <label for="formGroupExampleInput">Họ tên</label>
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" name="hoten">
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Số CMND / Căn cước công dân</label>
+      <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input" name="cccd">
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Địa chỉ nơi ở</label>
+      <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input" name="diachi">
+    </div>  
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Trạng thái hiện tại </label>
+      <select  name="trangthai">
+            <option value="F0">
+              F0
+            </option>
+              <option value="F1">
+              F1
+            </option>
+              <option value="F2">
+              F2
+            </option>
+      </select>
+    </div>  
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Nơi đang điều trị: </label>
+      {{#unless DSnoidieutri}}
+        link tới chổ thêm nơi điều trị
+      {{else}}
+      <select  name="dieutri_id">
+          {{#each DSnoidieutri}}
+            <option value="{{this.DieuTri_id}}">
+              <p>{{this.ten}} / {{this.diachi}}</p>
+            </option>
+          {{/each}}
+      </select>
+      {{/unless}}
+    </div>
+    <button type="submit">submit</button>
 </form>
 </ul>
 

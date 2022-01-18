@@ -78,9 +78,43 @@ class ManagerController {
     if (!req.authenticated) {
       res.redirect("/");
     } else {
-      res.render("manager/addCovidUser", {
-        authenticated: req.authenticated,
-      });
+      require("../db")
+        .query('SELECT * FROM public."NoiDieuTri"')
+        .then((data) => {
+          if (data.rowCount == 0) {
+            console.log("khong co du lieu");
+            res.render("manager/addCovidUser", {
+              authenticated: req.authenticated,
+            });
+          } else {
+            res.render("manager/addCovidUser", {
+              authenticated: req.authenticated,
+              DSnoidieutri: data.rows,
+            });
+          }
+        });
+    }
+  }
+  postCovidUser(req, res, next) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      const { hoten, cccd, diachi, trangthai, dieutri_id } = req.body;
+      require("../db")
+        .query(
+          'INSERT INTO "Nguoi" (hoten, cccd, diachi, trangthai, dieutri_id) VALUES ($1, $2, $3, $4, $5);',
+          [hoten, cccd, diachi, trangthai, dieutri_id]
+        )
+        .then((data) => {
+          if (data.rowCount == 0) {
+            console.log("insert k thành công");
+            res.render("manager/addCovidUser", {
+              authenticated: req.authenticated,
+            });
+          } else {
+            res.redirect("manager/related-covid/list");
+          }
+        });
     }
   }
 }
