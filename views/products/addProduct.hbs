@@ -13,7 +13,12 @@
       role="button"
     >Go back list</a>
   </div>
-  <form enctype="multipart/form-data" class="add-covider" method="POST" action="">
+  <form
+    enctype="multipart/form-data"
+    class="add-covider"
+    method="POST"
+    action=""
+  >
     <div class="form-group">
       <label for="formGroupExampleInput">Tên Sản Phẩm</label>
       <input
@@ -57,7 +62,7 @@
         <option value="L">
           Lit (L)
         </option>
-         <option value="ml">
+        <option value="ml">
           MiliLit (ml)
         </option>
         <option value="Chai">
@@ -80,6 +85,8 @@
         </option>
       </select>
     </div>
-    <button type="submit" class="btn btn-primary add-covider-submit-1">Thêm nhu yếu phẩm</button>
+    <button type="submit" class="btn btn-primary add-covider-submit-1">{{#if
+        product
+      }}Sửa nhu yếu phẩm{{else}}Thêm nhu yếu phẩm{{/if}}</button>
   </form>
 </div>
