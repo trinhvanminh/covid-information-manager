@@ -1,7 +1,6 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/node
 # Edit at https://www.toptal.com/developers/gitignore?templates=node
-.env
 ### Node ###
 # Logs
 logs
@@ -77,6 +76,8 @@ web_modules/
 # dotenv environment variables file
 .env.test
 .env.production
+.env
+
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
