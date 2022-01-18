@@ -10,10 +10,18 @@ class ListProductController {
     // res.render("./products/addProduct");
     if (!req.authenticated) {
       res.redirect("/");
+    } else {
+      res.render("./products/addProduct");
+      // Xử lý add product to database here!
     }
-    else{
-        res.render("./products/addProduct");
-        // Xử lý add product to database here!
+  }
+
+  editProduct(req, res, next) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      res.render("./products/addProduct");
+      // Xử lý add product to database here!
     }
   }
 }
