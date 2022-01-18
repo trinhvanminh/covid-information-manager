@@ -65,6 +65,7 @@ CREATE TABLE "Nguoi" (
 BEGIN;
 INSERT INTO "Nguoi" (hoten, cccd, diachi) VALUES ('trịnh văn minh','0123456789', 'đây là địa chỉ của trịnh văn minh');
 INSERT INTO "Nguoi" (hoten, diachi, dieutri_id) VALUES ('lê quang nam', 'đây là địa chỉ của lê quang nam', 2);
+INSERT INTO "Nguoi" (hoten, diachi, dieutri_id) VALUES ('nguyen van a', 'đây là địa chỉ của nguyen van a', 3);
 COMMIT;
 
 
