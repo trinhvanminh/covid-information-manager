@@ -1,3 +1,65 @@
 <div class="container-fluid">
-    
+  <div class="banner-list-covider">
+    <img
+      src="https://nhuxuan.thanhhoa.gov.vn/portal/Photos/2021-08-26/c9e3d2ba15c4bb2dz1.jpg"
+      alt="khaulenh"
+    />
+  </div>
+  <div>
+    <div class="list-product-header">
+      <h1>Danh Sách Chi Tiết Về Gói Nhu Yếu Phẩm {ID ở đây}</h1>
+    </div>
+    <div class="list-product-list">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Package ID</th>
+            <th scope="col">Tên Gói</th>
+            <th width="25%" scope="col">Danh Sách Sản Phẩm</th>
+            <th scope="col">Giới hạn số lượng</th>
+            <th scope="col">Giới Hạn</th>
+            <th scope="col">Thời Gian GH</th>
+            <th width="10%" scope="col">Chức Năng</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each dataListProduct}}
+            <tr>
+              <th scope="row">{{this.id}}</th>
+              <td>{{this.packageName}}</td>
+              <td>
+                <ul>
+                  {{#each this.listProduct}}
+                    <li>{{this}}</li>
+                  {{/each}}
+                </ul>
+              </td>
+              <td>{{this.limitQuantity}}</td>
+              <td>{{this.limitPerson}}</td>
+              <td>{{this.limitTime}}</td>
+              <td>
+                <div class="list-product-action">
+                  <a
+                    class="btn btn-primary package-list-btn btn-sm"
+                    href="/package-product/view/{{this.id}}"
+                    role="button"
+                  >View</a>
+                  <a
+                    class="btn btn-primary package-list-btn btn-sm"
+                    href="/package-product/edit/{{this.id}}"
+                    role="button"
+                  >Edit</a>
+                  <a
+                    class="btn btn-primary package-list-btn btn-sm"
+                    href="/package-product/delete/{{this.id}}"
+                    role="button"
+                  >Delete</a>
+                </div>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
