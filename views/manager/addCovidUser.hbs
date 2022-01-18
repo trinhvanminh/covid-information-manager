@@ -1,88 +1,47 @@
-<div class="container-fluid">
-  <div class="banner-list-covider">
-    <img src="https://nhuxuan.thanhhoa.gov.vn/portal/Photos/2021-08-26/c74cffad295d4dddz4.jpg" alt="khaulenh">
-  </div>
-  <div class="detail-covider-header">
-    <h1>Thêm thông tin người liên quan covid </h1>
-    <a
-      class="btn btn-primary button detail-covider-back"
-      href="/manager/related-covid/list/"
-      role="button"
-    >Go back list</a>
-  </div>
-  <form class="add-covider">
+
+
+<h1>Thêm thông tin người liên quan covid </h1>
+  <form action="" method="POST">
     <div class="form-group">
       <label for="formGroupExampleInput">Họ tên</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput"
-        placeholder="Trịnh Văn Minh"
-      />
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" name="hoten">
     </div>
     <div class="form-group">
       <label for="formGroupExampleInput2">Số CMND / Căn cước công dân</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="245xxxxxx"
-      />
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Năm sinh</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="xx/xx/xxxx"
-      />
-    </div>
+      <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input" name="cccd">
     <div class="form-group">
       <label for="formGroupExampleInput2">Địa chỉ nơi ở</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="162 đường số 8, ...."
-      />
-    </div>
+      <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input" name="diachi">
+    </div>  
     <div class="form-group">
       <label for="formGroupExampleInput2">Trạng thái hiện tại </label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="FO"
-      />
-    </div>
+      <select  name="trangthai">
+            <option value="F0">
+              F0
+            </option>
+              <option value="F1">
+              F1
+            </option>
+              <option value="F2">
+              F2
+            </option>
+      </select>
+    </div>  
     <div class="form-group">
-      <label for="formGroupExampleInput2">Nơi đang điều trị</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="Bệnh Viện Từ Dũ"
-      />
+      <label for="formGroupExampleInput2">Nơi đang điều trị: </label>
+      {{#unless DSnoidieutri}}
+        link tới chổ thêm nơi điều trị
+      {{else}}
+      <select  name="dieutri_id">
+          {{#each DSnoidieutri}}
+            <option value="{{this.DieuTri_id}}">
+              <p>{{this.ten}} / {{this.diachi}}</p>
+            </option>
+          {{/each}}
+      </select>
+      {{/unless}}
     </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Có liên quan với bệnh nhân có ID</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="ID-122"
-      />
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Lịch sử quá trình được quản lý</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="F0 thành F1,..."
-      />
-    </div>
-    <button type="submit" class="btn btn-primary add-covider-submit">Thêm Bệnh Nhân</button>
-  </form>
-</div>
+    <button type="submit">submit</button>
+</form>
+</ul>
+
