@@ -13,104 +13,73 @@
       role="button"
     >Go back list</a>
   </div>
-  <form class="add-covider" method="POST" action="">
+  <form enctype="multipart/form-data" class="add-covider" method="POST" action="">
     <div class="form-group">
       <label for="formGroupExampleInput">Tên Sản Phẩm</label>
       <input
         type="text"
         class="form-control"
         id="formGroupExampleInput"
-        placeholder="Trịnh Văn Minh"
+        placeholder="Gạo"
         name="product-name"
       />
     </div>
     <div class="form-group">
-      <label for="formGroupExampleInput2">Số CMND / Căn cước công dân</label>
+      <label for="formGroupExampleInput2">Hình ảnh minh họa</label>
       <input
-        type="text"
-        class="form-control"
+        type="file"
+        class="file-upload"
         id="formGroupExampleInput2"
-        placeholder="245xxxxxx"
-        name="cccd"
+        name="images"
+        accept="image/*"
+        multiple="true"
       />
     </div>
     <div class="form-group">
       <label for="formGroupExampleInput2">Giá Tiền</label>
       <input
-        type="text"
+        type="number"
         class="form-control"
         id="formGroupExampleInput2"
-        placeholder="YYYY/MM/dd"
+        placeholder="100000 vnd"
         name="price"
       />
     </div>
     <div class="form-group">
-      <label for="formGroupExampleInput2">Địa chỉ nơi ở</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="162 đường số 8, ...."
-        name="diachi"
-      />
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Trạng thái hiện tại </label>
-      <select name="trangthai">
-        <option value="F0">
-          F0
+      <label for="formGroupExampleInput2">Đơn Vị Định Lượng</label>
+      <select name="quantitative">
+        <option value="KG">
+          KiloGram (KG)
         </option>
-        <option value="F1">
-          F1
+        <option value="Gram">
+          Gram (gr)
         </option>
-        <option value="F2">
-          F2
+        <option value="L">
+          Lit (L)
+        </option>
+         <option value="ml">
+          MiliLit (ml)
+        </option>
+        <option value="Chai">
+          Chai
+        </option>
+        <option value="Bó">
+          Bó
+        </option>
+        <option value="Thùng">
+          Thùng
+        </option>
+        <option value="Hộp">
+          Hộp
+        </option>
+        <option value="Cây">
+          Cây
+        </option>
+        <option value="Cái">
+          Cái
         </option>
       </select>
     </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Nơi đang điều trị: </label>
-      {{#unless DSnoidieutri}}
-        link tới chổ thêm nơi điều trị
-      {{else}}
-        <select name="dieutri_id">
-          {{#each DSnoidieutri}}
-            <option value="{{this.DieuTri_id}}">
-              <p>{{this.ten}} / {{this.diachi}}</p>
-            </option>
-          {{/each}}
-        </select>
-      {{/unless}}
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Có liên quan với bệnh nhân</label>
-      {{#unless DSNguoi}}
-        link tới chổ thêm nguoi
-      {{else}}
-        <select name="Nguoi_id">
-          <option>
-            -- Chọn người liên quan
-          </option>
-          {{#each DSNguoi}}
-            <option value="{{this.Nguoi_id}}">
-              <p>{{this.hoten}} / {{this.cccd}} / {{this.diachi}}</p>
-            </option>
-          {{/each}}
-        </select>
-      {{/unless}}
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Lịch sử quá trình được quản lý</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="F0 thành F1,..."
-        name="lichsu"
-      />
-    </div>
-    <input type="hidden" value="{{maxNguoiId}}" name="maxNguoiId" />
-    <button type="submit" class="btn btn-primary add-covider-submit">Thêm Bệnh
-      Nhân</button>
+    <button type="submit" class="btn btn-primary add-covider-submit-1">Thêm nhu yếu phẩm</button>
   </form>
 </div>
