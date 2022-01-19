@@ -14,7 +14,7 @@ class PackageProductController {
   // POST Add Package Product /
   addPackageProduct(req, res) {
     //   Data Test
-    res.render("./productPackages/addPackageProduct", { products });
+    res.render("./productPackages/addPackageProduct");
   }
 
   editPackageProduct(req, res) {
@@ -31,6 +31,17 @@ class PackageProductController {
       if (req.params.id === dataTest.id) {
         res.render("./productPackages/editPackageProduct", { dataTest });
       }
+    } catch (error) {
+      console.log(error.message);
+      return res.status(500).json({ status: false, message: error.message });
+    }
+  }
+
+  // DELETE Delete Package Product /
+  deletePackageProduct(req, res) {
+    try {
+      // Delete Data here
+      res.redirect("/package-product");
     } catch (error) {
       console.log(error.message);
       return res.status(500).json({ status: false, message: error.message });
