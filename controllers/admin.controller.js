@@ -19,7 +19,13 @@ class AdminController {
   }
   // GET Edit Location Isolation /
   editLocationIsolation(req, res) {
-    res.render("./admin/locationISO/editLocationIsolation");
+    const dataTest = {
+      id: 1,
+      name: "Địa điểm điều trị",
+      suchua: 1000,
+      controng: 200,
+    };
+    res.render("./admin/locationISO/editLocationIsolation", { dataTest });
   }
 }
 
