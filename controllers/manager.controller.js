@@ -249,6 +249,17 @@ class ManagerController {
       } else res.render("manager/related");
     }
   }
+
+  // [GET] /statistic - Thống kê thông tin ................
+  statisticInformation(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      res.render("manager/statistic", { authenticated: req.authenticated });
+    }
+  }
+
+
 }
 
 module.exports = new ManagerController();

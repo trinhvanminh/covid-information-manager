@@ -25,4 +25,8 @@ router.get(
   verifyToken,
   managerController.editCovidUserView
 );
+
+// Thống kê thông tin 
+router.get("/statistic", verifyToken, managerController.statisticInformation);
+
 module.exports = router;
