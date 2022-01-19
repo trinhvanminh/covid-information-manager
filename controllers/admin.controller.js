@@ -11,7 +11,7 @@ class AdminController {
   }
   // GET List Location Isolation /
   listLocationIsolation(req, res) {
-    res.render("./admin/locationIsolation/listLocationIsolation");
+    res.render("./admin/locationISO/listLocationIsolation");
   }
   // GET Add Location Isolation /
   addLocationIsolation(req, res) {
