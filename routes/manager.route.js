@@ -37,4 +37,7 @@ router.delete(
   verifyToken,
   managerController.deleteCovidUser
 );
+
+// Thống kê thông tin 
+router.get("/statistic", verifyToken, managerController.statisticInformation);
 module.exports = router;

@@ -346,6 +346,16 @@ class ManagerController {
       }
     }
   }
+  // [GET] /statistic - Thống kê thông tin ................
+  statisticInformation(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      res.render("staticInformation/staticInfo", {
+        authenticated: req.authenticated,
+      });
+    }
+  }
 }
 
 module.exports = new ManagerController();
