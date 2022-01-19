@@ -95,19 +95,33 @@
     </div>
     <div class="form-group">
       <label for="formGroupExampleInput2">Có liên quan với bệnh nhân</label>
-      {{#unless this.DSNguoi}}
-        link tới chổ thêm nguoi
+      {{#unless DSNguoi}}
+        Hiện chưa có người nào <a href="/manager/related-covid/add">Thêm ngay</a>
       {{else}}
-        <select name="Nguoi_id">
-          <option>
-            -- Chọn người liên quan
-          </option>
-          {{#each DSNguoi}}
-            <option value="{{this.Nguoi_id}}">
-              <p>{{this.hoten}} / {{this.cccd}} / {{this.diachi}}</p>
-            </option>
-          {{/each}}
-        </select>
+        <div class="multiselect">
+          <div class="selectBox" onclick="showCheckboxes()">
+            <select>
+              <option>-- Thay đổi người liên quan</option>
+            </select>
+            <div class="overSelect"></div>
+          </div>
+          <div id="checkboxes">
+            {{#each DSNguoi}}
+              <label for="{{this.Nguoi_id}}">
+                <input
+                  type="checkbox"
+                  id="{{this.Nguoi_id}}"
+                  value="{{this.Nguoi_id}}"
+                  name="DS_nlq_id"
+                  {{#if this.selected}}checked{{/if}}
+                />{{this.hoten}}
+                /
+                {{this.cccd}}
+                /
+                {{this.diachi}}</label>
+            {{/each}}
+          </div>
+        </div>
       {{/unless}}
     </div>
     <div class="form-group">
@@ -126,3 +140,8 @@
       tin</button>
   </form>
 </div>
+
+<script>var expanded = false; function showCheckboxes() { var checkboxes =
+  document.getElementById("checkboxes"); if (!expanded) {
+  checkboxes.style.display = "block"; expanded = true; } else {
+  checkboxes.style.display = "none"; expanded = false; } }</script>

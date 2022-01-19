@@ -189,7 +189,7 @@ class ManagerController {
         .catch((err) => console.log(err));
     }
   }
-  // [PUT] /related-covid/list/edit/:id
+  // [GET] /related-covid/list/edit/:id
   editCovidUserView(req, res, next) {
     if (!req.authenticated) {
       res.redirect("/");
@@ -214,13 +214,36 @@ class ManagerController {
                 require("../db")
                   .query('SELECT * FROM public."Nguoi" ORDER BY "Nguoi_id" ASC')
                   .then((nguoi) => {
-                    res.render("manager/editCovidUser", {
-                      authenticated: req.authenticated,
-                      user: data.rows[0],
-                      DSnoidieutri,
-                      DSNguoi: nguoi.rows, //NHIEU NGUOI LIEN QUAN
-                    });
-                  });
+                    let queryStr = `select "Nguoi_id" from public."Nguoi" where "Nguoi_id" in
+                    (SELECT "nlq_id" 
+                    FROM public."Nguoi" 
+                      full JOIN public."NguoiLienQuan" 
+                      on "Nguoi"."Nguoi_id" = "NguoiLienQuan"."nguoi_id" 
+                    where "Nguoi"."Nguoi_id" = $1)`;
+                    require("../db")
+                      .query(queryStr, [req.params.id])
+                      .then((DSnlqId) => {
+                        DSnlqId.rows.map((nlq) => {
+                          for (let i = 0; i < nguoi.rows.length; i++) {
+                            nguoi.rows[i] =
+                              nlq.Nguoi_id === nguoi.rows[i].Nguoi_id
+                                ? {
+                                    ...nguoi.rows[i],
+                                    selected: true,
+                                  }
+                                : nguoi.rows[i];
+                          }
+                        });
+
+                        res.render("manager/editCovidUser", {
+                          authenticated: req.authenticated,
+                          user: data.rows[0],
+                          DSnoidieutri,
+                          DSNguoi: nguoi.rows,
+                        });
+                      });
+                  })
+                  .catch((err) => console.log(err));
               });
           });
       } else res.render("manager/related");
