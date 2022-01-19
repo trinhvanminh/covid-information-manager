@@ -15,7 +15,7 @@
       >Go back</a>
     </div>
     <div class="card-body">
-      {{#if product}}
+      {{#if dataTest}}
         <form
           enctype="multipart/form-data"
           class="add-covider"
@@ -91,8 +91,10 @@
               </option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary add-covider-submit-1">Sửa
-            nhu yếu phẩm</button>
+          <button
+            type="submit"
+            class="btn btn-primary button-edit-location"
+          >Sửa</button>
         </form>
       {{/if}}
     </div>

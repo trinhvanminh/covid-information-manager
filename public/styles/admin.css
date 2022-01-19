@@ -8,12 +8,19 @@
   justify-content: space-between;
 }
 
-.button-account-manager-detail{
-    width: 100px;
-    height: 35px;
+.button-account-manager-detail {
+  width: 100px;
+  height: 35px;
 }
 
-.button-account-manager-detail-1{
-    width: 150px;
+.button-account-manager-detail-1 {
+  width: 150px;
+  height: 35px;
+}
+
+.button-edit-location {
+    display: flex;
+    width: 55px;
     height: 35px;
+    margin: 40px auto;
 }
