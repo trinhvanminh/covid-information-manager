@@ -5,6 +5,10 @@ class AdminController {
   viewAccountManager(req, res) {
     res.render("./admin/accountManager/accountManager");
   }
+ // GET History Account Manager /
+  historyAccountManager(req, res){
+    res.render("./admin/accountManager/historyAccountManager");
+  }
 }
 
 module.exports = new AdminController();
