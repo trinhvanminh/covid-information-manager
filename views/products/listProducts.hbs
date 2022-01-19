@@ -1,0 +1,169 @@
+<div class="container-fluid">
+  <div class="banner-list-covider">
+    <img
+      src="https://nhuxuan.thanhhoa.gov.vn/portal/Photos/2021-08-26/c74cffad295d4dddz4.jpg"
+      alt="khaulenh"
+    />
+  </div>
+  <div>
+    <div class="list-product-header">
+      <h1>Danh Sách Các Nhu Yếu Phẩm Cần Thiết</h1>
+    </div>
+    <div class="list-product-features">
+      <form class="form-inline my-2 my-lg-0">
+        <input
+          class="form-control mr-sm-2 search-product"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button
+          class="btn btn-primary my-2 my-sm-0 list-product-button"
+          type="submit"
+        >Search</button>
+      </form>
+      <a
+        class="btn btn-primary covid-list-btn-add btn-sm list-product-button"
+        href="/list-product/add"
+        role="button"
+      >Add product</a>
+      <select
+        class="form-select covid-list-select list-product-button"
+        aria-label="Default select example"
+      >
+        <option selected>Sắp Xếp</option>
+        <option value="1">Mặc Định</option>
+        <option value="2">Tên A-Z</option>
+        <option value="3">Tên Z-A</option>
+      </select>
+    </div>
+    <div class="list-product-list">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Product ID</th>
+            <th scope="col">Tên Sản Phẩm</th>
+            <th width="30%" scope="col">Hình Ảnh</th>
+            <th scope="col">Giá Tiền</th>
+            <th scope="col">Đơn Vị Định Lượng</th>
+            <th width="10%" scope="col">Chức Năng</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data}}
+            <tr>
+              <th scope="row">{{this.id}}</th>
+              <td>{{this.product-name}}</td>
+              <td>
+                {{#each this.images}}
+                  <img
+                    src="{{this}}"
+                    alt="hinhanh"
+                    width="100px"
+                    height="100px"
+                  />
+                {{/each}}
+              </td>
+              <td>{{this.price}}</td>
+              <td>{{this.quantitative}}</td>
+              <td>
+                <div class="list-product-action">
+                  <a
+                    class="btn btn-primary covid-list-btn-add btn-sm"
+                    href="/list-product/edit/{{this.id}}"
+                    role="button"
+                  >Edit</a>
+                  <a
+                    class="btn btn-primary covid-list-btn-add btn-sm"
+                    href="/list-product/delete/{{this.id}}"
+                    role="button"
+                  >Delete</a>
+                </div>
+              </td>
+            </tr>
+          {{/each}}
+          <tr>
+            <th scope="row">P-01</th>
+            <td>Rượu Volka</td>
+            <td><img
+                src="https://minhcaumart.vn/media/com_eshop/products/Ru%20Vodka%20Men%2029.5%20300ml.jpg"
+                alt="Volka"
+                width="100px"
+                height="100px"
+              />
+              <img
+                src="https://www.cqmart.vn/images/thumbs/0001897_ruou-vodka-ha-noi-700ml-395-vol.png"
+                alt="Volka"
+                width="100px"
+                height="100px"
+              />
+              <img
+                src="https://www.cqmart.vn/images/thumbs/0001897_ruou-vodka-ha-noi-700ml-395-vol.png"
+                alt="Volka"
+                width="100px"
+                height="100px"
+              />
+              
+              </td>
+            <td>69000 vnd</td>
+            <td>Chai</td>
+            <td>
+              <div class="list-product-action">
+                <a
+                  class="btn btn-primary covid-list-btn-edit btn-sm list-product-button"
+                  href="/list-product/edit/:id"
+                  role="button"
+                >Edit</a>
+                <a
+                  class="btn btn-primary covid-list-btn-delete btn-sm list-product-button"
+                  href="/list-product/delete"
+                  role="button"
+                >Delete</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">P-01</th>
+            <td>Rượu Volka</td>
+            <td><img
+                src="https://minhcaumart.vn/media/com_eshop/products/Ru%20Vodka%20Men%2029.5%20300ml.jpg"
+                alt="Volka"
+                width="100px"
+                height="100px"
+              />
+              <img
+                src="https://www.cqmart.vn/images/thumbs/0001897_ruou-vodka-ha-noi-700ml-395-vol.png"
+                alt="Volka"
+                width="100px"
+                height="100px"
+              />
+              <img
+                src="https://www.cqmart.vn/images/thumbs/0001897_ruou-vodka-ha-noi-700ml-395-vol.png"
+                alt="Volka"
+                width="100px"
+                height="100px"
+              />
+              
+              </td>
+            <td>69000 vnd</td>
+            <td>Chai</td>
+            <td>
+              <div class="list-product-action">
+                <a
+                  class="btn btn-primary covid-list-btn-edit btn-sm list-product-button"
+                  href="/list-product/edit/:id"
+                  role="button"
+                >Edit</a>
+                <a
+                  class="btn btn-primary covid-list-btn-delete btn-sm list-product-button"
+                  href="/list-product/delete"
+                  role="button"
+                >Delete</a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
