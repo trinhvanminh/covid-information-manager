@@ -7,3 +7,8 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.button-account-manager-detail{
+    width: 100px;
+    height: 35px;
+}
