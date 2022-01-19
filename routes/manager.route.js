@@ -37,5 +37,4 @@ router.delete(
   verifyToken,
   managerController.deleteCovidUser
 );
-
 module.exports = router;
