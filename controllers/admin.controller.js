@@ -5,9 +5,19 @@ class AdminController {
   viewAccountManager(req, res) {
     res.render("./admin/accountManager/accountManager");
   }
- // GET History Account Manager /
-  historyAccountManager(req, res){
+  // GET History Account Manager /
+  historyAccountManager(req, res) {
     res.render("./admin/accountManager/historyAccountManager");
+  }
+
+  // GET Add Location Isolation /
+  addLocationIsolation(req, res) {
+    res.render("./admin/locationISO/addLocationIsolation");
+  }
+
+  // GET Edit Location Isolation /
+  editLocationIsolation(req, res) {
+    res.render("./admin/locationISO/editLocationIsolation");
   }
 }
 
