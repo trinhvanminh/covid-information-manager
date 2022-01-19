@@ -13,34 +13,39 @@ class PackageProductController {
 
   // POST Add Package Product /
   addPackageProduct(req, res) {
-    //   Data Test 
-    const products = [
-      {
-        id: 1,
-        name: "Product 1",
-        price: 100,
-        quantity: 10,
-      },
-      {
-        id: 2,
-        name: "Product 2",
-        price: 200,
-        quantity: 20,
-      },
-      {
-        id: 3,
-        name: "Product 3",
-        price: 300,
-        quantity: 30,
-      },
-      {
-        id: 4,
-        name: "Product 4",
-        price: 400,
-        quantity: 40,
-      },
-    ];
-    res.render("./productPackages/addPackageProduct", { products });
+    //   Data Test
+    res.render("./productPackages/addPackageProduct");
+  }
+
+  editPackageProduct(req, res) {
+    try {
+      const dataTest = {
+        id: "23121",
+        packageName: "Package 12222",
+        listProduct: [],
+        limitQuantity: 2,
+        limitPerson: 3,
+        limitTime: 10,
+      };
+
+      if (req.params.id === dataTest.id) {
+        res.render("./productPackages/editPackageProduct", { dataTest });
+      }
+    } catch (error) {
+      console.log(error.message);
+      return res.status(500).json({ status: false, message: error.message });
+    }
+  }
+
+  // DELETE Delete Package Product /
+  deletePackageProduct(req, res) {
+    try {
+      // Delete Data here
+      res.redirect("/package-product");
+    } catch (error) {
+      console.log(error.message);
+      return res.status(500).json({ status: false, message: error.message });
+    }
   }
 }
 
