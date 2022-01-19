@@ -3,6 +3,6 @@ const UserSystemController = require("../controllers/userSystem.controller");
 const { verifyToken } = require("../jwt");
 
 // View Personal information
-router.get("/account", verifyToken, AdminController.viewAccountManager);
+router.get("/information", verifyToken, UserSystemController.viewInforUser);
 
 module.exports = router;
