@@ -24,6 +24,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^6.0.2",
     "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
     "pg": "^8.7.1",
     "pg-pool": "^3.4.1"
   },

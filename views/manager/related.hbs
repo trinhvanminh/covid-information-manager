@@ -55,7 +55,7 @@
             <th scope="col">Họ Và Tên</th>
             <th scope="col">Trạng Thái</th>
             <th scope="col">Nơi điều trị</th>
-            <th scope="col">Liên Quan Với</th>
+            <th scope="col">Hành động</th>
           </tr>
         </thead>
         <tbody>
@@ -67,7 +67,21 @@
                 >{{this.hoten}}</a></td>
               <td>{{this.trangthai}}</td>
               <td>{{this.ten}}</td>
-              <td>ID-12</td>
+              <td><a
+                  type="button"
+                  class="btn btn-link"
+                  href="/manager/related-covid/edit/{{this.Nguoi_id}}"
+                >edit</a>
+                /
+                <form
+                  style="display:inline-block"
+                  id="delete"
+                  method="POST"
+                  action="/manager/related-covid/delete/{{this.Nguoi_id}}?_method=DELETE"
+                ><button
+                    type="submit"
+                    class="btn btn-link"
+                  >delete</button></form></td>
             </tr>
           {{/each}}
         </tbody>

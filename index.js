@@ -6,6 +6,10 @@ const route = require("./routes/index.route");
 const morgan = require("morgan");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const methodOverride = require("method-override");
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride("_method"));
 
 // set body-parse to parse req.body
 app.use(express.urlencoded({ extended: true }));

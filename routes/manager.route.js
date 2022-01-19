@@ -19,10 +19,22 @@ router.post(
   verifyToken,
   managerController.postCovidUser
 );
-// Edit form
+// [GET] Edit form
 router.get(
   "/related-covid/edit/:id",
   verifyToken,
   managerController.editCovidUserView
+);
+// [PUT] Edit covid user
+router.put(
+  "/related-covid/edit/:id",
+  verifyToken,
+  managerController.editCovidUser
+);
+// [POST] delete covid user
+router.delete(
+  "/related-covid/delete/:id",
+  verifyToken,
+  managerController.deleteCovidUser
 );
 module.exports = router;
