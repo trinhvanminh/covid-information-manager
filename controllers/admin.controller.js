@@ -9,12 +9,14 @@ class AdminController {
   historyAccountManager(req, res) {
     res.render("./admin/accountManager/historyAccountManager");
   }
-
+  // GET List Location Isolation /
+  listLocationIsolation(req, res) {
+    res.render("./admin/locationIsolation/listLocationIsolation");
+  }
   // GET Add Location Isolation /
   addLocationIsolation(req, res) {
     res.render("./admin/locationISO/addLocationIsolation");
   }
-
   // GET Edit Location Isolation /
   editLocationIsolation(req, res) {
     res.render("./admin/locationISO/editLocationIsolation");
