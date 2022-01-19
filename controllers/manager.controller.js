@@ -249,7 +249,6 @@ class ManagerController {
       } else res.render("manager/related");
     }
   }
-
   // [PUT] /related-covid/edit/:id
   editCovidUser(req, res, next) {
     if (!req.authenticated) {
@@ -347,7 +346,6 @@ class ManagerController {
       }
     }
   }
-
   // [GET] /statistic - Thống kê thông tin ................
   statisticInformation(req, res) {
     if (!req.authenticated) {
@@ -356,8 +354,6 @@ class ManagerController {
       res.render("staticInformation/staticInfo", { authenticated: req.authenticated });
     }
   }
-
-
 }
 
 module.exports = new ManagerController();
