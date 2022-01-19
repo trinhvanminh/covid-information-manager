@@ -25,7 +25,8 @@ app.engine(
     extname: ".hbs",
     helpers: {
       sum: (a, b) => a + b,
-      formatTs: (ts) => (ts ? ts.toLocaleDateString() : ""),
+      formatTs: (ts) =>
+        ts ? ts.toLocaleDateString("en-GB").split("/").reverse().join("/") : "",
       ifeq: (a, b) => (a === b ? "selected" : ""),
     },
   })
