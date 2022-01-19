@@ -250,6 +250,104 @@ class ManagerController {
     }
   }
 
+  // [PUT] /related-covid/edit/:id
+  editCovidUser(req, res, next) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      const {
+        hoten,
+        cccd,
+        namsinh,
+        diachi,
+        trangthai,
+        dieutri_id,
+        DS_nlq_id,
+        lichsu,
+      } = req.body;
+      if (req.params.id) {
+        const queryStr = `select "succhua" 
+        from public."NoiDieuTri" 
+        where "DieuTri_id" = $1 and "succhua" > (	SELECT count(*) 
+                  FROM public."Nguoi" left JOIN public."NoiDieuTri" 
+                      on "Nguoi"."dieutri_id" = "NoiDieuTri"."DieuTri_id" 
+                  where "NoiDieuTri"."DieuTri_id" = $1);`;
+        require("../db")
+          .query(queryStr, [dieutri_id])
+          .then((data) => {
+            if (data.rowCount === 0) {
+              console.log("không đủ sức chứa");
+              res.render("manager/editCovidUser", {
+                authenticated: req.authenticated,
+                message: "không đủ sức chứa",
+                type: "warning",
+              });
+            } else {
+              const queryStr = ` UPDATE public."Nguoi"
+              SET "hoten" = $2, "cccd" = $3, "namsinh" = $4, "diachi" = $5, "trangthai" = $6, "dieutri_id" = $7, "lichsu" = $8
+              WHERE "Nguoi_id" = $1;`;
+
+              require("../db")
+                .query(queryStr, [
+                  req.params.id,
+                  hoten,
+                  cccd,
+                  namsinh,
+                  diachi,
+                  trangthai,
+                  dieutri_id,
+                  lichsu,
+                ])
+                .then((data) => {
+                  if (DS_nlq_id) {
+                    const trangthaiNlq =
+                      trangthai !== "F3"
+                        ? "F" + (parseInt(trangthai[1]) + 1).toString()
+                        : "";
+                    let queryStr = `
+                  UPDATE public."Nguoi"
+                  SET "trangthai" = $1
+                  WHERE "Nguoi_id" = $2 `;
+                    for (let i = 0; i < DS_nlq_id.length - 1; i++) {
+                      queryStr = queryStr + `or "Nguoi_id" = $${i + 3} `;
+                    }
+                    require("../db")
+                      .query(queryStr, [trangthaiNlq, ...DS_nlq_id])
+                      .then((data) => {
+                        console.log(data.rows);
+                        res.redirect("/manager/related-covid/list");
+                      });
+                  } else {
+                    res.redirect("/manager/related-covid/list");
+                  }
+                })
+                .catch((err) => console.log(err));
+            }
+          });
+      } else res.redirect("/manager/related-covid/list");
+    }
+  }
+  // [DELETE] /related-covid/delete/:id
+  deleteCovidUser(req, res, next) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      if (req.params.id) {
+        const queryStr = `delete from public."Nguoi" where "Nguoi_id" = $1`;
+        require("../db")
+          .query(queryStr, [req.params.id])
+          .then((data) => {
+            if (data.rowCount === 0) {
+              console.log("xoá không thành công");
+              res.redirect("/manager/related-covid/list/");
+            } else {
+              res.redirect("/manager/related-covid/list/");
+            }
+          });
+      }
+    }
+  }
+
   // [GET] /statistic - Thống kê thông tin ................
   statisticInformation(req, res) {
     if (!req.authenticated) {

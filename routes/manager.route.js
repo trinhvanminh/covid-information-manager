@@ -26,6 +26,19 @@ router.get(
   managerController.editCovidUserView
 );
 
+// [PUT] Edit covid user
+router.put(
+  "/related-covid/edit/:id",
+  verifyToken,
+  managerController.editCovidUser
+);
+// [POST] delete covid user
+router.delete(
+  "/related-covid/delete/:id",
+  verifyToken,
+  managerController.deleteCovidUser
+);
+
 // Thống kê thông tin 
 router.get("/statistic", verifyToken, managerController.statisticInformation);
 
