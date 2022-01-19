@@ -255,7 +255,7 @@ class ManagerController {
     if (!req.authenticated) {
       res.redirect("/");
     } else {
-      res.render("manager/statistic", { authenticated: req.authenticated });
+      res.render("staticInformation/staticInfo", { authenticated: req.authenticated });
     }
   }
 
