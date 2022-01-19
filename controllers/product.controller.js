@@ -1,39 +1,61 @@
 class ListProductController {
   // GET List Product /
   listProduct(req, res) {
-    require("../db")
-      .query('SELECT * FROM public."SP"')
-      .then((data) => {
-        const spwithLinks = Promise.all(
-          data.rows.map((ele, idx) => {
-            return require("../db")
-              .query(
-                'SELECT * FROM public."HinhAnh" where "HinhAnh"."sp_id" = $1',
-                [ele.SP_id]
-              )
-              .then((hinhanh) => {
-                data.rows[idx].links = hinhanh.rows.map((h) => h.link);
-                return data.rows[idx];
-              })
-              .catch((err) => console.log(err));
-          })
-        );
-        spwithLinks.then((SpWithLinks) => {
-          res.render("./products/listProducts", {
-            authenticated: req.authenticated,
-            data: SpWithLinks,
-          });
+    const renderData = (data) => {
+      const spwithLinks = Promise.all(
+        data.rows.map((ele, idx) => {
+          return require("../db")
+            .query(
+              'SELECT * FROM public."HinhAnh" where "HinhAnh"."sp_id" = $1',
+              [ele.SP_id]
+            )
+            .then((hinhanh) => {
+              data.rows[idx].links = hinhanh.rows.map((h) => h.link);
+              return data.rows[idx];
+            })
+            .catch((err) => console.log(err));
+        })
+      );
+      spwithLinks.then((SpWithLinks) => {
+        res.render("./products/listProducts", {
+          authenticated: req.authenticated,
+          data: SpWithLinks,
         });
       });
+    };
+    if (req.query.q) {
+      require("../db")
+        .query('SELECT * FROM public."SP" where "SP"."ten" like $1', [
+          "%" + req.query.q + "%",
+        ])
+        .then(renderData);
+    } else if (req.query.sort && req.query.sort !== "") {
+      const queryString =
+        req.query.sort === "ASC"
+          ? 'SELECT * FROM public."SP" ORDER BY "ten" ASC'
+          : 'SELECT * FROM public."SP" ORDER BY "ten" DESC';
+      require("../db").query(queryString).then(renderData);
+    } else {
+      require("../db").query('SELECT * FROM public."SP"').then(renderData);
+    }
   }
 
+  //   GET Add Product View
+  addProductView(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      res.render("./products/addProduct");
+    }
+  }
   //   POST Add Product
   addProduct(req, res) {
     // res.render("./products/addProduct");
     if (!req.authenticated) {
       res.redirect("/");
     } else {
-      res.render("./products/addProduct");
+      console.log(req);
+      // res.redirect("./products");
       // Xử lý add product to database here!
     }
   }
