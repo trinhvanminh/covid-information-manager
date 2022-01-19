@@ -157,8 +157,8 @@ class ManagerController {
         trangthai,
         dieutri_id,
         lichsu,
-        Nguoi_id,
         maxNguoiId,
+        DS_nlq_id,
       } = req.body;
       require("../db")
         .query(
@@ -171,11 +171,16 @@ class ManagerController {
             res.render("manager/addCovidUser", {
               authenticated: req.authenticated,
             });
-          } else if (Nguoi_id) {
-            require("../db").query(
-              'INSERT INTO "NguoiLienQuan" (nguoi_id, nlq_id) VALUES ($1, $2);',
-              [maxNguoiId, Nguoi_id]
-            );
+          } else if (DS_nlq_id) {
+            let queryStr =
+              'INSERT INTO public."NguoiLienQuan" (nguoi_id, nlq_id) VALUES ($1, $2)';
+            for (let index = 0; index < DS_nlq_id.length - 1; index++) {
+              queryStr = queryStr + `,($1, $${index + 3})`;
+            }
+            require("../db").query(queryStr, [
+              (parseInt(maxNguoiId) + 1).toString(),
+              ...DS_nlq_id,
+            ]);
             res.redirect("manager/related-covid/list");
           } else {
             res.redirect("manager/related-covid/list");
@@ -195,16 +200,9 @@ class ManagerController {
             req.params.id,
           ])
           .then((data) => {
-            // console.log(data.rows[0]);
             require("../db")
               .query('SELECT * FROM public."NoiDieuTri"')
               .then((dieutri) => {
-                console.log(dieutri.rows);
-                // console.log({
-                //   selected: data.rows[0].dieutri_id,
-                //   ...dieutri.rows,
-                // });
-
                 const DSnoidieutri = dieutri.rows.map((obj) => {
                   return obj.DieuTri_id === data.rows[0].dieutri_id
                     ? {
@@ -213,7 +211,6 @@ class ManagerController {
                       }
                     : obj;
                 });
-                console.log(DSnoidieutri);
                 require("../db")
                   .query('SELECT * FROM public."Nguoi" ORDER BY "Nguoi_id" ASC')
                   .then((nguoi) => {
@@ -221,7 +218,7 @@ class ManagerController {
                       authenticated: req.authenticated,
                       user: data.rows[0],
                       DSnoidieutri,
-                      DSNguoi: nguoi.rows,
+                      DSNguoi: nguoi.rows, //NHIEU NGUOI LIEN QUAN
                     });
                   });
               });

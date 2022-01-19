@@ -74,6 +74,9 @@
         link tới chổ thêm nơi điều trị
       {{else}}
         <select name="dieutri_id">
+          <option>
+            -- Chọn nơi điều trị
+          </option>
           {{#each DSnoidieutri}}
             <option value="{{this.DieuTri_id}}">
               <p>{{this.ten}} / {{this.DieuTri_diachi}}</p>
@@ -87,16 +90,30 @@
       {{#unless DSNguoi}}
         link tới chổ thêm nguoi
       {{else}}
-        <select name="Nguoi_id">
-          <option>
-            -- Chọn người liên quan
-          </option>
-          {{#each DSNguoi}}
-            <option value="{{this.Nguoi_id}}">
-              <p>{{this.hoten}} / {{this.cccd}} / {{this.diachi}}</p>
-            </option>
-          {{/each}}
-        </select>
+
+        <div class="multiselect">
+          <div class="selectBox" onclick="showCheckboxes()">
+            <select>
+              <option>-- Chọn người liên quan</option>
+            </select>
+            <div class="overSelect"></div>
+          </div>
+          <div id="checkboxes">
+            {{#each DSNguoi}}
+              <label for="{{this.Nguoi_id}}">
+                <input
+                  type="checkbox"
+                  id="{{this.Nguoi_id}}"
+                  value="{{this.Nguoi_id}}"
+                  name="DS_nlq_id"
+                />{{this.hoten}}
+                /
+                {{this.cccd}}
+                /
+                {{this.diachi}}</label>
+            {{/each}}
+          </div>
+        </div>
       {{/unless}}
     </div>
     <div class="form-group">
@@ -114,3 +131,8 @@
       Nhân</button>
   </form>
 </div>
+
+<script>var expanded = false; function showCheckboxes() { var checkboxes =
+  document.getElementById("checkboxes"); if (!expanded) {
+  checkboxes.style.display = "block"; expanded = true; } else {
+  checkboxes.style.display = "none"; expanded = false; } }</script>
