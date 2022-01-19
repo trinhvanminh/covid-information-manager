@@ -24,3 +24,10 @@
     height: 35px;
     margin: 40px auto;
 }
+
+.button-add-location{
+    display: flex;
+    width: 70px;
+    height: 35px;
+    margin: 40px auto;
+}
