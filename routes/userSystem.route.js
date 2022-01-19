@@ -7,6 +7,7 @@ router.get("/information", verifyToken, UserSystemController.viewInforUser);
 router.get("/notify-payment", verifyToken, UserSystemController.notifyPaymentUser);
 router.get("/cart", verifyToken, UserSystemController.cartUser);
 router.get("/checkout", verifyToken, UserSystemController.checkoutUser);
+router.get("/balance", verifyToken, UserSystemController.balanceUser);
 
 
 module.exports = router;

@@ -20,6 +20,12 @@ class UserSystemController {
   checkoutUser(req, res) {
     res.render("./user/checkoutPayment");
   }
+
+  // GET Balance User /
+  balanceUser(req, res) {
+    res.render("./user/accountBalance");
+  }
+
  
 }
 
