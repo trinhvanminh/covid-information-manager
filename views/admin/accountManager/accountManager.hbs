@@ -5,15 +5,54 @@
       alt="khaulenh"
     />
   </div>
-  <div class="detail-covider-header">
-    <h1>Quản lý tài khoản người quản lý(Manager)</h1>
-    <a
+  <div class="card">
+    <div class="card-header admin-account-header">
+      <h4 class="card-title">Thống Kê Thông Tin</h4>
+      <a
       class="btn btn-primary button detail-covider-back"
       href="/"
       role="button"
-    >Go back list</a>
-  </div>
-  <div>
-
+    >Go back</a>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="text-primary">
+            <th width="70%">
+              <strong>Bảng Thống Kê Người Dùng</strong>
+            </th>
+            <th>
+              <strong>Số lượng</strong>
+            </th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Tổng số người dùng</strong>
+              </td>
+              <td>
+                <strong>{{totalUser}} 10</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Tổng số người dùng online</strong>
+              </td>
+              <td>
+                <strong>{{totalUserOnline}} 1</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Tổng số người dùng offline</strong>
+              </td>
+              <td>
+                <strong>{{totalUserOffline}} 9</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

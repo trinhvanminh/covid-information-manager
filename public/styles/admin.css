@@ -1,0 +1,9 @@
+.admin-account-card {
+  margin-top: 20px;
+}
+
+.admin-account-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
