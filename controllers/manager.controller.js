@@ -87,7 +87,6 @@ class ManagerController {
               authenticated: req.authenticated,
             });
           } else {
-            // ----------------------------------------
             const queryStr = `select * from public."Nguoi" where "Nguoi_id" in
               ( SELECT "nlq_id" 
                 FROM public."Nguoi" full JOIN public."NguoiLienQuan" 
@@ -112,10 +111,10 @@ class ManagerController {
                 }
               });
           }
-          // ----------------------------------------
         });
     }
   }
+  // [GET]  /related-covid/list/add
   addCovidUser(req, res, next) {
     if (!req.authenticated) {
       res.redirect("/");
@@ -144,6 +143,7 @@ class ManagerController {
         .catch((err) => console.log(err));
     }
   }
+  // [POST]  /related-covid/list/add
   postCovidUser(req, res, next) {
     if (!req.authenticated) {
       res.redirect("/");
@@ -182,6 +182,51 @@ class ManagerController {
           }
         })
         .catch((err) => console.log(err));
+    }
+  }
+  // [PUT] /related-covid/list/edit/:id
+  editCovidUserView(req, res, next) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      if (req.params.id) {
+        require("../db")
+          .query('SELECT * FROM public."Nguoi" where "Nguoi_id" = $1', [
+            req.params.id,
+          ])
+          .then((data) => {
+            // console.log(data.rows[0]);
+            require("../db")
+              .query('SELECT * FROM public."NoiDieuTri"')
+              .then((dieutri) => {
+                console.log(dieutri.rows);
+                // console.log({
+                //   selected: data.rows[0].dieutri_id,
+                //   ...dieutri.rows,
+                // });
+
+                const DSnoidieutri = dieutri.rows.map((obj) => {
+                  return obj.DieuTri_id === data.rows[0].dieutri_id
+                    ? {
+                        ...obj,
+                        selected: true,
+                      }
+                    : obj;
+                });
+                console.log(DSnoidieutri);
+                require("../db")
+                  .query('SELECT * FROM public."Nguoi" ORDER BY "Nguoi_id" ASC')
+                  .then((nguoi) => {
+                    res.render("manager/editCovidUser", {
+                      authenticated: req.authenticated,
+                      user: data.rows[0],
+                      DSnoidieutri,
+                      DSNguoi: nguoi.rows,
+                    });
+                  });
+              });
+          });
+      } else res.render("manager/related");
     }
   }
 }

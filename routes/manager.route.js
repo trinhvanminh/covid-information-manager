@@ -19,10 +19,10 @@ router.post(
   verifyToken,
   managerController.postCovidUser
 );
-// // update thong tin
-// router.get(
-//   "/related-covid/update/:id",
-//   verifyToken,
-//   managerController.postCovidUser
-// );
+// Edit form
+router.get(
+  "/related-covid/edit/:id",
+  verifyToken,
+  managerController.editCovidUserView
+);
 module.exports = router;

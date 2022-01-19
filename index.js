@@ -7,13 +7,10 @@ const morgan = require("morgan");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
-
 // set body-parse to parse req.body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(cookieParser());
-
-
 
 // set static folder
 app.use(express.static(path.join(__dirname, "public")));
@@ -29,6 +26,7 @@ app.engine(
     helpers: {
       sum: (a, b) => a + b,
       formatTs: (ts) => (ts ? ts.toLocaleDateString() : ""),
+      ifeq: (a, b) => (a === b ? "selected" : ""),
     },
   })
 );
