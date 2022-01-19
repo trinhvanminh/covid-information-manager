@@ -354,6 +354,7 @@ class ManagerController {
       res.render("staticInformation/staticInfo", { authenticated: req.authenticated });
     }
   }
+  
 }
 
 module.exports = new ManagerController();
