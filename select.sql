@@ -1,28 +1,30 @@
--- select * from public."User";
--- select * from public."NoiDieuTri";
--- select * from public."Nguoi";
--- select * from public."NguoiLienQuan";
--- select * from public."HinhAnh";
--- select * from public."Goi_SP";
--- select * from public."SP";
--- select * from public."Goi";
-
--- Copy (Select * From public."User") To 'D:\OLD DATA\User.csv' With  DELIMITER ',' HEADER ENCODING 'utf-8';
--- Copy (select * from public."NoiDieuTri") To 'D:\OLD DATA\NoiDieuTri.csv' With CSV DELIMITER ',' HEADER ENCODING 'utf-8';
--- Copy (select * from public."Nguoi") To 'D:\OLD DATA\Nguoi.csv' With CSV DELIMITER ',' HEADER ENCODING 'utf-8';
--- Copy (select * from public."NguoiLienQuan") To 'D:\OLD DATA\NguoiLienQuan.csv' With CSV DELIMITER ',' HEADER ENCODING 'utf-8';
--- Copy (select * from public."HinhAnh") To 'D:\OLD DATA\HinhAnh.csv' With CSV DELIMITER ',' HEADER ENCODING 'utf-8';
--- Copy (select * from public."Goi_SP") To 'D:\OLD DATA\Goi_SP.csv' With CSV DELIMITER ',' HEADER ENCODING 'utf-8';
--- Copy (select * from public."SP") To 'D:\OLD DATA\SP.csv' With CSV DELIMITER ',' HEADER ENCODING 'utf-8';
--- Copy (select * from public."Goi") To 'D:\OLD DATA\Goi.csv' With CSV DELIMITER ',' HEADER ENCODING 'utf-8';
+select * from public."Nguoi" where "Nguoi_id" in
+(SELECT "nlq_id" 
+FROM public."Nguoi" 
+	full JOIN public."NguoiLienQuan" 
+	on "Nguoi"."Nguoi_id" = "NguoiLienQuan"."nguoi_id" 
+where "Nguoi"."Nguoi_id" = 1);
 
 
+SELECT count(*) 
+FROM public."Nguoi" 
+left JOIN public."NoiDieuTri" 
+on "Nguoi"."dieutri_id" = "NoiDieuTri"."DieuTri_id" 
+where "NoiDieuTri"."DieuTri_id" = 3
 
--- select * from information_schema.tables where table_schema = 'public'
+select * from public."Nguoi" where "Nguoi_id" = 2
 
+select * from public."NoiDieuTri" where "DieuTri_id" = 1
 
--- select * from public."HinhAnh" where "sp_id" = 2
+-- sức chứa
+select "succhua" 
+from public."NoiDieuTri" 
+where "DieuTri_id" = 1 and "succhua" > (	SELECT count(*) 
+					FROM public."Nguoi" left JOIN public."NoiDieuTri" 
+							on "Nguoi"."dieutri_id" = "NoiDieuTri"."DieuTri_id" 
+					where "NoiDieuTri"."DieuTri_id" = 1);
 
--- DELETE FROM public."NguoiLienQuan" WHERE "nguoi_id" = 1 or "nlq_id" = 1;
--- DELETE FROM public."Nguoi" WHERE "id" = 1;
--- DELETE FROM public."NoiDieuTri" WHERE "id" = 2;
+	
+UPDATE public."Nguoi"
+SET "trangthai" = 'F2'
+WHERE "Nguoi_id" = 2 or "Nguoi_id" = 3;

@@ -1,4 +1,4 @@
--- ----------------------------
+----------------------------
 -- Table structure for User
 -- ----------------------------
 
@@ -28,7 +28,7 @@ DROP TABLE IF EXISTS "NoiDieuTri" CASCADE;
 CREATE TABLE "NoiDieuTri" (
   "DieuTri_id" SERIAL PRIMARY KEY,
   "ten" varchar(50) NOT NULL,
-  "diachi" varchar(255) not null,
+  "DieuTri_diachi" varchar(255) not null,
   "succhua" int4 NOT NULL
 )
 ;
@@ -37,9 +37,9 @@ CREATE TABLE "NoiDieuTri" (
 -- Records of NoiDieuTri
 -- ----------------------------
 BEGIN;
-INSERT INTO "NoiDieuTri" (ten, diachi, succhua) VALUES ('NoiDieuTri LongAn','1, đường abc, xã xyz, tỉnh Long An', 500);
-INSERT INTO "NoiDieuTri" (ten, diachi, succhua) VALUES ('Bệnh Viện Dã Chiến Củ Chi','huyện Củ Chi', 400);
-INSERT INTO "NoiDieuTri" (ten, diachi, succhua) VALUES ('Bệnh Viện Điều Trị Covid Cần Giờ','Cần Giờ', 600);
+INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('LongAn','1, đường abc, xã xyz, tỉnh Long An', 500);
+INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('Bệnh Viện Dã Chiến Củ Chi','Bệnh viện Huyện Củ Chi, 1307 Tỉnh lộ 7, An Nhơn Tây, Củ Chi, Thành phố Hồ Chí Minh', 400);
+INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('Bệnh Viện Điều Trị Covid Cần Giờ','An Thới Đông, Cần Giờ, Thành phố Hồ Chí Minh, Việt Nam', 600);
 COMMIT;
 
 
@@ -51,6 +51,7 @@ CREATE TABLE "Nguoi" (
     "Nguoi_id" SERIAL PRIMARY KEY,
     "hoten" varchar(50) NOT NULL,
 	"cccd" varchar(12) UNIQUE, 
+	"namsinh" date,
 	"diachi" varchar(255) not null,
 	"trangthai" varchar(3),
 	"dieutri_id" int4,
@@ -63,9 +64,10 @@ CREATE TABLE "Nguoi" (
 -- Records of Nguoi
 -- ----------------------------
 BEGIN;
-INSERT INTO "Nguoi" (hoten, cccd, diachi) VALUES ('trịnh văn minh','0123456789', 'đây là địa chỉ của trịnh văn minh');
-INSERT INTO "Nguoi" (hoten, diachi, dieutri_id) VALUES ('lê quang nam', 'đây là địa chỉ của lê quang nam', 2);
-INSERT INTO "Nguoi" (hoten, diachi, dieutri_id) VALUES ('nguyen van a', 'đây là địa chỉ của nguyen van a', 3);
+INSERT INTO "Nguoi" (hoten, cccd, diachi, namsinh,trangthai, dieutri_id) VALUES ('trịnh văn minh','0123456789', 'xã Hoà Phú, huyện Củ Chi, HCM', '1998/11/26', 'F2', 1);
+INSERT INTO "Nguoi" (hoten, cccd, diachi, namsinh,trangthai, dieutri_id) VALUES ('lê quang nam','111111111', 'Linh Trung Ward, Thu Duc District, Ho Chi Minh City', '2000/1/3', 'F3', 2);
+INSERT INTO "Nguoi" (hoten, cccd, diachi, namsinh,trangthai, dieutri_id) VALUES ('nguyễn hoàng mẫn','222222222', '366E Cach Mang Thang Tam Street, An Thoi Ward, Can Tho City', '1998/11/26','F3',3);
+INSERT INTO "Nguoi" (hoten, cccd, diachi, namsinh,trangthai, dieutri_id) VALUES ('nguyễn văn a','33333333', 'zzzzzzzzzzz', '1998/11/26','', 3);
 COMMIT;
 
 
@@ -76,7 +78,7 @@ DROP TABLE IF EXISTS "NguoiLienQuan" CASCADE;
 CREATE TABLE "NguoiLienQuan" (
   nguoi_id int,
    nlq_id int,
-   thoigian date,
+   thoigian TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (nguoi_id, nlq_id)
 )
 ;
@@ -85,8 +87,8 @@ CREATE TABLE "NguoiLienQuan" (
 -- Records of NguoiLienQuan
 -- ----------------------------
 BEGIN;
-INSERT INTO "NguoiLienQuan" (nguoi_id, nlq_id, thoigian) 
-VALUES (1, 2, '2022/1/18'),(1, 3, '2022/1/10');
+INSERT INTO "NguoiLienQuan" (nguoi_id, nlq_id, thoigian) VALUES (1, 2, '2022/1/10');
+INSERT INTO "NguoiLienQuan" (nguoi_id, nlq_id) VALUES (1, 3);
 COMMIT;
 
 
