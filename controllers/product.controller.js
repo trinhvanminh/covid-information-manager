@@ -1,9 +1,30 @@
-const e = require("express");
-
 class ListProductController {
   // GET List Product /
   listProduct(req, res) {
-    res.render("./products/listProducts");
+    require("../db")
+      .query('SELECT * FROM public."SP"')
+      .then((data) => {
+        const spwithLinks = Promise.all(
+          data.rows.map((ele, idx) => {
+            return require("../db")
+              .query(
+                'SELECT * FROM public."HinhAnh" where "HinhAnh"."sp_id" = $1',
+                [ele.SP_id]
+              )
+              .then((hinhanh) => {
+                data.rows[idx].links = hinhanh.rows.map((h) => h.link);
+                return data.rows[idx];
+              })
+              .catch((err) => console.log(err));
+          })
+        );
+        spwithLinks.then((SpWithLinks) => {
+          res.render("./products/listProducts", {
+            authenticated: req.authenticated,
+            data: SpWithLinks,
+          });
+        });
+      });
   }
 
   //   POST Add Product
