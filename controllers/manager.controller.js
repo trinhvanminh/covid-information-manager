@@ -1,5 +1,5 @@
 class ManagerController {
-  // GET /
+  // GET /related-covid/list
   relatedCovidView(req, res, next) {
     // console.log(req);
     if (!req.authenticated) {
@@ -70,6 +70,7 @@ class ManagerController {
       }
     }
   }
+  // [GET]  /related-covid/list/:id
   detailCovidUser(req, res, next) {
     if (!req.authenticated) {
       res.redirect("/");
@@ -86,11 +87,32 @@ class ManagerController {
               authenticated: req.authenticated,
             });
           } else {
-            res.render("manager/detailUser", {
-              authenticated: req.authenticated,
-              data: data.rows[0],
-            });
+            // ----------------------------------------
+            const queryStr = `select * from public."Nguoi" where "Nguoi_id" in
+              ( SELECT "nlq_id" 
+                FROM public."Nguoi" full JOIN public."NguoiLienQuan" 
+                on "Nguoi"."Nguoi_id" = "NguoiLienQuan"."nguoi_id" 
+                WHERE "Nguoi"."Nguoi_id" = $1);`;
+
+            require("../db")
+              .query(queryStr, [req.params.id])
+              .then((lienquan) => {
+                if (lienquan.rowCount == 0) {
+                  console.log("khong co nguoi lien quan");
+                  res.render("manager/detailUser", {
+                    authenticated: req.authenticated,
+                    data: data.rows[0],
+                  });
+                } else {
+                  res.render("manager/detailUser", {
+                    authenticated: req.authenticated,
+                    data: data.rows[0],
+                    lienquan: lienquan.rows,
+                  });
+                }
+              });
           }
+          // ----------------------------------------
         });
     }
   }

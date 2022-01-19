@@ -52,7 +52,7 @@
             </tr>
             <tr>
               <td>Năm Sinh</td>
-              <td>Thiếu năm sinh này</td>
+              <td>{{namsinh}}</td>
             </tr>
             <tr>
               <td>Địa Chỉ Hiện Tại</td>
@@ -63,12 +63,12 @@
               <td>{{trangthai}}</td>
             </tr>
             <tr>
-              <td>Nơi đang điều trị</td>
-              <td>?</td>
+              <td>Tên nơi đang điều trị</td>
+              <td>{{ten}}</td>
             </tr>
             <tr>
-              <td>Có liên quan với Covider ID</td>
-              <td>?</td>
+              <td>Địa chỉ nơi đang điều trị</td>
+              <td>{{DieuTri_diachi}}</td>
             </tr>
             <tr>
               <td>Lịch sử</td>
@@ -93,22 +93,22 @@
               <th scope="col">Năm Sinh</th>
               <th scope="col">Địa Chỉ Hiện Tại</th>
               <th scope="col">Trạng thái hiện tại</th>
-              <th scope="col">Nơi đang điều trị</th>
-              <th scope="col">Có liên quan với Covider ID</th>
+              <th scope="col">Điều trị id</th>
               <th scope="col">Lịch sử</th>
             </tr>
           </thead>
           <tbody>
-            {{#each data}}
+            {{#each lienquan}}
               <tr>
                 <td>{{Nguoi_id}}</td>
-                <td>{{hoten}}</td>
+                <td><a
+                    href="/manager/related-covid/list/{{Nguoi_id}}"
+                  >{{hoten}}</a></td>
                 <td>{{cccd}}</td>
-                <td>{{ngaysinh}}</td>
+                <td>{{namsinh}}</td>
                 <td>{{diachi}}</td>
                 <td>{{trangthai}}</td>
-                <td>{{noi_dieutri}}</td>
-                <td>{{lienquan}}</td>
+                <td>{{dieutri_id}}</td>
                 <td>{{lichsu}}</td>
               </tr>
             {{/each}}
