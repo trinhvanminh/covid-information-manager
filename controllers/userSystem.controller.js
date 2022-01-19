@@ -15,6 +15,11 @@ class UserSystemController {
   cartUser(req, res) {
     res.render("./user/cartUser");
   }
+
+  // GET Checkout User /
+  checkoutUser(req, res) {
+    res.render("./user/checkoutPayment");
+  }
  
 }
 
