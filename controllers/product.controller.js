@@ -48,6 +48,7 @@ class ListProductController {
       res.render("./products/addProduct");
     }
   }
+  // ------------ CHUA XONG ---------------
   //   POST Add Product
   addProduct(req, res) {
     // res.render("./products/addProduct");
@@ -79,16 +80,32 @@ class ListProductController {
       res.render("./products/editProduct", { product });
     }
   }
+  // ------------ CHUA XONG ---------------
   //   DELETE Delete Product
   deleteProduct(req, res) {
     if (!req.authenticated) {
       res.redirect("/");
+    } else if (req.params.id) {
+      require("../db")
+        .query('delete FROM public."SP" where "SP"."SP_id" = $1', [
+          req.params.id,
+        ])
+        .then((data) => {
+          if (data.rowCount === 0) {
+            console.log("xoas khong thanh cong");
+            res.redirect("/list-product");
+            res.render("products/listProducts", {
+              authenticated: req.authenticated,
+              message: "xoá không thành công",
+              type: "warning",
+            });
+          } else {
+            res.redirect("/list-product");
+          }
+        })
+        .catch((err) => console.log(err));
     } else {
-      // Xử lý delete product to database here!
-      //   const { id } = req.params; Lấy cái ID ở trên params/path
-      //   const product = await Product.findById(id); Lấy cái product ở trên database - này là code cũ mongoDB
-      // Thay code tìm bằng Postgres nha bạn - Delete here
-      res.render("./products/listProducts");
+      res.redirect("/list-product");
     }
   }
 }

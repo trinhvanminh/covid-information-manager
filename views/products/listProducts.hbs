@@ -75,14 +75,20 @@
                 <div class="list-product-action">
                   <a
                     class="btn btn-primary covid-list-btn-add btn-sm"
-                    href="/list-product/edit/{{this.id}}"
+                    href="/list-product/edit/{{this.SP_id}}"
                     role="button"
                   >Edit</a>
-                  <a
-                    class="btn btn-primary covid-list-btn-add btn-sm"
-                    href="/list-product/delete/{{this.id}}"
-                    role="button"
-                  >Delete</a>
+                  <form
+                    action="/list-product/delete/{{this.SP_id}}?_method=DELETE"
+                    method="POST"
+                  >
+                    <button
+                      class="btn btn-primary covid-list-btn-add btn-sm"
+                      role="button"
+                      type="submit"
+                    >Delete</button>
+
+                  </form>
                 </div>
               </td>
             </tr>

@@ -7,6 +7,6 @@ router.get("/", verifyToken, ListProductController.listProduct);
 router.get("/add", verifyToken, ListProductController.addProductView);
 router.post("/add", verifyToken, ListProductController.addProduct);
 router.get("/edit/:id", verifyToken, ListProductController.editProduct);
-router.get("/delete/:id", verifyToken, ListProductController.deleteProduct);
+router.delete("/delete/:id", verifyToken, ListProductController.deleteProduct);
 
 module.exports = router;
