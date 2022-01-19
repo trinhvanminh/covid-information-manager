@@ -10,6 +10,11 @@ class UserSystemController {
   notifyPaymentUser(req, res) {
     res.render("./user/notifyPayment");
   }
+
+  // GET Cart User /
+  cartUser(req, res) {
+    res.render("./user/cartUser");
+  }
  
 }
 
