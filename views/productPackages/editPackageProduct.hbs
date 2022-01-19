@@ -1,0 +1,77 @@
+<div class="container-fluid">
+  <div class="banner-list-covider">
+    <img
+      src="https://nhuxuan.thanhhoa.gov.vn/portal/Photos/2021-08-26/84e1b1cd2e6ee1dz6.jpg"
+      alt="khaulenh"
+    />
+  </div>
+  <div class="detail-covider-header">
+    <h1>Sửa Gói Nhu Yếu Phẩm</h1>
+    <a
+      class="btn btn-primary button detail-covider-back"
+      href="/package-product"
+      role="button"
+    >Go back list</a>
+  </div>
+  {{#if dataTest}}
+    <form
+      enctype="multipart/form-data"
+      class="add-covider"
+      method="POST"
+      action=""
+    >
+      <div class="form-group">
+        <label for="formGroupExampleInput">Tên Gói Nhu Yếu Phẩm</label>
+        <input
+          type="text"
+          class="form-control"
+          id="formGroupExampleInput"
+          placeholder="Gói Số 1"
+          value={{dataTest.packageName}}
+          name="packageName"
+        />
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Thêm các nhu yếu phẩm</label>
+
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Giới Hạn Số Lượng</label>
+        <input
+          type="number"
+          class="form-control"
+          id="formGroupExampleInput2"
+          placeholder="9"
+          value={{dataTest.limitQuantity}}
+          name="limitQuantity"
+        />
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Giới Hạn Trên Mỗi Người</label>
+        <input
+          type="number"
+          class="form-control"
+          id="formGroupExampleInput2"
+          placeholder="2"
+          value={{dataTest.limitPerson}}
+          name="limitPerson"
+        />
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Thời Gian Giới Hạn</label>
+        <input
+          type="text"
+          class="form-control"
+          id="formGroupExampleInput2"
+          placeholder="10 Days or 10 Weeks or 10 Months"
+          value={{dataTest.limitTime}}
+          name="limitTime"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary add-package-submit-1">Sửa gói
+        nhu yếu phẩm</button>
+    </form>
+  {{/if}}
+
+</div>
