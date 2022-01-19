@@ -23,73 +23,35 @@
           action=""
         >
           <div class="form-group">
-            <label for="formGroupExampleInput">Tên Sản Phẩm</label>
+            <label for="formGroupExampleInput">Tên Địa Điểm Cách Ly/Điều Trị</label>
             <input
               type="text"
               class="form-control"
               id="formGroupExampleInput"
-              placeholder="Gạo"
-              value="{{product.productName}}"
-              name="productName"
+              placeholder="Bệnh Viện Nhân Dân 115"
+              value="{{dataTest.name}}"
+              name="name"
             />
           </div>
           <div class="form-group">
-            <label for="formGroupExampleInput2">Hình ảnh minh họa</label>
-            <input
-              type="file"
-              class="file-upload"
-              id="formGroupExampleInput2"
-              name="images"
-              value="{{product.images}}"
-              accept="image/*"
-              multiple="true"
-            />
-          </div>
-          <div class="form-group">
-            <label for="formGroupExampleInput2">Giá Tiền</label>
+            <label for="formGroupExampleInput2">Sức Chứa</label>
             <input
               type="number"
               class="form-control"
               id="formGroupExampleInput2"
-              value="{{product.price}}"
-              placeholder="100000 vnd"
-              name="price"
+              name="succhua"
+              value="{{dataTest.succhua}}"
             />
           </div>
           <div class="form-group">
-            <label for="formGroupExampleInput2">Đơn Vị Định Lượng</label>
-            <select name="quantitative">
-              <option value="KG">
-                KiloGram (KG)
-              </option>
-              <option value="Gram">
-                Gram (gr)
-              </option>
-              <option value="L">
-                Lit (L)
-              </option>
-              <option value="ml">
-                MiliLit (ml)
-              </option>
-              <option value="Chai">
-                Chai
-              </option>
-              <option value="Bó">
-                Bó
-              </option>
-              <option value="Thùng">
-                Thùng
-              </option>
-              <option value="Hộp">
-                Hộp
-              </option>
-              <option value="Cây">
-                Cây
-              </option>
-              <option value="Cái">
-                Cái
-              </option>
-            </select>
+            <label for="formGroupExampleInput2">Số Lượng Còn Trống</label>
+            <input
+              type="number"
+              class="form-control"
+              id="formGroupExampleInput2"
+              name="controng"
+              value="{{dataTest.controng}}"
+            />
           </div>
           <button
             type="submit"
@@ -98,6 +60,5 @@
         </form>
       {{/if}}
     </div>
-
   </div>
 </div>

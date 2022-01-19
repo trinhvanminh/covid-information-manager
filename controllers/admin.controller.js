@@ -22,7 +22,7 @@ class AdminController {
     const dataTest = {
       id: 1,
       name: "Địa điểm điều trị",
-      suchua: 1000,
+      succhua: 1000,
       controng: 200,
     };
     res.render("./admin/locationISO/editLocationIsolation", { dataTest });
