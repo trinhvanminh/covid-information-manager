@@ -10,7 +10,9 @@ router.get("/account/:id", verifyToken, AdminController.historyAccountManager);
 router.get("/location", verifyToken, AdminController.listLocationIsolation);
 // Thêm Địa điểm điều trị/Cách Ly
 router.get("/location/add", verifyToken, AdminController.addLocationIsolation);
+// View Địa điểm điều trị/Cách Ly
+router.get("/location/edit/:id", verifyToken, AdminController.editViewLocationIsolation);
 // Edit Địa điểm điều trị/Cách Ly
-router.get("/location/edit/:id", verifyToken, AdminController.editLocationIsolation);
+router.post("/location/edit/:id", verifyToken, AdminController.editLocationIsolation);
 
 module.exports = router;
