@@ -3,9 +3,9 @@ const cloudinary = require("cloudinary");
 const fs = require("fs");
 
 cloudinary.config({
-  cloud_name: "soralymusic",
-  api_key: 456357255278685,
-  api_secret: "eylEN9ePrN-lvCQE2Q55HQzQLIw",
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 class ListProductController {
   // GET List Product /
@@ -54,7 +54,7 @@ class ListProductController {
     if (!req.authenticated) {
       res.redirect("/");
     } else {
-      res.render("./products/addProduct");
+      res.render("./products/addProduct", { authenticated: req.authenticated });
     }
   }
   // ------------ CHUA XONG ---------------
@@ -64,46 +64,83 @@ class ListProductController {
     if (!req.authenticated) {
       res.redirect("/");
     } else {
-      const file = req.files.hinhanh;
+      const files = req.files?.hinhanh;
+      if (!files)
+        return res.render("./products/addProduct", {
+          authenticated: req.authenticated,
+          message: "cần có hình ảnh sản phẩm",
+          type: "warning",
+        });
+      if (Array.isArray(files)) {
+        const data = Promise.all(
+          files.map((file) => {
+            return cloudinary.v2.uploader.upload(
+              file.tempFilePath,
+              { folder: "Covid-Info" },
+              (err, result) => {
+                if (err) throw err;
+                removeTmp(file.tempFilePath);
+                //   result.url này là link của ảnh được upload lên cloundinary
+                return result.url;
+              }
+            );
+          })
+        );
+        data.then((urls) => insertSP(req.body, urls));
+      } else {
+        const data = cloudinary.v2.uploader.upload(
+          files.tempFilePath,
+          { folder: "Covid-Info" },
+          (err, result) => {
+            if (err) throw err;
+            removeTmp(files.tempFilePath);
+            //   result.url này là link của ảnh được upload lên cloundinary
+            return [result.url];
+          }
+        );
+        data.then((urls) => insertSP(req.body, urls));
+      }
 
-      cloudinary.v2.uploader.upload(
-        file.tempFilePath,
-        { folder: "Covid-Info" },
-        (err, result) => {
-          if (err) throw err;
-          removeTmp(file.tempFilePath);
-          //   result.url này là link của ảnh được upload lên cloundinary
-          console.log(result.url);
-        }
-      );
-      console.log(req.body);
-      const { ten, tien, donvi } = req.body;
-      // db.query(
-      //   'INSERT INTO "Nguoi" (hoten, cccd, namsinh, diachi, trangthai, dieutri_id, lichsu) VALUES ($1, $2, $3, $4, $5, $6, $7);',
-      //   [hoten, cccd, namsinh, diachi, trangthai, dieutri_id, lichsu]
-      // )
-      //   .then((data) => {
-      //     if (data.rowCount == 0) {
-      //       console.log("insert k thành công");
-      //       res.render("manager/addCovidUser", {
-      //         authenticated: req.authenticated,
-      //       });
-      //     } else if (DS_nlq_id) {
-      //       let queryStr =
-      //         'INSERT INTO public."NguoiLienQuan" (nguoi_id, nlq_id) VALUES ($1, $2)';
-      //       for (let index = 0; index < DS_nlq_id.length - 1; index++) {
-      //         queryStr = queryStr + `,($1, $${index + 3})`;
-      //       }
-      //       require("../db").query(queryStr, [
-      //         (parseInt(maxNguoiId) + 1).toString(),
-      //         ...DS_nlq_id,
-      //       ]);
-      //       res.redirect("manager/related-covid/list");
-      //     } else {
-      //       res.redirect("manager/related-covid/list");
-      //     }
-      //   })
-      //   .catch((err) => console.log(err));
+      function insertSP({ ten, gia, donvi }, urls) {
+        db.query(
+          'insert into public."SP" (ten, gia, donvi) values ($1, $2, $3) returning "SP"."SP_id"',
+          [ten, gia, donvi]
+        )
+          .then((data) => {
+            const insertId = data.rows[0].SP_id;
+            // console.log(insertId);
+            return insertId;
+          })
+          .then((id) => insertHinhAnh(id, urls))
+          .catch((err) => console.log(err));
+      }
+      function insertHinhAnh(insertId, urls) {
+        const r = Promise.all(
+          urls.map((link) => {
+            return db.query(
+              'insert into public."HinhAnh" (sp_id, link) values ($1, $2)',
+              [insertId, link.url]
+            );
+          })
+        );
+        r.then((data) => {
+          if (data.rowCount === 0) {
+            console.log("insert hinh anh loi");
+            res.render("products/addProduct", {
+              authenticated: req.authenticated,
+              message: "Thêm hình ảnh lỗi",
+              type: "warning",
+            });
+          } else {
+            res.redirect("/list-product");
+            res.render("products/listProducts", {
+              authenticated: req.authenticated,
+              message: "Đã thêm thành công",
+              type: "success",
+            });
+          }
+        }).catch((err) => console.log(err));
+      }
     }
   }
   //   PATCH Edit Product
