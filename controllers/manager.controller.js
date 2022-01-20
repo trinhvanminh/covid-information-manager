@@ -369,6 +369,33 @@ class ManagerController {
       });
     }
   }
+
+  // [GET] /payment/level - Them han muc thanh toan
+  paymentLevelView(req, res) {
+    const hanMucThanhToanCu = localStorage.getItem("hanMucThanhToan");
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      res.render("manager/editPaymentLevel", {
+        authenticated: req.authenticated,
+        hanMucThanhToanCu
+      });
+    }
+  }
+
+  // [[POST] /payment/level - Them han muc thanh toan]]
+  paymentLevel(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      localStorage.setItem("hanMucThanhToan", req.body.newhanmuc);
+      res.render("manager/editPaymentLevel", {
+        authenticated: req.authenticated,
+        message: "Thêm hạn mức thành công",
+        type: "success",
+      });
+    }
+  }
 }
 
 module.exports = new ManagerController();
