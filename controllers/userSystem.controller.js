@@ -50,7 +50,7 @@ class UserSystemController {
     try {
       const role = localStorage.getItem("role");
       const idWallet = localStorage.getItem("idPayMent");
-      const amount = 100009;
+      const amount = 120000;
       const hanMucThanhToan = localStorage.getItem("hanMucThanhToan");
       if (amount < hanMucThanhToan) {
         res.render("./user/checkoutPayment", {
