@@ -5,136 +5,30 @@
       alt="khaulenh"
     />
   </div>
-  <div class="detail-covider-header">
-    <h1>Quản Lý Thanh Toán</h1>
-    <a
-      class="btn btn-primary button detail-covider-back"
-      href="/"
-      role="button"
-    >Go back list</a>
+  <div class="card admin-account-card">
+    <div class="card-header admin-account-header">
+      <h4 class="card-title">Quản Lý Thanh Toán</h4>
+      <a
+        class="btn btn-primary button detail-covider-back"
+        href="/"
+        role="button"
+      >Go back</a>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="text-primary">
+            <th width="50%">
+              <a href="/manager/payment/level" role="button" class="btn btn-primary">Thay Đổi Hạn Mức Thanh Toán Tối Thiểu</a>
+            </th>
+            <th>
+              <a href="/manager/payment/list" role="button" class="btn btn-primary">Duyệt Danh Sách và Gửi Thông Báo</a>
+            </th>
+          </thead>
+        </table>
+      </div>
+    </div>
   </div>
-  <form
-    name="formAddCovider"
-    onsubmit="return validateFormAddCovider()"
-    class="add-covider"
-    method="POST"
-    action=""
-  >
-    <div class="form-group">
-      <label for="formGroupExampleInput">Họ tên</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput"
-        placeholder="Trịnh Văn Minh"
-        name="hoten"
-      />
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Số CMND / Căn cước công dân</label>
-      <input
-        type="number"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="245xxxxxx"
-        name="cccd"
-      />
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Năm sinh</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="YYYY/MM/dd"
-        name="namsinh"
-      />
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Địa chỉ nơi ở</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="162 đường số 8, ...."
-        name="diachi"
-      />
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Trạng thái hiện tại </label>
-      <select name="trangthai">
-        <option value="F0">
-          F0
-        </option>
-        <option value="F1">
-          F1
-        </option>
-        <option value="F2">
-          F2
-        </option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Nơi đang điều trị: </label>
-      {{#unless DSnoidieutri}}
-        link tới chổ thêm nơi điều trị
-      {{else}}
-        <select name="dieutri_id">
-          <option>
-            -- Chọn nơi điều trị
-          </option>
-          {{#each DSnoidieutri}}
-            <option value="{{this.DieuTri_id}}">
-              <p>{{this.ten}} / {{this.DieuTri_diachi}}</p>
-            </option>
-          {{/each}}
-        </select>
-      {{/unless}}
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Có liên quan với bệnh nhân</label>
-      {{#unless DSNguoi}}
-        link tới chổ thêm nguoi
-      {{else}}
-        <div class="multiselect">
-          <div class="selectBox" onclick="showCheckboxes()">
-            <select>
-              <option>-- Chọn người liên quan</option>
-            </select>
-            <div class="overSelect"></div>
-          </div>
-          <div id="checkboxes">
-            {{#each DSNguoi}}
-              <label for="{{this.Nguoi_id}}">
-                <input
-                  type="checkbox"
-                  id="{{this.Nguoi_id}}"
-                  value="{{this.Nguoi_id}}"
-                  name="DS_nlq_id"
-                />{{this.hoten}}
-                /
-                {{this.cccd}}
-                /
-                {{this.diachi}}</label>
-            {{/each}}
-          </div>
-        </div>
-      {{/unless}}
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">Lịch sử quá trình được quản lý</label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="F0 thành F1,..."
-        name="lichsu"
-      />
-    </div>
-    <input type="hidden" value="{{maxNguoiId}}" name="maxNguoiId" />
-    <button type="submit" class="btn btn-primary add-covider-submit">Thêm Bệnh
-      Nhân</button>
-  </form>
 </div>
 {{! Path: views/manager/paymentManagement.hbs }}
 {{! Language: handlebars }}
