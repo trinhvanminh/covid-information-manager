@@ -37,9 +37,11 @@ CREATE TABLE "NoiDieuTri" (
 -- Records of NoiDieuTri
 -- ----------------------------
 BEGIN;
-INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('LongAn','1, đường abc, xã xyz, tỉnh Long An', 500);
+INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('Bệnh Viện Điều Trị Covid-19 Phạm Ngọc Thạch','120 Hồng Bàng, Phường 12, Quận 5, TP.HCM', 500);
 INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('Bệnh Viện Dã Chiến Củ Chi','Bệnh viện Huyện Củ Chi, 1307 Tỉnh lộ 7, An Nhơn Tây, Củ Chi, Thành phố Hồ Chí Minh', 400);
 INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('Bệnh Viện Điều Trị Covid Cần Giờ','An Thới Đông, Cần Giờ, Thành phố Hồ Chí Minh, Việt Nam', 600);
+INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('Bệnh Viện Điều Trị Covid-19 Trưng Vương','266 Lý Thường Kiệt, Phường 14, Quận 10, TPHCM', 1000);
+INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('Bệnh Viện Điều Nhi Đồng 2','14 Lý Tự Trọng, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh', 60);
 COMMIT;
 
 
@@ -110,10 +112,10 @@ CREATE TABLE "SP" (
 -- Records of SP
 -- ----------------------------
 BEGIN;
-INSERT INTO "SP" (ten, gia, donvi) VALUES ('bánh mì chay', 8000, 'cái');
-INSERT INTO "SP" (ten, gia, donvi) VALUES ('rau xà lách', 5000, 'bó');
-INSERT INTO "SP" (ten, gia, donvi) VALUES ('thịt lợn', 60000, 'kg');
-INSERT INTO "SP" (ten, gia, donvi) VALUES ('bánh mì thịt', 10000, 'cái');
+INSERT INTO "SP" (ten, gia, donvi) VALUES ('bánh mì chay', 8000, 'Cái');
+INSERT INTO "SP" (ten, gia, donvi) VALUES ('rau xà lách', 5000, 'Bó');
+INSERT INTO "SP" (ten, gia, donvi) VALUES ('thịt lợn', 60000, 'Kg');
+INSERT INTO "SP" (ten, gia, donvi) VALUES ('bánh mì thịt', 10000, 'Cái');
 COMMIT;
 
 
@@ -126,7 +128,7 @@ CREATE TABLE "Goi" (
   "Goi_id" SERIAL PRIMARY KEY,
    "ten" varchar(50) NOT NULL,
 	"gioihan_goi" int default 1,
-	"thoigian" varchar(6) default 'tuan'
+	"thoigian" varchar(6) default 'Tuần'
 )
 ;
 
@@ -135,7 +137,7 @@ CREATE TABLE "Goi" (
 -- ----------------------------
 BEGIN;
 INSERT INTO "Goi" (ten) VALUES ('gói combo ăn chay rau củ');
-INSERT INTO "Goi" (ten, gioihan_goi, thoigian) VALUES ('gói ăn thịt', 4,'thang');
+INSERT INTO "Goi" (ten, gioihan_goi, thoigian) VALUES ('gói ăn thịt', 4,'Tháng');
 COMMIT;
 
 
