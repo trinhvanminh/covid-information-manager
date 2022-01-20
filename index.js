@@ -34,6 +34,7 @@ app.engine(
         ts ? ts.toLocaleDateString("en-GB").split("/").reverse().join("/") : "",
       ifeq: (a, b) => (a === b ? "selected" : ""),
       if_eq: (a, b, opts) => (a === b ? opts.fn(this) : opts.inverse(this)),
+      if_eq_s: (a,b,c,opts) => (a === b || a == c) ? opts.fn(this) : opts.inverse(this),
     },
   })
 );
