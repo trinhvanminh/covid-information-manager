@@ -299,7 +299,6 @@ class PackageProductController {
                     })
                   );
                   re.then((data) => {
-                    console.log(data);
                     res.redirect("/package-product");
                   }).catch((err) => console.log(err));
                 });
