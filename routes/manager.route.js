@@ -40,4 +40,15 @@ router.delete(
 
 // Thống kê thông tin 
 router.get("/statistic", verifyToken, managerController.statisticInformation);
+
+// Quanr Lý Thanh Toán  
+router.get("/payment", verifyToken, managerController.paymentManagement);
+// View Thay Doi Han Muc
+router.get("/payment/level", verifyToken, managerController.paymentLevelView);
+// POST Thay Doi Han Muc
+router.post("/payment/level", verifyToken, managerController.paymentLevel);
+// View danh sach thanh toan
+router.get("/payment/list", verifyToken, managerController.paymentList);
+
+
 module.exports = router;

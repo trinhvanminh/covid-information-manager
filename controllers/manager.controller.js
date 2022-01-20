@@ -358,6 +358,56 @@ class ManagerController {
       });
     }
   }
+
+  // [GET] /payment - Quản Lý Thanh Toán
+  paymentManagement(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      res.render("manager/paymentManagement", {
+        authenticated: req.authenticated,
+      });
+    }
+  }
+
+  // [GET] /payment/level - Them han muc thanh toan
+  paymentLevelView(req, res) {
+    const hanMucThanhToanCu = localStorage.getItem("hanMucThanhToan");
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      res.render("manager/editPaymentLevel", {
+        authenticated: req.authenticated,
+        hanMucThanhToanCu
+      });
+    }
+  }
+
+  // [[POST] /payment/level - Them han muc thanh toan]]
+  paymentLevel(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      localStorage.setItem("hanMucThanhToan", req.body.newhanmuc);
+      res.render("manager/editPaymentLevel", {
+        authenticated: req.authenticated,
+        message: "Thêm hạn mức thành công",
+        type: "success",
+      });
+    }
+  }
+
+  // [GET] /payment/list
+  paymentList(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      res.render("manager/paymentList", {
+        authenticated: req.authenticated,
+      });
+    }
+  }
+
 }
 
 module.exports = new ManagerController();

@@ -25,6 +25,17 @@ class usersController {
             message: "tai khoan hoac mk khong chinh xac",
             type: "warning",
           });
+        } else if (data.rowCount == 1 && data.rows[0].password === "") {
+          const accessToken = createTokens({
+            username: req.body.username,
+          });
+          localStorage.setItem("role", data.rows[0].role);
+          res.cookie("access-token", accessToken);
+          res.render("./user/informationUser", {
+            message: "Vui lòng đổi mật khẩu",
+            type: "warning",
+            authenticated: req.authenticated,
+          });
         } else {
           // Load hash from your password DB.
           bcrypt

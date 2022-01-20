@@ -114,6 +114,8 @@ class UserSystemController {
           authenticated: req.authenticated,
         });
       } else if (data.rowCount == 1 && data.rows[0].password === "") {
+        console.log("here");
+        
         bcrypt
           .hash(newpassword, 10)
           .then((hash) => {
