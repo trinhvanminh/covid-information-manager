@@ -47,18 +47,31 @@ class AdminController {
 
   // GET Edit Location Isolation /
   editViewLocationIsolation(req, res) {
-    const dataTest = {
-      id: 1,
-      name: "Địa điểm điều trị",
-      succhua: 1000,
-      controng: 200,
-    };
-    res.render("./admin/locationISO/editLocationIsolation", { dataTest });
+    const idNoiDieuTri = req.params.id;
+    db.query(
+      `SELECT * FROM public."NoiDieuTri" WHERE "DieuTri_id" = ${idNoiDieuTri}`
+    ).then((data) => {
+      console.log(data);
+      res.render("./admin/locationISO/editLocationIsolation", {
+        authenticated: req.authenticated,
+        data: data.rows[0],
+      });
+    });
   }
 
   // POST Edit Location Isolation /
   editLocationIsolation(req, res) {
-    res.render("./admin/locationISO/editLocationIsolation");
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      let { ten, DieuTri_diachi, controng, succhua } = req.body;
+      const idNoiDieuTri = req.params.id;
+      db.query(
+        `UPDATE public."NoiDieuTri" SET "ten" = '${ten}', "DieuTri_diachi" = '${DieuTri_diachi}', "controng" = '${controng}', "succhua" = '${succhua}' WHERE "DieuTri_id" = ${idNoiDieuTri}`
+      ).then(() => {
+        res.redirect("/admin/location");
+      });
+    }
   }
 }
 
