@@ -5,6 +5,7 @@ const { verifyToken } = require("../jwt");
 // [GET] /manager/related-covid/list
 router.get(
   "/related-covid/list",
+  verifyToken,
   managerController.relatedCovidView
 );
 router.get(
