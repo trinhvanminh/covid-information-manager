@@ -13,6 +13,19 @@ const PaymentController = {
       console.log(error);
     }
   },
+  // [PUT] /api/payment - payment
+  paymentWallet: async (req, res) => {
+    try {
+      const id = 2;
+      const amount = 100000;
+      let response = await axios(`http://localhost:3003/api/payment/${id}`, {
+        amount: amount,
+      });
+      console.log(response.data, response.message);
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 module.exports = PaymentController;
