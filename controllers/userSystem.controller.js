@@ -38,9 +38,11 @@ class UserSystemController {
   // GET Checkout User /
   checkoutUser(req, res) {
     const role = localStorage.getItem("role");
+    const sodu = localStorage.getItem("sodu")
     res.render("./user/checkoutPayment", {
       authenticated: req.authenticated,
       role,
+      sodu
     });
   }
   // patch Checkout Cart / - Thanh Toán Đơn Hàng Qua Hệ Thống Bên Kia
@@ -48,7 +50,7 @@ class UserSystemController {
     try {
       const role = localStorage.getItem("role");
       const idWallet = localStorage.getItem("idPayMent");
-      const amount = 100000;
+      const amount = 100009;
       const hanMucThanhToan = localStorage.getItem("hanMucThanhToan");
       if (amount < hanMucThanhToan) {
         res.render("./user/checkoutPayment", {
