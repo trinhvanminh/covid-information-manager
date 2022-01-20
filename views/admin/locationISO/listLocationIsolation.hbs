@@ -37,15 +37,16 @@
             </th>
           </thead>
           <tbody>
+            {{#each data}}
             <tr>
               <td>
-                <strong>Nhà Bạn Minh</strong>
+                <strong>{{this.ten}}</strong>
               </td>
               <td>
-                <strong>20</strong>
+                <strong>{{this.succhua}}</strong>
               </td>
               <td>
-                <strong>3</strong>
+                <strong>{{this.controng}}</strong>
               </td>
               <td>
                 <a
@@ -55,60 +56,7 @@
                 >Thay Đổi</a>
               </td>
             </tr>
-            <tr>
-              <td>
-                <strong>Nhà Bạn Minh</strong>
-              </td>
-              <td>
-                <strong>20</strong>
-              </td>
-              <td>
-                <strong>3</strong>
-              </td>
-              <td>
-                <a
-                  class="btn btn-primary button button-account-manager-detail-1"
-                  href="/admin/location/edit/:id"
-                  role="button"
-                >Thay Đổi</a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Nhà Bạn Minh</strong>
-              </td>
-              <td>
-                <strong>20</strong>
-              </td>
-              <td>
-                <strong>3</strong>
-              </td>
-              <td>
-                <a
-                  class="btn btn-primary button button-account-manager-detail-1"
-                  href="/admin/location/edit/:id"
-                  role="button"
-                >Thay Đổi</a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Nhà Bạn Minh</strong>
-              </td>
-              <td>
-                <strong>20</strong>
-              </td>
-              <td>
-                <strong>3</strong>
-              </td>
-              <td>
-                <a
-                  class="btn btn-primary button button-account-manager-detail-1"
-                  href="/admin/location/edit/:id"
-                  role="button"
-                >Thay Đổi</a>
-              </td>
-            </tr>
+            {{/each}}
           </tbody>
         </table>
       </div>

@@ -34,7 +34,8 @@ CREATE TABLE "NoiDieuTri" (
   "DieuTri_id" SERIAL PRIMARY KEY,
   "ten" varchar(50) NOT NULL,
   "DieuTri_diachi" varchar(255) not null,
-  "succhua" int4 NOT NULL
+  "succhua" int4 NOT NULL,
+  "controng" int4 NOT NULL
 )
 ;
 
@@ -42,11 +43,11 @@ CREATE TABLE "NoiDieuTri" (
 -- Records of NoiDieuTri
 -- ----------------------------
 BEGIN;
-INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('Bệnh Viện Điều Trị Covid-19 Phạm Ngọc Thạch','120 Hồng Bàng, Phường 12, Quận 5, TP.HCM', 500);
-INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('Bệnh Viện Dã Chiến Củ Chi','Bệnh viện Huyện Củ Chi, 1307 Tỉnh lộ 7, An Nhơn Tây, Củ Chi, Thành phố Hồ Chí Minh', 400);
-INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('Bệnh Viện Điều Trị Covid Cần Giờ','An Thới Đông, Cần Giờ, Thành phố Hồ Chí Minh, Việt Nam', 600);
-INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('Bệnh Viện Điều Trị Covid-19 Trưng Vương','266 Lý Thường Kiệt, Phường 14, Quận 10, TPHCM', 1000);
-INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua) VALUES ('Bệnh Viện Điều Nhi Đồng 2','14 Lý Tự Trọng, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh', 60);
+INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua, controng) VALUES ('Bệnh Viện Điều Trị Covid-19 Phạm Ngọc Thạch','120 Hồng Bàng, Phường 12, Quận 5, TP.HCM', 500,123);
+INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua, controng) VALUES ('Bệnh Viện Dã Chiến Củ Chi','Bệnh viện Huyện Củ Chi, 1307 Tỉnh lộ 7, An Nhơn Tây, Củ Chi, Thành phố Hồ Chí Minh', 400,111);
+INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua, controng) VALUES ('Bệnh Viện Điều Trị Covid Cần Giờ','An Thới Đông, Cần Giờ, Thành phố Hồ Chí Minh, Việt Nam', 600,12);
+INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua, controng) VALUES ('Bệnh Viện Điều Trị Covid-19 Trưng Vương','266 Lý Thường Kiệt, Phường 14, Quận 10, TPHCM', 1000,223);
+INSERT INTO "NoiDieuTri" (ten, "DieuTri_diachi", succhua, controng) VALUES ('Bệnh Viện Điều Nhi Đồng 2','14 Lý Tự Trọng, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh', 60,2);
 COMMIT;
 
 
