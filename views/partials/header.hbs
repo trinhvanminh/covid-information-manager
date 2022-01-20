@@ -33,18 +33,18 @@
               <a class="dropdown-item" href="/manager/related-covid/list">List
                 Covider</a>
               <div class="dropdown-divider"></div>
-              {{#if_eq role "manager"}}
+              {{#if_eq_s role "manager" "admin"}}
               <a class="dropdown-item" href="/manager/related-covid/add">Add
                 Covider</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/">Change State Of Covider</a>
               <div class="dropdown-divider"></div>
-              {{/if_eq}}
+              {{/if_eq_s}}
               <a class="dropdown-item" href="/list-product">Utensils Necessary</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/package-product">Utensils
                 Necessary Packages</a>
-              {{#if_eq role "manager"}}
+              {{#if_eq_s role "manager" "admin"}}
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/manager/statistic">Statistical
                 information</a>
@@ -52,7 +52,7 @@
               <a class="dropdown-item" href="/xxx">Payment Management</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/xxx">Storage</a>
-              {{/if_eq}}
+              {{/if_eq_s}}
             </div>
           </li>
           {{#if_eq role "admin"}}
