@@ -12,6 +12,4 @@ router.get("/balance", verifyToken, UserSystemController.balanceUser);
 router.get("/connect", verifyToken, UserSystemController.connectWalletUser);
 router.post("/connect", verifyToken, UserSystemController.connectPostWalletUser);
 
-
-
 module.exports = router;
