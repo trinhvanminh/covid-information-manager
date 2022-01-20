@@ -60,37 +60,34 @@
             <th scope="col">Họ Và Tên</th>
             <th scope="col">Trạng Thái</th>
             <th scope="col">Nơi điều trị</th>
-            {{#if_eq_s role "manager" "admin"}}
-              <th scope="col">Hành động</th>
-            {{/if_eq_s}}
+            <th scope="col">Hành động</th>
           </tr>
         </thead>
         <tbody>
           {{#each data}}
             <tr>
-              <th scope="row">{{this.Nguoi_id}}</th>
+              <td scope="row">{{this.Nguoi_id}}</td>
               <td><a
                   href="/manager/related-covid/list/{{this.Nguoi_id}}"
                 >{{this.hoten}}</a></td>
               <td>{{this.trangthai}}</td>
               <td>{{this.ten}}</td>
-              {{#if_eq_s role "manager" "admin"}}
-                <td><a
-                    type="button"
+              <td>
+                <a
+                  type="button"
+                  class="btn btn-link"
+                  href="/manager/related-covid/edit/{{this.Nguoi_id}}"
+                >Edit</a>
+                /
+                <form
+                  style="display:inline-block"
+                  id="delete"
+                  method="POST"
+                  action="/manager/related-covid/delete/{{this.Nguoi_id}}?_method=DELETE"
+                ><button
+                    type="submit"
                     class="btn btn-link"
-                    href="/manager/related-covid/edit/{{this.Nguoi_id}}"
-                  >edit</a>
-                  /
-                  <form
-                    style="display:inline-block"
-                    id="delete"
-                    method="POST"
-                    action="/manager/related-covid/delete/{{this.Nguoi_id}}?_method=DELETE"
-                  ><button
-                      type="submit"
-                      class="btn btn-link"
-                    >delete</button></form></td>
-              {{/if_eq_s}}
+                  >Delete</button></form></td>
             </tr>
           {{/each}}
         </tbody>

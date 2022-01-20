@@ -1,12 +1,11 @@
 const LocalStorage = require("node-localstorage").LocalStorage,
   localStorage = new LocalStorage("./scratch");
 
-const role = localStorage.getItem("role");
-
 class ManagerController {
   // GET /related-covid/list
   relatedCovidView(req, res, next) {
     // console.log(req);
+    const role = localStorage.getItem("role");
     if (req.query.q) {
       require("../db")
         .query(
@@ -18,7 +17,7 @@ class ManagerController {
             console.log("khong co du lieu");
             res.render("manager/related", {
               authenticated: req.authenticated,
-              role
+              role,
             });
           } else {
             res.render("manager/related", {
@@ -42,13 +41,13 @@ class ManagerController {
             console.log("khong co du lieu");
             res.render("manager/related", {
               authenticated: req.authenticated,
-              role
+              role,
             });
           } else {
             res.render("manager/related", {
               authenticated: req.authenticated,
               data: data.rows,
-              role
+              role,
             });
           }
         })
@@ -64,13 +63,13 @@ class ManagerController {
             console.log("khong co du lieu");
             res.render("manager/related", {
               authenticated: req.authenticated,
-              role
+              role,
             });
           } else {
             res.render("manager/related", {
               authenticated: req.authenticated,
               data: data.rows,
-              role
+              role,
             });
           }
         })
