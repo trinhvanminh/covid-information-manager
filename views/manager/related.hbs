@@ -1,5 +1,7 @@
 {{#unless data}}
-  <h1>Chưa có dữ liệu kìa bạn ơi</h1>
+  <div class="container-fluid">
+    <h1>Dữ Liệu Này Không Tồn Tại Trong DataBase</h1>
+  </div>
 {{else}}
   <div class="container-fluid">
     <div class="banner-list-covider">
@@ -41,11 +43,14 @@
 
         </select>
       </form>
-      <a
-        class="btn btn-primary covid-list-btn-add btn-sm"
-        href="/manager/related-covid/add"
-        role="button"
-      >Add new user</a>
+      {{#if_eq_s role "manager" "admin"}}
+        <a
+          class="btn btn-primary covid-list-btn-add btn-sm"
+          href="/manager/related-covid/add"
+          role="button"
+        >Add new user</a>
+      {{/if_eq_s}}
+
     </div>
     <ul class="covid-list">
       <table class="table table-striped table-hover">
@@ -55,7 +60,9 @@
             <th scope="col">Họ Và Tên</th>
             <th scope="col">Trạng Thái</th>
             <th scope="col">Nơi điều trị</th>
-            <th scope="col">Hành động</th>
+            {{#if_eq_s role "manager" "admin"}}
+              <th scope="col">Hành động</th>
+            {{/if_eq_s}}
           </tr>
         </thead>
         <tbody>
@@ -67,21 +74,23 @@
                 >{{this.hoten}}</a></td>
               <td>{{this.trangthai}}</td>
               <td>{{this.ten}}</td>
-              <td><a
-                  type="button"
-                  class="btn btn-link"
-                  href="/manager/related-covid/edit/{{this.Nguoi_id}}"
-                >edit</a>
-                /
-                <form
-                  style="display:inline-block"
-                  id="delete"
-                  method="POST"
-                  action="/manager/related-covid/delete/{{this.Nguoi_id}}?_method=DELETE"
-                ><button
-                    type="submit"
+              {{#if_eq_s role "manager" "admin"}}
+                <td><a
+                    type="button"
                     class="btn btn-link"
-                  >delete</button></form></td>
+                    href="/manager/related-covid/edit/{{this.Nguoi_id}}"
+                  >edit</a>
+                  /
+                  <form
+                    style="display:inline-block"
+                    id="delete"
+                    method="POST"
+                    action="/manager/related-covid/delete/{{this.Nguoi_id}}?_method=DELETE"
+                  ><button
+                      type="submit"
+                      class="btn btn-link"
+                    >delete</button></form></td>
+              {{/if_eq_s}}
             </tr>
           {{/each}}
         </tbody>
