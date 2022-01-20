@@ -40,6 +40,17 @@ class UserSystemController {
     try {
       const idWallet = localStorage.getItem("idPayMent");
       const amount = 100000;
+      const hanMucThanhToan = localStorage.getItem("hanMucThanhToan");
+      if (amount < hanMucThanhToan) {
+        res.render("./user/checkoutPayment", {
+          authenticated: req.authenticated,
+          message:
+            "Số tiền thanh toán hiện tại thấp hơn hạn mức thanh toán - Hạn mức thanh toán hiện tại là: " +
+            hanMucThanhToan,
+          type: "warning",
+        });
+      }
+
       // const amount = 100000;
       let response = await axios.put(`http://localhost:3003/api/payment`, {
         id: idWallet,
@@ -115,7 +126,7 @@ class UserSystemController {
         });
       } else if (data.rowCount == 1 && data.rows[0].password === "") {
         console.log("here");
-        
+
         bcrypt
           .hash(newpassword, 10)
           .then((hash) => {
