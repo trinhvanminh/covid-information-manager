@@ -7,6 +7,7 @@ function route(app) {
   app.use("/package-product", require("./packageProduct.route"));
   app.use("/admin", require("./admin.route"));
   app.use("/user", require("./userSystem.route"));
+  app.use("/payment", require("./payment.route"));
   app.use("/", require("./site.route"));
 }
 
