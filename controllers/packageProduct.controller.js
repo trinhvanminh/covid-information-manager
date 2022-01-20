@@ -76,17 +76,24 @@ class PackageProductController {
   // GET edit package view
   editPackageProductView(req, res) {
     try {
-      const dataTest = {
-        id: "23121",
-        packageName: "Package 12222",
-        listProduct: [],
-        limitQuantity: 2,
-        limitPerson: 3,
-        limitTime: 10,
-      };
-
-      if (req.params.id === dataTest.id) {
-        res.render("./productPackages/editPackageProduct", { dataTest });
+      // res.render("./productPackages/editPackageProduct", { dataTest });
+      if (!req.authenticated) {
+        res.redirect("/");
+      } else {
+        const { id } = req.params;
+        require("../db")
+          .query('select * from public."Goi" where "Goi"."Goi_id" = $1', [id])
+          .then((data) => {
+            if (data.rowCount === 0) {
+              res.redirect("/package-product");
+            } else {
+              res.render("productPackages/editPackageProduct", {
+                authenticated: req.authenticated,
+                data: data.rows[0],
+              });
+            }
+          })
+          .catch((err) => console.log(err));
       }
     } catch (error) {
       console.log(error.message);
@@ -95,7 +102,27 @@ class PackageProductController {
   }
   // PUT edit Package Product
   editPackageProduct(req, res) {
-    res.render("./productPackages/editPackageProduct");
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      const { ten, gioihan_goi, thoigian } = req.body;
+      if (ten && gioihan_goi && thoigian) {
+        const queryStr = `UPDATE public."Goi"
+        SET "ten" = $2, "gioihan_goi" = $3, "thoigian" = $4
+        WHERE "Goi_id" = $1;`;
+        require("../db")
+          .query(queryStr, [req.params.id, ten, gioihan_goi, thoigian])
+          .then((data) => {
+            if (data.rowCount === 0) {
+              res.render("./productPackages/editPackageProduct", {
+                authenticated: req.authenticated,
+                message: "Cập nhật gói hàng không thành công",
+                type: "danger",
+              });
+            } else res.redirect("/package-product");
+          });
+      }
+    }
   }
   // DELETE Delete Package Product /
   deletePackageProduct(req, res) {
