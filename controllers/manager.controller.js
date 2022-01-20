@@ -372,11 +372,13 @@ class ManagerController {
 
   // [GET] /payment/level - Them han muc thanh toan
   paymentLevelView(req, res) {
+    const hanMucThanhToanCu = localStorage.getItem("hanMucThanhToan");
     if (!req.authenticated) {
       res.redirect("/");
     } else {
       res.render("manager/editPaymentLevel", {
         authenticated: req.authenticated,
+        hanMucThanhToanCu
       });
     }
   }
@@ -386,19 +388,12 @@ class ManagerController {
     if (!req.authenticated) {
       res.redirect("/");
     } else {
-      const { level, price } = req.body;
-      if (level && price) {
-        const queryStr = `INSERT INTO public."HanMuc" ("level", "price")
-        VALUES ($1, $2)`;
-        require("../db")
-          .query(queryStr, [level, price])
-          .then((data) => {
-            res.redirect("/manager/paymentManagement");
-          })
-          .catch((err) => console.log(err));
-      } else {
-        res.redirect("/manager/paymentLevel");
-      }
+      localStorage.setItem("hanMucThanhToan", req.body.newhanmuc);
+      res.render("manager/editPaymentLevel", {
+        authenticated: req.authenticated,
+        message: "Thêm hạn mức thành công",
+        type: "success",
+      });
     }
   }
 }
