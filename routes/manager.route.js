@@ -40,4 +40,7 @@ router.delete(
 
 // Thống kê thông tin 
 router.get("/statistic", verifyToken, managerController.statisticInformation);
+
+// Quanr Lý Thanh Toán  
+router.get("/payment", verifyToken, managerController.paymentManagement);
 module.exports = router;
