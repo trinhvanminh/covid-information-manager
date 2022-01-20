@@ -1,7 +1,12 @@
+const LocalStorage = require("node-localstorage").LocalStorage,
+  localStorage = new LocalStorage("./scratch");
 class SiteController {
   // GET /
   index(req, res, next) {
-    res.render("home", { authenticated: req.authenticated });
+    const role = localStorage.getItem("role");
+    console.log(role);
+    
+    res.render("home", { authenticated: req.authenticated, role });
   }
 
   // GET /*

@@ -9,8 +9,6 @@ const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
 const fileUpload = require("express-fileupload");
 
-
-
 // override with POST having ?_method=DELETE
 app.use(methodOverride("_method"));
 
@@ -35,6 +33,7 @@ app.engine(
       formatTs: (ts) =>
         ts ? ts.toLocaleDateString("en-GB").split("/").reverse().join("/") : "",
       ifeq: (a, b) => (a === b ? "selected" : ""),
+      if_eq: (a, b, opts) => (a === b ? opts.fn(this) : opts.inverse(this)),
     },
   })
 );

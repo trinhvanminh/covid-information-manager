@@ -52,6 +52,7 @@
               <a class="dropdown-item" href="/xxx">Storage</a>
             </div>
           </li>
+          {{#if_eq role "admin"}}
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -68,7 +69,9 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/admin/location">Quản Lý Địa Điểm Cách Ly</a>
           </li>
+          {{/if_eq}}
           {{!-- Phân Quyền Role nào thì mở role đó --}}
+          {{#if_eq role "user"}}
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -85,6 +88,7 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/user/cart">Giỏ Hàng Cá Nhân</a>
           </li>
+          {{/if_eq}}
           <li class="nav-item mr-4">
             <a class="nav-link" href="/introduce">Introduce</a>
           </li>
