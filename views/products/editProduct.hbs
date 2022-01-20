@@ -18,7 +18,7 @@
       enctype="multipart/form-data"
       class="add-covider"
       method="POST"
-      action=""
+      action="/list-product/edit/{{product.id}}?_method=PUT"
     >
       <div class="form-group">
         <label for="formGroupExampleInput">Tên Sản Phẩm</label>
@@ -28,7 +28,7 @@
           id="formGroupExampleInput"
           placeholder="Gạo"
           value="{{product.productName}}"
-          name="productName"
+          name="ten"
         />
       </div>
       <div class="form-group">
@@ -37,8 +37,8 @@
           type="file"
           class="file-upload"
           id="formGroupExampleInput2"
-          name="images"
-          value="{{product.images}}"
+          name="hinhanh"
+          {{!-- value="{{product.images}}" --}}
           accept="image/*"
           multiple="true"
         />
@@ -51,45 +51,46 @@
           id="formGroupExampleInput2"
           value="{{product.price}}"
           placeholder="100000 vnd"
-          name="price"
+          name="gia"
         />
       </div>
       <div class="form-group">
         <label for="formGroupExampleInput2">Đơn Vị Định Lượng</label>
-        <select name="quantitative">
-          <option value="KG">
+        <select name="donvi">
+          <option {{ifeq product.quantitative "KG"}} value="Kg">
             KiloGram (KG)
           </option>
-          <option value="Gram">
+          <option {{ifeq product.quantitative "Gram"}} value="Gram">
             Gram (gr)
           </option>
-          <option value="L">
+          <option {{ifeq product.quantitative "L"}} value="L">
             Lit (L)
           </option>
-          <option value="ml">
+          <option {{ifeq product.quantitative "Ml"}} value="Ml">
             MiliLit (ml)
           </option>
-          <option value="Chai">
+          <option {{ifeq product.quantitative "Chai"}} value="Chai">
             Chai
           </option>
-          <option value="Bó">
+          <option {{ifeq product.quantitative "Bó"}} value="Bó">
             Bó
           </option>
-          <option value="Thùng">
+          <option {{ifeq product.quantitative "Thùng"}} value="Thùng">
             Thùng
           </option>
-          <option value="Hộp">
+          <option {{ifeq product.quantitative "Hộp"}} value="Hộp">
             Hộp
           </option>
-          <option value="Cây">
+          <option {{ifeq product.quantitative "Cây"}} value="Cây">
             Cây
           </option>
-          <option value="Cái">
+          <option {{ifeq product.quantitative "Cái"}} value="Cái">
             Cái
           </option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary add-covider-submit-1">Sửa nhu yếu phẩm</button>
+      <button type="submit" class="btn btn-primary add-covider-submit-1">Sửa nhu
+        yếu phẩm</button>
     </form>
   {{/if}}
 </div>
