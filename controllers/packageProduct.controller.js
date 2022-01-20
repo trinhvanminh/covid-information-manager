@@ -1,10 +1,15 @@
+const LocalStorage = require("node-localstorage").LocalStorage,
+  localStorage = new LocalStorage("./scratch");
+
 class PackageProductController {
   // GET List Package Product /
   listPackageProduct(req, res) {
+    const role = localStorage.getItem("role");
     const renderData = (data) => {
       res.render("./productPackages/listPackageProduct", {
         authenticated: req.authenticated,
         data: data.rows,
+        role
       });
     };
     if (req.query.q) {
@@ -29,6 +34,7 @@ class PackageProductController {
 
   // GET View Package Product /
   viewPackageProduct(req, res) {
+    const role = localStorage.getItem("role");
     const renderData = (data) => {
       const spwithLinks = Promise.all(
         data.rows.map((ele, idx) => {
@@ -49,6 +55,7 @@ class PackageProductController {
           authenticated: req.authenticated,
           data: SpWithLinks,
           Goi_id: req.params.id,
+          role
         });
       });
     };

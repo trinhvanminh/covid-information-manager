@@ -1,118 +1,120 @@
+const LocalStorage = require("node-localstorage").LocalStorage,
+  localStorage = new LocalStorage("./scratch");
+
 class ManagerController {
   // GET /related-covid/list
   relatedCovidView(req, res, next) {
     // console.log(req);
-    if (!req.authenticated) {
-      res.redirect("/");
-    } else {
-      if (req.query.q) {
-        require("../db")
-          .query(
-            'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" WHERE "hoten" LIKE $1;',
-            ["%" + req.query.q + "%"]
-          )
-          .then((data) => {
-            if (data.rowCount == 0) {
-              console.log("khong co du lieu");
-              res.render("manager/related", {
-                authenticated: req.authenticated,
-              });
-            } else {
-              res.render("manager/related", {
-                authenticated: req.authenticated,
-                data: data.rows,
-              });
-            }
-          })
-          .catch((err) => console.log(err));
-      } else if (req.query.sort && req.query.sort !== "") {
-        const queryString =
-          req.query.sort === "ASC"
-            ? 'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" ORDER BY "hoten" ASC'
-            : 'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" ORDER BY "hoten" DESC';
-        require("../db")
-          .query(queryString)
-          .then((data) => {
-            console.log(data);
-            if (data.rowCount == 0) {
-              console.log("khong co du lieu");
-              res.render("manager/related", {
-                authenticated: req.authenticated,
-              });
-            } else {
-              res.render("manager/related", {
-                authenticated: req.authenticated,
-                data: data.rows,
-              });
-            }
-          })
-          .catch((err) => console.log(err));
-      } else {
-        require("../db")
-          .query(
-            'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" ORDER BY "Nguoi_id" ASC'
-          )
-          .then((data) => {
-            // console.log(data);
-            if (data.rowCount == 0) {
-              console.log("khong co du lieu");
-              res.render("manager/related", {
-                authenticated: req.authenticated,
-              });
-            } else {
-              res.render("manager/related", {
-                authenticated: req.authenticated,
-                data: data.rows,
-              });
-            }
-          })
-          .catch((err) => console.log(err));
-      }
-    }
-  }
-  // [GET]  /related-covid/list/:id
-  detailCovidUser(req, res, next) {
-    if (!req.authenticated) {
-      res.redirect("/");
-    } else {
+    const role = localStorage.getItem("role");
+    if (req.query.q) {
       require("../db")
         .query(
-          'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" where "Nguoi_id" = $1',
-          [req.params.id]
+          'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" WHERE "hoten" LIKE $1;',
+          ["%" + req.query.q + "%"]
         )
         .then((data) => {
           if (data.rowCount == 0) {
             console.log("khong co du lieu");
-            res.render("manager/detailUser", {
+            res.render("manager/related", {
               authenticated: req.authenticated,
+              role,
             });
           } else {
-            const queryStr = `select * from public."Nguoi" where "Nguoi_id" in
+            res.render("manager/related", {
+              authenticated: req.authenticated,
+              data: data.rows,
+              role,
+            });
+          }
+        })
+        .catch((err) => console.log(err));
+    } else if (req.query.sort && req.query.sort !== "") {
+      const queryString =
+        req.query.sort === "ASC"
+          ? 'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" ORDER BY "hoten" ASC'
+          : 'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" ORDER BY "hoten" DESC';
+      require("../db")
+        .query(queryString)
+        .then((data) => {
+          console.log(data);
+          if (data.rowCount == 0) {
+            console.log("khong co du lieu");
+            res.render("manager/related", {
+              authenticated: req.authenticated,
+              role,
+            });
+          } else {
+            res.render("manager/related", {
+              authenticated: req.authenticated,
+              data: data.rows,
+              role,
+            });
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      require("../db")
+        .query(
+          'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" ORDER BY "Nguoi_id" ASC'
+        )
+        .then((data) => {
+          // console.log(data);
+          if (data.rowCount == 0) {
+            console.log("khong co du lieu");
+            res.render("manager/related", {
+              authenticated: req.authenticated,
+              role,
+            });
+          } else {
+            res.render("manager/related", {
+              authenticated: req.authenticated,
+              data: data.rows,
+              role,
+            });
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+  // [GET]  /related-covid/list/:id
+  detailCovidUser(req, res, next) {
+    require("../db")
+      .query(
+        'SELECT * FROM public."Nguoi" left JOIN public."NoiDieuTri" on "Nguoi".dieutri_id = "NoiDieuTri"."DieuTri_id" where "Nguoi_id" = $1',
+        [req.params.id]
+      )
+      .then((data) => {
+        if (data.rowCount == 0) {
+          console.log("khong co du lieu");
+          res.render("manager/detailUser", {
+            authenticated: req.authenticated,
+          });
+        } else {
+          const queryStr = `select * from public."Nguoi" where "Nguoi_id" in
               ( SELECT "nlq_id" 
                 FROM public."Nguoi" full JOIN public."NguoiLienQuan" 
                 on "Nguoi"."Nguoi_id" = "NguoiLienQuan"."nguoi_id" 
                 WHERE "Nguoi"."Nguoi_id" = $1);`;
 
-            require("../db")
-              .query(queryStr, [req.params.id])
-              .then((lienquan) => {
-                if (lienquan.rowCount == 0) {
-                  console.log("khong co nguoi lien quan");
-                  res.render("manager/detailUser", {
-                    authenticated: req.authenticated,
-                    data: data.rows[0],
-                  });
-                } else {
-                  res.render("manager/detailUser", {
-                    authenticated: req.authenticated,
-                    data: data.rows[0],
-                    lienquan: lienquan.rows,
-                  });
-                }
-              });
-          }
-        });
-    }
+          require("../db")
+            .query(queryStr, [req.params.id])
+            .then((lienquan) => {
+              if (lienquan.rowCount == 0) {
+                console.log("khong co nguoi lien quan");
+                res.render("manager/detailUser", {
+                  authenticated: req.authenticated,
+                  data: data.rows[0],
+                });
+              } else {
+                res.render("manager/detailUser", {
+                  authenticated: req.authenticated,
+                  data: data.rows[0],
+                  lienquan: lienquan.rows,
+                });
+              }
+            });
+        }
+      });
   }
   // [GET]  /related-covid/list/add
   addCovidUser(req, res, next) {

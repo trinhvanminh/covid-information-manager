@@ -54,7 +54,7 @@
         </div>
 
         <div class="w3-row" style="margin-top:64px">
-          <a href="/xxx" class="w3-col s3 main-feature-item">
+          <a href="/package-product" class="w3-col s3 main-feature-item">
             <i class="fa fa-shield w3-text-orange w3-jumbo"></i>
             <p>Utensils Necessary Packages</p>
           </a>
@@ -302,6 +302,7 @@
             <i class="fa fa-bolt w3-text-orange w3-jumbo"></i>
             <p>List Covider</p>
           </a>
+          {{#if_eq_s role "manager" "admin"}}
           <a
             href="/manager/related-covid/add"
             class="w3-col s3 main-feature-item"
@@ -313,6 +314,7 @@
             <i class="fa fa-camera w3-text-yellow w3-jumbo"></i>
             <p>Manager</p>
           </a>
+          {{/if_eq_s}}
           <a href="/list-product" class="w3-col s3 main-feature-item">
             <i class="fa fa-battery-full w3-text-green w3-jumbo"></i>
             <p>Utensils Necessary</p>
@@ -324,6 +326,7 @@
             <i class="fa fa-shield w3-text-orange w3-jumbo"></i>
             <p>Utensils Necessary Packages</p>
           </a>
+          {{#if_eq_s role "manager" "admin"}}
           <a href="/manager/statistic" class="w3-col s3 main-feature-item">
             <i class="fa fa-cloud w3-text-blue w3-jumbo"></i>
             <p>Statistical information</p>
@@ -336,6 +339,7 @@
             <i class="fa fa-hdd-o w3-text-cyan w3-jumbo"></i>
             <p>Location Isolation</p>
           </a>
+          {{/if_eq_s}}
         </div>
       </div>
     </div>

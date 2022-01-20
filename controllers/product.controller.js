@@ -1,6 +1,8 @@
 const db = require("../db");
 const cloudinary = require("cloudinary");
 const fs = require("fs");
+const LocalStorage = require("node-localstorage").LocalStorage,
+  localStorage = new LocalStorage("./scratch");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -10,6 +12,7 @@ cloudinary.config({
 class ListProductController {
   // GET List Product /
   listProduct(req, res) {
+    const role = localStorage.getItem("role");
     const renderData = (data) => {
       const spwithLinks = Promise.all(
         data.rows.map((ele, idx) => {
@@ -29,6 +32,7 @@ class ListProductController {
         res.render("./products/listProducts", {
           authenticated: req.authenticated,
           data: SpWithLinks,
+          role
         });
       });
     };

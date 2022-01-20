@@ -1,5 +1,7 @@
 {{#unless data}}
-  <h1>Chưa có dữ liệu kìa bạn ơi</h1>
+  <div class="container-fluid">
+    <h1>Dữ Liệu Này Không Tồn Tại Trong DataBase</h1>
+  </div>
 {{else}}
   <div class="container-fluid">
     <div class="banner-list-covider">
@@ -41,11 +43,14 @@
 
         </select>
       </form>
-      <a
-        class="btn btn-primary covid-list-btn-add btn-sm"
-        href="/manager/related-covid/add"
-        role="button"
-      >Add new user</a>
+      {{#if_eq_s role "manager" "admin"}}
+        <a
+          class="btn btn-primary covid-list-btn-add btn-sm"
+          href="/manager/related-covid/add"
+          role="button"
+        >Add new user</a>
+      {{/if_eq_s}}
+
     </div>
     <ul class="covid-list">
       <table class="table table-striped table-hover">
@@ -61,17 +66,18 @@
         <tbody>
           {{#each data}}
             <tr>
-              <th scope="row">{{this.Nguoi_id}}</th>
+              <td scope="row">{{this.Nguoi_id}}</td>
               <td><a
                   href="/manager/related-covid/list/{{this.Nguoi_id}}"
                 >{{this.hoten}}</a></td>
               <td>{{this.trangthai}}</td>
               <td>{{this.ten}}</td>
-              <td><a
+              <td>
+                <a
                   type="button"
                   class="btn btn-link"
                   href="/manager/related-covid/edit/{{this.Nguoi_id}}"
-                >edit</a>
+                >Edit</a>
                 /
                 <form
                   style="display:inline-block"
@@ -81,7 +87,7 @@
                 ><button
                     type="submit"
                     class="btn btn-link"
-                  >delete</button></form></td>
+                  >Delete</button></form></td>
             </tr>
           {{/each}}
         </tbody>
