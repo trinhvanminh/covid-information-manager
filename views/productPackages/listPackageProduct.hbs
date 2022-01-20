@@ -16,6 +16,7 @@
           type="search"
           placeholder="Search"
           aria-label="Search"
+          name="q"
         />
         <button
           class="btn btn-primary my-2 my-sm-0 list-product-button"
@@ -27,15 +28,19 @@
         href="/package-product/add"
         role="button"
       >Add package</a>
-      <select
-        class="form-select covid-list-select list-product-button"
-        aria-label="Default select example"
-      >
-        <option selected>Sắp Xếp</option>
-        <option value="1">Mặc Định</option>
-        <option value="2">Tên A-Z</option>
-        <option value="3">Tên Z-A</option>
-      </select>
+      <form action="" method="GET">
+        <select
+          class="form-select covid-list-select list-product-button"
+          aria-label="Default select example"
+          onchange="this.form.submit()"
+          name="sort"
+        >
+          <option selected>Sắp Xếp</option>
+          <option value="">Mặc Định</option>
+          <option value="ASC">Tên A-Z</option>
+          <option value="DESC">Tên Z-A</option>
+        </select>
+      </form>
     </div>
     <div class="list-product-list">
       <table class="table">
@@ -43,9 +48,7 @@
           <tr>
             <th scope="col">Package ID</th>
             <th scope="col">Tên Gói</th>
-            <th width="25%" scope="col">Danh Sách Sản Phẩm</th>
             <th scope="col">Giới hạn số lượng</th>
-            <th scope="col">Giới Hạn</th>
             <th scope="col">Thời Gian GH</th>
             <th width="10%" scope="col">Chức Năng</th>
           </tr>
@@ -53,18 +56,10 @@
         <tbody>
           {{#each data}}
             <tr>
-              <th scope="row">{{this.id}}</th>
-              <td>{{this.packageName}}</td>
-              <td>
-                <ul>
-                  {{#each this.listProduct}}
-                    <li>{{this}}</li>
-                  {{/each}}
-                </ul>
-              </td>
-              <td>{{this.limitQuantity}}</td>
-              <td>{{this.limitPerson}}</td>
-              <td>{{this.limitTime}}</td>
+              <th scope="row">{{this.Goi_id}}</th>
+              <td>{{this.ten}}</td>
+              <td>{{this.gioihan_goi}}</td>
+              <td>{{this.thoigian}}</td>
               <td>
                 <div class="list-product-action">
                   <a
@@ -86,105 +81,6 @@
               </td>
             </tr>
           {{/each}}
-          <tr>
-            <th scope="row">PP-01</th>
-            <td>Gói Số 1</td>
-            <td>
-              <ul>
-                <li>Mắm</li>
-                <li>Muối</li>
-                <li>Đường</li>
-              </ul>
-            </td>
-            <td>10</td>
-            <td>2</td>
-            <td>2 Tuần</td>
-            <td>
-              <div class="list-product-action">
-                <a
-                  class="btn btn-primary package-list-btn btn-sm"
-                  href="/package-product/view/:id"
-                  role="button"
-                >View</a>
-                <a
-                  class="btn btn-primary package-list-btn btn-sm"
-                  href="/package-product/edit/23121"
-                  role="button"
-                >Edit</a>
-                <a
-                  class="btn btn-primary package-list-btn btn-sm"
-                  href="/package-product/delete/:id"
-                  role="button"
-                >Delete</a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">PP-01</th>
-            <td>Gói Số 1</td>
-            <td>
-              <ul>
-                <li>Mắm</li>
-                <li>Muối</li>
-                <li>Đường</li>
-              </ul>
-            </td>
-            <td>10</td>
-            <td>2</td>
-            <td>2 Tuần</td>
-            <td>
-              <div class="list-product-action">
-                <a
-                  class="btn btn-primary package-list-btn btn-sm"
-                  href="/package-product/view/:id"
-                  role="button"
-                >View</a>
-                <a
-                  class="btn btn-primary package-list-btn btn-sm"
-                  href="/package-product/edit/:id"
-                  role="button"
-                >Edit</a>
-                <a
-                  class="btn btn-primary package-list-btn btn-sm"
-                  href="/package-product/delete/:id"
-                  role="button"
-                >Delete</a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">PP-01</th>
-            <td>Gói Số 1</td>
-            <td>
-              <ul>
-                <li>Mắm</li>
-                <li>Muối</li>
-                <li>Đường</li>
-              </ul>
-            </td>
-            <td>10</td>
-            <td>2</td>
-            <td>2 Tuần</td>
-            <td>
-              <div class="list-product-action">
-                <a
-                  class="btn btn-primary package-list-btn btn-sm"
-                  href="/package-product/view/:id"
-                  role="button"
-                >View</a>
-                <a
-                  class="btn btn-primary package-list-btn btn-sm"
-                  href="/package-product/edit/:id"
-                  role="button"
-                >Edit</a>
-                <a
-                  class="btn btn-primary package-list-btn btn-sm"
-                  href="/package-product/delete/:id"
-                  role="button"
-                >Delete</a>
-              </div>
-            </td>
-          </tr>
         </tbody>
       </table>
     </div>
