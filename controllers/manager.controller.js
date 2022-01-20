@@ -369,6 +369,38 @@ class ManagerController {
       });
     }
   }
+
+  // [GET] /payment/level - Them han muc thanh toan
+  paymentLevelView(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      res.render("manager/editPaymentLevel", {
+        authenticated: req.authenticated,
+      });
+    }
+  }
+
+  // [[POST] /payment/level - Them han muc thanh toan]]
+  paymentLevel(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      const { level, price } = req.body;
+      if (level && price) {
+        const queryStr = `INSERT INTO public."HanMuc" ("level", "price")
+        VALUES ($1, $2)`;
+        require("../db")
+          .query(queryStr, [level, price])
+          .then((data) => {
+            res.redirect("/manager/paymentManagement");
+          })
+          .catch((err) => console.log(err));
+      } else {
+        res.redirect("/manager/paymentLevel");
+      }
+    }
+  }
 }
 
 module.exports = new ManagerController();
