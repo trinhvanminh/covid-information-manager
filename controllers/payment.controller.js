@@ -18,10 +18,11 @@ const PaymentController = {
     try {
       const id = 2;
       const amount = 100000;
-      let response = await axios(`http://localhost:3003/api/payment/${id}`, {
-        amount: amount,
+      let response = await axios.patch(`http://localhost:3003/api/payment`, {
+        id,
+        amount,
       });
-      console.log(response.data, response.message);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
