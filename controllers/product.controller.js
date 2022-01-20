@@ -1,6 +1,12 @@
 const db = require("../db");
 const cloudinary = require("cloudinary");
 const fs = require("fs");
+
+cloudinary.config({
+  cloud_name: "soralymusic",
+  api_key: 456357255278685,
+  api_secret: "eylEN9ePrN-lvCQE2Q55HQzQLIw",
+});
 class ListProductController {
   // GET List Product /
   listProduct(req, res) {
@@ -58,10 +64,12 @@ class ListProductController {
     if (!req.authenticated) {
       res.redirect("/");
     } else {
+      const file = req.files.hinhanh;
+
       cloudinary.v2.uploader.upload(
         file.tempFilePath,
         { folder: "Covid-Info" },
-        async (err, result) => {
+        (err, result) => {
           if (err) throw err;
           removeTmp(file.tempFilePath);
           //   result.url này là link của ảnh được upload lên cloundinary
@@ -147,5 +155,11 @@ class ListProductController {
     }
   }
 }
+
+const removeTmp = (path) => {
+  fs.unlink(path, (err) => {
+    if (err) throw err;
+  });
+};
 
 module.exports = new ListProductController();
