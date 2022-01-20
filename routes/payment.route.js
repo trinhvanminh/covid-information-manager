@@ -4,7 +4,7 @@ const { verifyToken } = require("../jwt");
 
 router.get("/", verifyToken, payemntController.connectWallet);
 // Thanh Toan
-router.get("/checkout", verifyToken, payemntController.paymentWallet);
+router.get("/checkout-main", verifyToken, payemntController.paymentWallet);
 
 
 module.exports = router;
