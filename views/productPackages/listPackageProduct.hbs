@@ -57,7 +57,11 @@
           {{#each data}}
             <tr>
               <th scope="row">{{this.Goi_id}}</th>
-              <td>{{this.ten}}</td>
+              <td><a
+                  class="btn btn-link"
+                  href="/package-product/view/{{this.Goi_id}}"
+                  role="button"
+                >{{this.ten}}</a></td>
               <td>{{this.gioihan_goi}}</td>
               <td>{{this.thoigian}}</td>
               <td>
