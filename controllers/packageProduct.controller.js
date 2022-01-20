@@ -35,12 +35,43 @@ class PackageProductController {
   // GET Add Package Product /
   addPackageProductView(req, res) {
     //   Data Test
-    res.render("./productPackages/addPackageProduct");
+    res.render("./productPackages/addPackageProduct", {
+      authenticated: req.authenticated,
+    });
   }
   // POST Add Package Product /
   addPackageProduct(req, res) {
-    //   Data Test
-    res.render("./productPackages/addPackageProduct");
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      const { ten, gioihan_goi, thoigian } = req.body;
+      if (ten && gioihan_goi && thoigian) {
+        require("../db")
+          .query(
+            'insert into public."Goi" (ten, gioihan_goi, thoigian) values ($1, $2, $3)',
+            [ten, gioihan_goi, thoigian]
+          )
+          .then((data) => {
+            if (data.rowCount === 0) {
+              console.log("Thêm gói nhu yếu phẩm lỗi");
+              res.render("productPackages/addPackageProduct", {
+                authenticated: req.authenticated,
+                message: "Thêm gói nhu yếu phẩm lỗi",
+                type: "warning",
+              });
+            } else {
+              res.redirect("/package-product");
+            }
+          })
+          .catch((err) => console.log(err));
+      } else {
+        res.render("productPackages/addPackageProduct", {
+          authenticated: req.authenticated,
+          message: "Cần đầy đủ thông tin",
+          type: "warning",
+        });
+      }
+    }
   }
   // GET edit package view
   editPackageProductView(req, res) {
@@ -69,8 +100,20 @@ class PackageProductController {
   // DELETE Delete Package Product /
   deletePackageProduct(req, res) {
     try {
-      // Delete Data here
-      res.redirect("/package-product");
+      if (!req.authenticated) {
+        res.redirect("/");
+      } else if (req.params.id) {
+        require("../db")
+          .query('delete FROM public."Goi" where "Goi"."Goi_id" = $1', [
+            req.params.id,
+          ])
+          .then((data) => {
+            res.redirect("/package-product");
+          })
+          .catch((err) => console.log(err));
+      } else {
+        res.redirect("/package-product");
+      }
     } catch (error) {
       console.log(error.message);
       return res.status(500).json({ status: false, message: error.message });
