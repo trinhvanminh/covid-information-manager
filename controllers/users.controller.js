@@ -1,5 +1,7 @@
 const bcrypt = require("bcrypt");
 const { createTokens } = require("../jwt");
+const LocalStorage = require("node-localstorage").LocalStorage,
+  localStorage = new LocalStorage("./scratch");
 
 class usersController {
   //[GET] /auth/login
@@ -13,7 +15,7 @@ class usersController {
   //[POST] /auth/login
   login(req, res, rext) {
     require("../db")
-      .query('select "password" from public."User" where "username" = $1', [
+      .query('select * from public."User" where "username" = $1', [
         req.body.username,
       ])
       .then((data) => {
@@ -33,6 +35,7 @@ class usersController {
                 const accessToken = createTokens({
                   username: req.body.username,
                 });
+                localStorage.setItem("role", data.rows[0].role);
                 res.cookie("access-token", accessToken);
                 res.redirect("/");
               } else {
