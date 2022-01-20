@@ -28,12 +28,22 @@ class UserSystemController {
   }
 
   // GET Notify Payment User /
-  notifyPaymentUser(req, res) {
-    const role = localStorage.getItem("role");
-    res.render("./user/notifyPayment", {
-      authenticated: req.authenticated,
-      role,
-    });
+  async notifyPaymentUser(req, res) {
+    try {
+      const role = localStorage.getItem("role");
+      const idWallet = localStorage.getItem("idPayMent");
+      let response = await axios.put(`http://localhost:3003/api/history`, {
+        id: idWallet,
+      });
+
+      res.render("./user/notifyPayment", {
+        authenticated: req.authenticated,
+        role,
+        history: response.data.data.rows,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // GET Cart User /
