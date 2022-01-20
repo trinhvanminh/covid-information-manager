@@ -33,6 +33,25 @@ class UserSystemController {
       authenticated: req.authenticated,
     });
   }
+  // patch Checkout Cart / - Thanh Toán Đơn Hàng Qua Hệ Thống Bên Kia
+  async checkoutCartUser(req, res) {
+    try {
+      const idWallet = localStorage.getItem("idPayMent");
+      const amount = 100000;
+      // const amount = 100000;
+      let response = await axios.put(`http://localhost:3003/api/payment`, {
+        id: idWallet,
+        amount,
+      });
+      res.render("./user/informationUser", {
+        authenticated: req.authenticated,
+        message: response.data.message,
+        type: "success",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   // GET Balance User /
   balanceUser(req, res) {
