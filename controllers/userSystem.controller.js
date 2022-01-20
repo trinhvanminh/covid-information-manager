@@ -2,6 +2,8 @@ const e = require("express");
 const LocalStorage = require("node-localstorage").LocalStorage,
   localStorage = new LocalStorage("./scratch");
 const axios = require("axios");
+const db = require("../db");
+const bcrypt = require("bcrypt");
 
 class UserSystemController {
   // GET Information User /
@@ -94,24 +96,69 @@ class UserSystemController {
 
   // GET Change Password User /
   changePasswordViewUser(req, res) {
-    res.render("./user/changePasswordUser", {
+    res.render("./user/changePassword", {
       authenticated: req.authenticated,
     });
   }
 
   // POST Change Password User /
-  async changePasswordUser(req, res) {
-    try {
-      const { oldPassword, newPassword } = req.body;
-     
-      res.render("./user/informationUser", {
-        authenticated: req.authenticated,
-        message: response.data.message,
-        type: "success",
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  changePasswordUser(req, res) {
+    const { username, password, newpassword } = req.body;
+    db.query('select "password" from public."User" where "username" = $1', [
+      req.body.username,
+    ]).then((data) => {
+      if (data.rowCount == 0) {
+        res.render("./user/changePassword", {
+          message: "tai khoan hoac mk khong chinh xac",
+          type: "warning",
+          authenticated: req.authenticated,
+        });
+      } else if (data.rowCount == 1 && data.rows[0].password === "") {
+        bcrypt
+          .hash(newpassword, 10)
+          .then((hash) => {
+            db.query(
+              'update public."User" set "password" = $1 where "username" = $2',
+              [hash, username]
+            );
+            res.render("./user/changePassword", {
+              message: "doi mat khau thanh cong",
+              type: "success",
+              authenticated: req.authenticated,
+            });
+          })
+          .catch((err) => console.log(err));
+      } else {
+        // Load hash from your password DB.
+        bcrypt
+          .compare(password, data.rows[0].password)
+          .then((match) => {
+            if (match) {
+              bcrypt
+                .hash(newpassword, 10)
+                .then((hash) => {
+                  db.query(
+                    'update public."User" set "password" = $1 where "username" = $2',
+                    [hash, username]
+                  );
+                  res.render("./user/changePassword", {
+                    message: "doi mat khau thanh cong",
+                    type: "success",
+                    authenticated: req.authenticated,
+                  });
+                })
+                .catch((err) => console.log(err));
+            } else {
+              res.render("./user/changePassword", {
+                message: "sai mat khau cu",
+                type: "warning",
+                authenticated: req.authenticated,
+              });
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    });
   }
 }
 
