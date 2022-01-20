@@ -11,5 +11,8 @@ router.get("/checkout/payment", verifyToken, UserSystemController.checkoutCartUs
 router.get("/balance", verifyToken, UserSystemController.balanceUser);
 router.get("/connect", verifyToken, UserSystemController.connectWalletUser);
 router.post("/connect", verifyToken, UserSystemController.connectPostWalletUser);
+router.get("/change-password", verifyToken, UserSystemController.changePasswordViewUser);
+router.post("/change-password", verifyToken, UserSystemController.changePasswordUser);
+
 
 module.exports = router;
