@@ -396,6 +396,18 @@ class ManagerController {
       });
     }
   }
+
+  // [GET] /payment/list
+  paymentList(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      res.render("manager/paymentList", {
+        authenticated: req.authenticated,
+      });
+    }
+  }
+
 }
 
 module.exports = new ManagerController();
