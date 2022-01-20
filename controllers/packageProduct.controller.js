@@ -29,7 +29,57 @@ class PackageProductController {
 
   // GET View Package Product /
   viewPackageProduct(req, res) {
-    res.render("./productPackages/viewPackageProduct");
+    const renderData = (data) => {
+      const spwithLinks = Promise.all(
+        data.rows.map((ele, idx) => {
+          return require("../db")
+            .query(
+              'SELECT * FROM public."HinhAnh" where "HinhAnh"."sp_id" = $1',
+              [ele.SP_id]
+            )
+            .then((hinhanh) => {
+              data.rows[idx].links = hinhanh.rows.map((h) => h.link);
+              return data.rows[idx];
+            })
+            .catch((err) => console.log(err));
+        })
+      );
+      spwithLinks.then((SpWithLinks) => {
+        res.render("./productPackages/viewPackageProduct", {
+          authenticated: req.authenticated,
+          data: SpWithLinks,
+          Goi_id: req.params.id,
+        });
+      });
+    };
+    if (req.query.q) {
+      const queryStr = `
+      select * 
+      from (select * from public."Goi_SP" join public."SP" on "Goi_SP"."sp_id" = "SP"."SP_id" where "goi_id" = $1) AS "F" 
+      where "F"."ten" like $2
+      `;
+      require("../db")
+        .query(queryStr, [req.params.id, "%" + req.query.q + "%"])
+        .then(renderData);
+    } else if (req.query.sort && req.query.sort !== "") {
+      const queryString =
+        req.query.sort === "ASC"
+          ? `select * 
+          from (select * from public."Goi_SP" join public."SP" on "Goi_SP"."sp_id" = "SP"."SP_id" where "goi_id" = 1) AS "F" 
+          order by "F"."ten" ASC`
+          : `select * 
+          from (select * from public."Goi_SP" join public."SP" on "Goi_SP"."sp_id" = "SP"."SP_id" where "goi_id" = 1) AS "F" 
+          order by "F"."ten" desc`;
+      require("../db").query(queryString).then(renderData);
+    } else {
+      require("../db")
+        .query(
+          'select * from public."Goi_SP" join public."SP" on "Goi_SP"."sp_id" = "SP"."SP_id" where "goi_id" = $1',
+          [req.params.id]
+        )
+        .then(renderData)
+        .catch((err) => console.log(err));
+    }
   }
 
   // GET Add Package Product /
