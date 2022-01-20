@@ -8,8 +8,10 @@ router.get("/account", verifyToken, AdminController.viewAccountManager);
 router.get("/account/:id", verifyToken, AdminController.historyAccountManager);
 // List Địa điểm điều trị/Cách Ly
 router.get("/location", verifyToken, AdminController.listLocationIsolation);
-// Thêm Địa điểm điều trị/Cách Ly
-router.get("/location/add", verifyToken, AdminController.addLocationIsolation);
+// View Them Địa điểm điều trị/Cách Ly
+router.get("/location/add", verifyToken, AdminController.addLocationIsolationView);
+// View Them Địa điểm điều trị/Cách Ly
+router.post("/location/add", verifyToken, AdminController.addLocationIsolation);
 // View Địa điểm điều trị/Cách Ly
 router.get("/location/edit/:id", verifyToken, AdminController.editViewLocationIsolation);
 // Edit Địa điểm điều trị/Cách Ly
