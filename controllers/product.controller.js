@@ -57,7 +57,6 @@ class ListProductController {
       res.render("./products/addProduct", { authenticated: req.authenticated });
     }
   }
-  // ------------ CHUA XONG ---------------
   //   POST Add Product
   addProduct(req, res) {
     // res.render("./products/addProduct");
@@ -116,7 +115,7 @@ class ListProductController {
       }
       function insertHinhAnh(insertId, urls) {
         const r = Promise.all(
-          urls.map((link) => {
+          [urls].map((link) => {
             return db.query(
               'insert into public."HinhAnh" (sp_id, link) values ($1, $2)',
               [insertId, link.url]
@@ -133,17 +132,40 @@ class ListProductController {
             });
           } else {
             res.redirect("/list-product");
-            res.render("products/listProducts", {
-              authenticated: req.authenticated,
-              message: "Đã thêm thành công",
-              type: "success",
-            });
           }
         }).catch((err) => console.log(err));
       }
     }
   }
-  //   PATCH Edit Product
+  //   GET Edit Product View
+  editProductView(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      // Xử lý edit product to database here!
+      const { id } = req.params; //Lấy cái ID ở trên params/path
+      require("../db")
+        .query('SELECT * FROM public."SP" where "SP"."SP_id" = $1', [id])
+        .then((data) => {
+          if (data.rowCount === 0) {
+            res.render("./products/editProduct", {
+              authenticated: req.authenticated,
+              message: "không tồn tại sản phẩm này",
+              type: "danger",
+            });
+          }
+        });
+      // const product = {
+      //   productName: "Sản phẩm 1",
+      //   images: [],
+      //   price: 10000,
+      //   quantitative: "Cây",
+      // };
+
+      res.render("./products/editProduct", { product });
+    }
+  }
+  //   PUT Edit Product View
   editProduct(req, res) {
     if (!req.authenticated) {
       res.redirect("/");
@@ -163,7 +185,7 @@ class ListProductController {
       res.render("./products/editProduct", { product });
     }
   }
-  // ------------ CHUA XONG ---------------
+
   //   DELETE Delete Product
   deleteProduct(req, res) {
     if (!req.authenticated) {
