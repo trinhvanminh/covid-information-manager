@@ -358,6 +358,17 @@ class ManagerController {
       });
     }
   }
+
+  // [GET] /payment - Quản Lý Thanh Toán
+  paymentManagement(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      res.render("manager/paymentManagement", {
+        authenticated: req.authenticated,
+      });
+    }
+  }
 }
 
 module.exports = new ManagerController();

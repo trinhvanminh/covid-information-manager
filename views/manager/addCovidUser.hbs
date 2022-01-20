@@ -80,7 +80,7 @@
         link tới chổ thêm nơi điều trị
       {{else}}
         <select name="dieutri_id">
-          <option value="option_noidieutri">
+          <option>
             -- Chọn nơi điều trị
           </option>
           {{#each DSnoidieutri}}
@@ -156,7 +156,7 @@
   (namsinh == "") { alert("Vui lòng nhập năm sinh"); return false; } if (diachi
   == "") { alert("Vui lòng nhập địa chỉ nơi ở"); return false; } if (trangthai
   == "") { alert("Vui lòng nhập trạng thái hiện tại"); return false; } if
-  (dieutri_id == "option_noidieutri") { alert("Vui lòng nhập nơi điều trị"); return false; } if
+  (dieutri_id == "") { alert("Vui lòng nhập nơi điều trị"); return false; } if
   (lichsu == "") { alert("Vui lòng nhập lịch sử quá trình được quản lý"); return
   false; } return true; }
 </script>
