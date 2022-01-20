@@ -110,6 +110,7 @@ class usersController {
   // [GET] /auth/logout
   logout(req, res, next) {
     if (req.cookies["access-token"]) {
+      localStorage.setItem("role", "guest");
       res.clearCookie("access-token");
     }
     res.redirect("/");
