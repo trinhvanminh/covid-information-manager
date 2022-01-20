@@ -91,6 +91,28 @@ class UserSystemController {
       console.log(error);
     }
   }
+
+  // GET Change Password User /
+  changePasswordViewUser(req, res) {
+    res.render("./user/changePasswordUser", {
+      authenticated: req.authenticated,
+    });
+  }
+
+  // POST Change Password User /
+  async changePasswordUser(req, res) {
+    try {
+      const { oldPassword, newPassword } = req.body;
+     
+      res.render("./user/informationUser", {
+        authenticated: req.authenticated,
+        message: response.data.message,
+        type: "success",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 module.exports = new UserSystemController();
