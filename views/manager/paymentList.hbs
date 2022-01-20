@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <div class="banner-list-covider">
+    <img
+      src="https://nhuxuan.thanhhoa.gov.vn/portal/Photos/2021-08-26/c74cffad295d4dddz4.jpg"
+      alt="khaulenh"
+    />
+  </div>
+  <div class="card admin-account-card">
+    <div class="card-header admin-account-header">
+      <h4 class="card-title">Quản Lý Danh Sách Các Thanh Toán</h4>
+      <a
+        class="btn btn-primary button detail-covider-back"
+        href="/manager/payment"
+        role="button"
+      >Go back</a>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="text-primary">
+            <th width="70%">
+              <strong>Bảng Thống Kê Người Dùng</strong>
+            </th>
+            <th>
+              <strong>Số lượng</strong>
+            </th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Tổng số người dùng</strong>
+              </td>
+              <td>
+                <strong>{{totalUser}} 10</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Tổng số người dùng online</strong>
+              </td>
+              <td>
+                <strong>{{totalUserOnline}} 1</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Tổng số người dùng offline</strong>
+              </td>
+              <td>
+                <strong>{{totalUserOffline}} 9</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{{! Path: views/manager/paymentManagement.hbs }}
+{{! Language: handlebars }}
