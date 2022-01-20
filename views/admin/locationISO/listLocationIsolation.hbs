@@ -23,6 +23,9 @@
       <div class="table-responsive">
         <table class="table">
           <thead class="text-primary">
+            <th width="5%">
+              <strong>Id</strong>
+            </th>
             <th width="50%">
               <strong>Tên Địa Điểm</strong>
             </th>
@@ -32,30 +35,44 @@
             <th>
               <strong>Còn trống</strong>
             </th>
-            <th width="15%">
+            <th width="20%">
               <strong>Chức năng</strong>
             </th>
           </thead>
           <tbody>
             {{#each data}}
-            <tr>
-              <td>
-                <strong>{{this.ten}}</strong>
-              </td>
-              <td>
-                <strong>{{this.succhua}}</strong>
-              </td>
-              <td>
-                <strong>{{this.controng}}</strong>
-              </td>
-              <td>
-                <a
-                  class="btn btn-primary button button-account-manager-detail-1"
-                  href="/admin/location/edit/{{this.DieuTri_id}}"
-                  role="button"
-                >Thay Đổi</a>
-              </td>
-            </tr>
+              <tr>
+                <td>
+                  <strong>{{this.DieuTri_id}}</strong>
+                </td>
+                <td>
+                  <strong>{{this.ten}}</strong>
+                </td>
+                <td>
+                  <strong>{{this.succhua}}</strong>
+                </td>
+                <td>
+                  <strong>{{this.controng}}</strong>
+                </td>
+                <td>
+                  <a
+                    class="btn btn-primary"
+                    href="/admin/location/edit/{{this.DieuTri_id}}"
+                    role="button"
+                  >Edit</a>
+                  <form
+                    action="/admin/location/delete/{{this.DieuTri_id}}?_method=DELETE"
+                    method="POST"
+                    style="display: inline-block;"
+                  >
+                    <button
+                      class="btn btn-primary"
+                      role="button"
+                      type="submit"
+                    >Delete</button>
+                  </form>
+                </td>
+              </tr>
             {{/each}}
           </tbody>
         </table>

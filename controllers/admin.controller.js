@@ -33,22 +33,23 @@ class AdminController {
       return db.query(queryStr, [id]);
     };
 
-    db.query('SELECT * FROM public."NoiDieuTri"').then((data) => {
-      const DS_DieuTri_id = data.rows.map(
-        (noidieutri) => noidieutri.DieuTri_id
-      );
-      const re = Promise.all(DS_DieuTri_id.map(updateConTrong));
-      re.then((d) => {
-        console.log(d);
-        res.render("./admin/locationISO/listLocationIsolation", {
-          authenticated: req.authenticated,
-          data: data.rows,
-          role,
+    db.query(
+      'SELECT * FROM public."NoiDieuTri" order by "NoiDieuTri"."DieuTri_id"'
+    )
+      .then((data) => {
+        const DS_DieuTri_id = data.rows.map(
+          (noidieutri) => noidieutri.DieuTri_id
+        );
+        const re = Promise.all(DS_DieuTri_id.map(updateConTrong));
+        re.then((d) => {
+          res.render("./admin/locationISO/listLocationIsolation", {
+            authenticated: req.authenticated,
+            data: data.rows,
+            role,
+          });
         });
-      });
-    });
-
-    // res.render("./admin/locationISO/listLocationIsolation");
+      })
+      .catch((err) => console.log(err));
   }
   // GET Add Location Isolation /
   addLocationIsolationView(req, res) {
@@ -100,6 +101,22 @@ class AdminController {
         `UPDATE public."NoiDieuTri" SET "ten" = '${ten}', "DieuTri_diachi" = '${DieuTri_diachi}', "succhua" = '${succhua}' WHERE "DieuTri_id" = ${idNoiDieuTri}`
       ).then(() => {
         res.redirect("/admin/location");
+      });
+    }
+  }
+  // DELETE Edit Location Isolation /
+  deleteLocationIsolation(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      const idNoiDieuTri = req.params.id;
+      db.query('delete from public."NoiDieuTri" where "DieuTri_id" = $1', [
+        idNoiDieuTri,
+      ]).then((data) => {
+        if (data.rowCount === 0) {
+          console.log("xoa khong thanh cong");
+          res.redirect("/admin/location");
+        } else res.redirect("/admin/location");
       });
     }
   }

@@ -9,12 +9,30 @@ router.get("/account/:id", verifyToken, AdminController.historyAccountManager);
 // List Địa điểm điều trị/Cách Ly
 router.get("/location", verifyToken, AdminController.listLocationIsolation);
 // View Them Địa điểm điều trị/Cách Ly
-router.get("/location/add", verifyToken, AdminController.addLocationIsolationView);
+router.get(
+  "/location/add",
+  verifyToken,
+  AdminController.addLocationIsolationView
+);
 // View Them Địa điểm điều trị/Cách Ly
 router.post("/location/add", verifyToken, AdminController.addLocationIsolation);
 // View Địa điểm điều trị/Cách Ly
-router.get("/location/edit/:id", verifyToken, AdminController.editViewLocationIsolation);
+router.get(
+  "/location/edit/:id",
+  verifyToken,
+  AdminController.editViewLocationIsolation
+);
 // Edit Địa điểm điều trị/Cách Ly
-router.post("/location/edit/:id", verifyToken, AdminController.editLocationIsolation);
+router.post(
+  "/location/edit/:id",
+  verifyToken,
+  AdminController.editLocationIsolation
+);
+// DELETE Địa điểm điều trị/Cách Ly
+router.delete(
+  "/location/delete/:id",
+  verifyToken,
+  AdminController.deleteLocationIsolation
+);
 
 module.exports = router;
