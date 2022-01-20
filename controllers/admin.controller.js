@@ -16,13 +16,35 @@ class AdminController {
   listLocationIsolation(req, res) {
     // select all table NoiDieuTri
     const role = localStorage.getItem("role");
+    const updateConTrong = (id) => {
+      const queryStr = `
+      update public."NoiDieuTri"
+      set "controng" = 
+      (select 
+      (select succhua from public."NoiDieuTri" where "NoiDieuTri"."DieuTri_id" = $1)
+      -
+      (SELECT Count(*)
+      FROM public."Nguoi" 
+      left JOIN public."NoiDieuTri" 
+      on "Nguoi"."dieutri_id" = "NoiDieuTri"."DieuTri_id" 
+      where "NoiDieuTri"."DieuTri_id" = $1))
+      where "NoiDieuTri"."DieuTri_id" = $1`;
+
+      return db.query(queryStr, [id]);
+    };
 
     db.query('SELECT * FROM public."NoiDieuTri"').then((data) => {
-      console.log(data);
-      res.render("./admin/locationISO/listLocationIsolation", {
-        authenticated: req.authenticated,
-        data: data.rows,
-        role
+      const DS_DieuTri_id = data.rows.map(
+        (noidieutri) => noidieutri.DieuTri_id
+      );
+      const re = Promise.all(DS_DieuTri_id.map(updateConTrong));
+      re.then((d) => {
+        console.log(d);
+        res.render("./admin/locationISO/listLocationIsolation", {
+          authenticated: req.authenticated,
+          data: data.rows,
+          role,
+        });
       });
     });
 
@@ -33,7 +55,7 @@ class AdminController {
     const role = localStorage.getItem("role");
     res.render("./admin/locationISO/addLocationIsolation", {
       authenticated: req.authenticated,
-      role
+      role,
     });
   }
 
@@ -63,7 +85,7 @@ class AdminController {
       res.render("./admin/locationISO/editLocationIsolation", {
         authenticated: req.authenticated,
         data: data.rows[0],
-        role
+        role,
       });
     });
   }
