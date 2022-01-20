@@ -9,7 +9,7 @@ class PackageProductController {
       res.render("./productPackages/listPackageProduct", {
         authenticated: req.authenticated,
         data: data.rows,
-        role
+        role,
       });
     };
     if (req.query.q) {
@@ -45,6 +45,7 @@ class PackageProductController {
             )
             .then((hinhanh) => {
               data.rows[idx].links = hinhanh.rows.map((h) => h.link);
+              data.rows[idx].Goi_id = req.params.id;
               return data.rows[idx];
             })
             .catch((err) => console.log(err));
@@ -55,7 +56,7 @@ class PackageProductController {
           authenticated: req.authenticated,
           data: SpWithLinks,
           Goi_id: req.params.id,
-          role
+          role,
         });
       });
     };
@@ -92,42 +93,113 @@ class PackageProductController {
   // GET Add Package Product /
   addPackageProductView(req, res) {
     //   Data Test
-    res.render("./productPackages/addPackageProduct", {
-      authenticated: req.authenticated,
-    });
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      require("../db")
+        .query('select * from public."SP"')
+        .then((data) => {
+          // danh sachs cac sp
+          res.render("./productPackages/addPackageProduct", {
+            authenticated: req.authenticated,
+            data: data.rows,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
   }
   // POST Add Package Product /
   addPackageProduct(req, res) {
     if (!req.authenticated) {
       res.redirect("/");
     } else {
-      const { ten, gioihan_goi, thoigian } = req.body;
-      if (ten && gioihan_goi && thoigian) {
+      const { ten, gioihan_goi, thoigian, DS_sp_id } = req.body;
+      if (DS_sp_id && DS_sp_id.length < 2) {
+        require("../db")
+          .query('select * from public."SP"')
+          .then((data) => {
+            // danh sachs cac sp
+            res.render("./productPackages/addPackageProduct", {
+              authenticated: req.authenticated,
+              message: "Gói nhu yếu phẩm phải có ít nhất 2 sản phẩm",
+              type: "info",
+              data: data.rows,
+            });
+          })
+          .catch((err) => console.log(err));
+      } else if (ten && gioihan_goi && thoigian) {
         require("../db")
           .query(
-            'insert into public."Goi" (ten, gioihan_goi, thoigian) values ($1, $2, $3)',
+            'insert into public."Goi" (ten, gioihan_goi, thoigian) values ($1, $2, $3) returning "Goi"."Goi_id"',
             [ten, gioihan_goi, thoigian]
           )
           .then((data) => {
             if (data.rowCount === 0) {
               console.log("Thêm gói nhu yếu phẩm lỗi");
-              res.render("productPackages/addPackageProduct", {
-                authenticated: req.authenticated,
-                message: "Thêm gói nhu yếu phẩm lỗi",
-                type: "warning",
-              });
+              require("../db")
+                .query('select * from public."SP"')
+                .then((data) => {
+                  // danh sachs cac sp
+                  res.render("./productPackages/addPackageProduct", {
+                    authenticated: req.authenticated,
+                    message: "Thêm gói nhu yếu phẩm lỗi",
+                    type: "warning",
+                    data: data.rows,
+                  });
+                })
+                .catch((err) => console.log(err));
             } else {
-              res.redirect("/package-product");
+              const re = Promise.all(
+                DS_sp_id.map((spId) => {
+                  require("../db").query(
+                    'insert into public."Goi_SP" (goi_id, sp_id) values ($1, $2)',
+                    [data.rows[0].Goi_id, spId]
+                  );
+                })
+              );
+              re.then((data) => {
+                console.log(data);
+                res.redirect("/package-product");
+              });
             }
           })
           .catch((err) => console.log(err));
       } else {
-        res.render("productPackages/addPackageProduct", {
-          authenticated: req.authenticated,
-          message: "Cần đầy đủ thông tin",
-          type: "warning",
-        });
+        require("../db")
+          .query('select * from public."SP"')
+          .then((data) => {
+            // danh sachs cac sp
+            res.render("./productPackages/addPackageProduct", {
+              authenticated: req.authenticated,
+              message: "Cần đầy đủ thông tin",
+              type: "warning",
+              data: data.rows,
+            });
+          })
+          .catch((err) => console.log(err));
       }
+    }
+  }
+  // DELETE product in package
+  deleteViewPackageProduct(req, res) {
+    if (!req.authenticated) {
+      res.redirect("/");
+    } else {
+      const { id, prodId } = req.params;
+      require("../db")
+        .query(
+          'delete from public."Goi_SP" where "Goi_SP"."goi_id" = $1 and "Goi_SP"."sp_id" = $2', //hai gói có cùng sp, ràng buộc cùng gói
+          [id, prodId]
+        )
+        .then((data) => {
+          if (data.rowCount === 0) {
+            console.log("xoas product in package khong thanh cong");
+            res.redirect(`/package-product/view/${id}`);
+          } else {
+            res.redirect(`/package-product/view/${id}`);
+          }
+        })
+        .catch((err) => console.log(err));
     }
   }
   // GET edit package view
@@ -144,10 +216,31 @@ class PackageProductController {
             if (data.rowCount === 0) {
               res.redirect("/package-product");
             } else {
-              res.render("productPackages/editPackageProduct", {
-                authenticated: req.authenticated,
-                data: data.rows[0],
-              });
+              require("../db")
+                .query('select * from public."SP"')
+                .then((products) => {
+                  // console.log(products.rows);
+                  require("../db")
+                    .query(
+                      'select * from public."Goi_SP" where "goi_id" = $1',
+                      [id]
+                    )
+                    .then((d) => {
+                      for (let j = 0; j < products.rows.length; j++) {
+                        for (let i = 0; i < d.rows.length; i++) {
+                          if (products.rows[j].SP_id === d.rows[i].sp_id) {
+                            products.rows[j].selected = true;
+                            break;
+                          }
+                        }
+                      }
+                      res.render("productPackages/editPackageProduct", {
+                        authenticated: req.authenticated,
+                        data: data.rows[0],
+                        products: products.rows,
+                      });
+                    });
+                });
             }
           })
           .catch((err) => console.log(err));

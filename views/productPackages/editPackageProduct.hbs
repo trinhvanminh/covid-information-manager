@@ -47,10 +47,47 @@
           <option {{ifeq data.thoigian "Tháng"}} value="Tháng">Tháng</option>
         </select>
       </div>
-
+  
+      <label for="formGroupExampleInput2">Các sản phẩm trong gói hàng: </label>
+      {{#unless products}}
+        link tới chổ thêm sp
+      {{else}}
+        <div class="multiselect">
+          <div class="selectBox" onclick="showCheckboxes()">
+            <select>
+              <option>-- Sửa các sản phẩm</option>
+            </select>
+            <div class="overSelect"></div>
+          </div>
+          <div id="checkboxes">
+            {{#each products}}
+              <label for="{{this.SP_id}}">
+                <input
+                  type="checkbox"
+                  id="{{this.SP_id}}"
+                  value="{{this.SP_id}}"
+                  name="DS_sp_id"
+                  {{#if this.selected }}checked{{/if}}
+                />{{this.SP_id}}
+                /
+                {{this.ten}}
+                /
+                {{this.gia}}
+                /
+                {{this.donvi}}</label><br />
+            {{/each}}
+          </div>
+        </div>
+      {{/unless}}
+    </div>
       <button type="submit" class="btn btn-primary add-package-submit-1">Sửa gói
         nhu yếu phẩm</button>
     </form>
   {{/if}}
 
 </div>
+
+<script>var expanded = false; function showCheckboxes() { var checkboxes =
+  document.getElementById("checkboxes"); if (!expanded) {
+  checkboxes.style.display = "block"; expanded = true; } else {
+  checkboxes.style.display = "none"; expanded = false; } }</script>

@@ -4,9 +4,14 @@ const { verifyToken } = require("../jwt");
 
 router.get("/", verifyToken, PackageProductController.listPackageProduct);
 router.get(
-  "/view/:id",
+  "/view/:id/",
   verifyToken,
   PackageProductController.viewPackageProduct
+);
+router.delete(
+  "/view/:id/delete/:prodId",
+  verifyToken,
+  PackageProductController.deleteViewPackageProduct
 );
 router.get("/add", verifyToken, PackageProductController.addPackageProductView);
 router.post("/add", verifyToken, PackageProductController.addPackageProduct);
