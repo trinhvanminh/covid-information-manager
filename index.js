@@ -8,9 +8,19 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
 const fileUpload = require("express-fileupload");
+const axios = require("axios");
+const https = require("https");
 
 // override with POST having ?_method=DELETE
 app.use(methodOverride("_method"));
+
+const Agent = new https.Agent({
+  rejectUnauthorized: false,
+});
+
+const instance = axios.create();
+
+instance.defaults.httpsAgent = Agent;
 
 // set body-parse to parse req.body
 app.use(express.urlencoded({ extended: true }));
@@ -34,7 +44,8 @@ app.engine(
         ts ? ts.toLocaleDateString("en-GB").split("/").reverse().join("/") : "",
       ifeq: (a, b) => (a === b ? "selected" : ""),
       if_eq: (a, b, opts) => (a === b ? opts.fn(this) : opts.inverse(this)),
-      if_eq_s: (a,b,c,opts) => (a === b || a == c) ? opts.fn(this) : opts.inverse(this),
+      if_eq_s: (a, b, c, opts) =>
+        a === b || a == c ? opts.fn(this) : opts.inverse(this),
     },
   })
 );
