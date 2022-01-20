@@ -17,6 +17,8 @@ BEGIN;
 INSERT INTO "User" (username, password, role) VALUES ('admin','$2a$12$W/YJXySK8/oN199/pM0MYuS7M0okkSGQTHZIbDHkZr1Fursa5PEBq', 'admin');
 INSERT INTO "User" (username, password)  VALUES ('1712601','$2a$12$W/YJXySK8/oN199/pM0MYuS7M0okkSGQTHZIbDHkZr1Fursa5PEBq');
 INSERT INTO "User" (username, password, role)  VALUES ('manager','$2a$12$W/YJXySK8/oN199/pM0MYuS7M0okkSGQTHZIbDHkZr1Fursa5PEBq','manager');
+INSERT INTO "User" (username, password)  VALUES ('1712603','$2a$12$W/YJXySK8/oN199/pM0MYuS7M0okkSGQTHZIbDHkZr1Fursa5PEBq');
+
 COMMIT;
 
 
