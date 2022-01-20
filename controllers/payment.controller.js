@@ -22,7 +22,11 @@ const PaymentController = {
         id,
         amount,
       });
-      console.log(response);
+      res.render("./user/checkoutPayment", {
+        authenticated: req.authenticated,
+        message: response.data.message,
+        type: "success",
+      });
     } catch (error) {
       console.log(error);
     }
