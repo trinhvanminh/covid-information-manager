@@ -23,11 +23,13 @@
           type="submit"
         >Search</button>
       </form>
+      {{#if_eq_s role "manager" "admin"}}
       <a
         class="btn btn-primary covid-list-btn-add btn-sm list-product-button"
         href="/package-product/add"
         role="button"
       >Add package</a>
+      {{/if_eq_s}}
       <form action="" method="GET">
         <select
           class="form-select covid-list-select list-product-button"
