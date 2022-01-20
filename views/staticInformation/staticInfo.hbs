@@ -48,6 +48,7 @@
           </tbody>
         </table>
       </div>
+      <div id="chart1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -88,6 +89,8 @@
           </tbody>
         </table>
       </div>
+      <div id="chart2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -106,7 +109,7 @@
                 <strong>Tổng số Gói Nhu Yếu Phẩm</strong>
               </td>
               <td>
-                <strong>100</strong>
+                <strong>300</strong>
               </td>
             </tr>
             <tr>
@@ -114,7 +117,7 @@
                 <strong>Số lượng còn lại</strong>
               </td>
               <td>
-                <strong>99</strong>
+                <strong>85</strong>
               </td>
             </tr>
             <tr>
@@ -122,12 +125,13 @@
                 <strong>Số Lượng tiêu thụ</strong>
               </td>
               <td>
-                <strong>1</strong>
+                <strong>215</strong>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+      <div id="chart3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -154,7 +158,7 @@
                 <strong>Số lượng còn lại</strong>
               </td>
               <td>
-                <strong>9999</strong>
+                <strong>6482</strong>
               </td>
             </tr>
             <tr>
@@ -162,12 +166,13 @@
                 <strong>Số Lượng tiêu thụ</strong>
               </td>
               <td>
-                <strong>1</strong>
+                <strong>3518</strong>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+      <div id="chart4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -200,6 +205,176 @@
           </tbody>
         </table>
       </div>
+      <div id="chart5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
     </div>
   </div>
 </div>
+
+<script>
+  $(function () {
+    Highcharts.chart("chart1", {
+        title: {
+            text: "Biểu Đồ Thống Kê Người Dùng",
+        },
+        xAxis: {
+            categories: ['16/01', "17/01", "18/01", "19/01", "20/01", "21/01"]
+        },
+        yAxis: {
+            title: {
+                text: "Số Lượng"
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: "#808080"
+            }]
+        },
+        tooltip: {
+            valueSuffix: "Đơn Vị"
+        },
+        legend: {
+            layout: "vertical",
+            align: "right",
+            verticalAlign: "middle",
+            borderWidth: 0
+        },
+        series: [{
+            data: [1.0,2.0,1.0,3.0,0,1.0]
+        }]
+    });
+    Highcharts.chart("chart2", {
+        chart: {
+        type: 'column'
+         },
+        title: {
+            text: "Biểu Đồ Thống Kê Tổng Người",
+        },
+        xAxis: {
+            categories: ['Chuyển Trạng Thái', "Đã Khỏi Bệnh", "Chưa Khỏi"]
+        },
+        yAxis: {
+            title: {
+                text: "Số Lượng"
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: "#808080"
+            }]
+        },
+        tooltip: {
+            valueSuffix: "Đơn Vị"
+        },
+        legend: {
+            layout: "vertical",
+            align: "right",
+            verticalAlign: "middle",
+            borderWidth: 0
+        },
+        series: [{
+            data: [1000,1923,2999]
+        }]
+    });
+    Highcharts.chart("chart3", {
+        chart: {
+        type: 'line'
+         },
+        title: {
+            text: "Biểu Đồ Thống Kê Tiêu Thụ Gói Nhu Yếu Phẩm",
+        },
+        xAxis: {
+            categories: ['16/01', "17/01", "18/01", "19/01", "20/01", "21/01"]
+        },
+        yAxis: {
+            title: {
+                text: "Số Lượng"
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: "#808080"
+            }]
+        },
+        tooltip: {
+            valueSuffix: "Đơn Vị"
+        },
+        legend: {
+            layout: "vertical",
+            align: "right",
+            verticalAlign: "middle",
+            borderWidth: 0
+        },
+        series: [{
+            data: [32,43,12,54,72,2]
+        }]
+    });
+    Highcharts.chart("chart4", {
+        chart: {
+        type: 'column'
+         },
+        title: {
+            text: "Biểu Đồ Thống Kê Tiêu Thụ Nhu Yếu Phẩm",
+        },
+        xAxis: {
+            categories: ['16/01', "17/01", "18/01", "19/01", "20/01", "21/01"]
+        },
+        yAxis: {
+            title: {
+                text: "Số Lượng"
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: "#808080"
+            }]
+        },
+        tooltip: {
+            valueSuffix: "Đơn Vị"
+        },
+        legend: {
+            layout: "vertical",
+            align: "right",
+            verticalAlign: "middle",
+            borderWidth: 0
+        },
+        series: [{
+            data: [672,521,721,821,732,51]
+        }]
+    });
+    Highcharts.chart("chart5", {
+        chart: {
+        type: 'bar'
+         },
+        title: {
+            text: "Biểu Đồ Thống Kê Nợ Nần",
+        },
+        xAxis: {
+            categories: ["Dư Nợ", "Thanh Toán"]
+        },
+        yAxis: {
+            title: {
+                text: "VND"
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: "#808080"
+            }]
+        },
+        tooltip: {
+            valueSuffix: "Đơn Vị"
+        },
+        legend: {
+            layout: "vertical",
+            align: "right",
+            verticalAlign: "middle",
+            borderWidth: 0
+        },
+        series: [{
+            data: [100000000,19999999]
+        }]
+    });
+});
+
+</script>
