@@ -1,5 +1,7 @@
 const e = require("express");
 const db = require("../db");
+const LocalStorage = require("node-localstorage").LocalStorage,
+  localStorage = new LocalStorage("./scratch");
 
 class AdminController {
   // GET View Account Manager /
@@ -13,11 +15,14 @@ class AdminController {
   // GET List Location Isolation /
   listLocationIsolation(req, res) {
     // select all table NoiDieuTri
+    const role = localStorage.getItem("role");
+
     db.query('SELECT * FROM public."NoiDieuTri"').then((data) => {
       console.log(data);
       res.render("./admin/locationISO/listLocationIsolation", {
         authenticated: req.authenticated,
         data: data.rows,
+        role
       });
     });
 
@@ -25,8 +30,10 @@ class AdminController {
   }
   // GET Add Location Isolation /
   addLocationIsolationView(req, res) {
+    const role = localStorage.getItem("role");
     res.render("./admin/locationISO/addLocationIsolation", {
       authenticated: req.authenticated,
+      role
     });
   }
 
@@ -48,6 +55,7 @@ class AdminController {
   // GET Edit Location Isolation /
   editViewLocationIsolation(req, res) {
     const idNoiDieuTri = req.params.id;
+    const role = localStorage.getItem("role");
     db.query(
       `SELECT * FROM public."NoiDieuTri" WHERE "DieuTri_id" = ${idNoiDieuTri}`
     ).then((data) => {
@@ -55,6 +63,7 @@ class AdminController {
       res.render("./admin/locationISO/editLocationIsolation", {
         authenticated: req.authenticated,
         data: data.rows[0],
+        role
       });
     });
   }
