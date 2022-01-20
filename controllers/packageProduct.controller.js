@@ -255,8 +255,21 @@ class PackageProductController {
     if (!req.authenticated) {
       res.redirect("/");
     } else {
-      const { ten, gioihan_goi, thoigian } = req.body;
-      if (ten && gioihan_goi && thoigian) {
+      const { ten, gioihan_goi, thoigian, DS_sp_id } = req.body;
+      if (DS_sp_id && DS_sp_id.length < 2) {
+        require("../db")
+          .query('select * from public."SP"')
+          .then((data) => {
+            // danh sachs cac sp
+            res.render("./productPackages/addPackageProduct", {
+              authenticated: req.authenticated,
+              message: "Gói nhu yếu phẩm phải có ít nhất 2 sản phẩm",
+              type: "info",
+              data: data.rows,
+            });
+          })
+          .catch((err) => console.log(err));
+      } else if (ten && gioihan_goi && thoigian) {
         const queryStr = `UPDATE public."Goi"
         SET "ten" = $2, "gioihan_goi" = $3, "thoigian" = $4
         WHERE "Goi_id" = $1;`;
@@ -269,7 +282,28 @@ class PackageProductController {
                 message: "Cập nhật gói hàng không thành công",
                 type: "danger",
               });
-            } else res.redirect("/package-product");
+            } else {
+              // xoa goi_sp cu --> insert moi
+              require("../db")
+                .query(
+                  'delete from public."Goi_SP" where "Goi_SP"."goi_id" = $1',
+                  [req.params.id]
+                )
+                .then((data) => {
+                  const re = Promise.all(
+                    DS_sp_id.map((spId) => {
+                      require("../db").query(
+                        'insert into public."Goi_SP" (goi_id, sp_id) values ($1, $2)',
+                        [req.params.id, spId]
+                      );
+                    })
+                  );
+                  re.then((data) => {
+                    console.log(data);
+                    res.redirect("/package-product");
+                  }).catch((err) => console.log(err));
+                });
+            }
           });
       }
     }
