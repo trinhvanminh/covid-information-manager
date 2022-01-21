@@ -909,9 +909,9 @@ class ManagerController {
               (parseInt(maxNguoiId) + 1).toString(),
               ...DS_nlq_id,
             ]);
-            res.redirect("manager/related-covid/list");
+            res.redirect("/manager/related-covid/list");
           } else {
-            res.redirect("manager/related-covid/list");
+            res.redirect("/manager/related-covid/list");
           }
         })
         .catch((err) => console.log(err));
