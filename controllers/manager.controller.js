@@ -139,7 +139,7 @@ const dataAddress = [
       },
     ],
   },
-  { 
+  {
     id: "dongnai",
     name: "Đồng Nai",
     districts: [
@@ -195,7 +195,7 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
+        ],
       },
       {
         id: "3",
@@ -222,7 +222,7 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
+        ],
       },
       {
         id: "4",
@@ -249,7 +249,7 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
+        ],
       },
       {
         id: "5",
@@ -276,10 +276,11 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
-      },]
+        ],
+      },
+    ],
   },
-  { 
+  {
     id: "binhduong",
     name: "Bình Dương",
     districts: [
@@ -335,7 +336,7 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
+        ],
       },
       {
         id: "3",
@@ -362,7 +363,7 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
+        ],
       },
       {
         id: "4",
@@ -389,7 +390,7 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
+        ],
       },
       {
         id: "5",
@@ -416,10 +417,11 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
-      },]
+        ],
+      },
+    ],
   },
-  { 
+  {
     id: "tayninh",
     name: "Tây Ninh",
     districts: [
@@ -475,7 +477,7 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
+        ],
       },
       {
         id: "3",
@@ -502,7 +504,7 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
+        ],
       },
       {
         id: "4",
@@ -529,7 +531,7 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
+        ],
       },
       {
         id: "5",
@@ -556,10 +558,11 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
-      },]
+        ],
+      },
+    ],
   },
-  { 
+  {
     id: "longan",
     name: "Long An",
     districts: [
@@ -615,7 +618,7 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
+        ],
       },
       {
         id: "3",
@@ -642,7 +645,7 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
+        ],
       },
       {
         id: "4",
@@ -669,7 +672,7 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
+        ],
       },
       {
         id: "5",
@@ -696,8 +699,9 @@ const dataAddress = [
             id: "5",
             name: "Phường 5",
           },
-        ]
-      },]
+        ],
+      },
+    ],
   },
 ];
 
@@ -862,7 +866,11 @@ class ManagerController {
         hoten,
         cccd,
         namsinh,
-        diachi,
+        // diachi,
+        city,
+        district,
+        ward,
+        detail,
         trangthai,
         dieutri_id,
         lichsu,
@@ -871,8 +879,19 @@ class ManagerController {
       } = req.body;
       require("../db")
         .query(
-          'INSERT INTO "Nguoi" (hoten, cccd, namsinh, diachi, trangthai, dieutri_id, lichsu) VALUES ($1, $2, $3, $4, $5, $6, $7);',
-          [hoten, cccd, namsinh, diachi, trangthai, dieutri_id, lichsu]
+          'INSERT INTO "Nguoi" (hoten, cccd, namsinh, city,district,ward,detail, trangthai, dieutri_id, lichsu) VALUES ($1, $2, $3, $4, $5, $6, $7,$8,$9,$10);',
+          [
+            hoten,
+            cccd,
+            namsinh,
+            city,
+            district,
+            ward,
+            detail,
+            trangthai,
+            dieutri_id,
+            lichsu,
+          ]
         )
         .then((data) => {
           if (data.rowCount == 0) {
@@ -949,6 +968,9 @@ class ManagerController {
                           user: data.rows[0],
                           DSnoidieutri,
                           DSNguoi: nguoi.rows,
+                          dataAddress,
+                          dataDistrict: dataAddress[0].districts,
+                          dataWard: dataAddress[0].districts[0].wards,
                         });
                       });
                   })
@@ -967,7 +989,10 @@ class ManagerController {
         hoten,
         cccd,
         namsinh,
-        diachi,
+        city,
+        district,
+        ward,
+        detail,
         trangthai,
         dieutri_id,
         DS_nlq_id,
@@ -992,7 +1017,7 @@ class ManagerController {
               });
             } else {
               const queryStr = ` UPDATE public."Nguoi"
-              SET "hoten" = $2, "cccd" = $3, "namsinh" = $4, "diachi" = $5, "trangthai" = $6, "dieutri_id" = $7, "lichsu" = $8
+              SET "hoten" = $2, "cccd" = $3, "namsinh" = $4, "city" = $5, "district" = $6, "ward" = $7, "detail" = $8, "trangthai" = $9, "dieutri_id" = $10, "lichsu" = $11
               WHERE "Nguoi_id" = $1;`;
 
               require("../db")
@@ -1001,7 +1026,10 @@ class ManagerController {
                   hoten,
                   cccd,
                   namsinh,
-                  diachi,
+                  city,
+                  district,
+                  ward,
+                  detail,
                   trangthai,
                   dieutri_id,
                   lichsu,

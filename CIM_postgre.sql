@@ -60,7 +60,10 @@ CREATE TABLE "Nguoi" (
     "hoten" varchar(50) NOT NULL,
 	"cccd" varchar(12) UNIQUE, 
 	"namsinh" date,
-	"diachi" varchar(255) not null,
+	"city" varchar(255) not null,
+	"ward" varchar(255) not null,
+	"district" varchar(255) not null,
+	"detail" varchar(255),
 	"trangthai" varchar(3),
 	"dieutri_id" int4,
 	"lichsu" varchar(255)
@@ -72,10 +75,10 @@ CREATE TABLE "Nguoi" (
 -- Records of Nguoi
 -- ----------------------------
 BEGIN;
-INSERT INTO "Nguoi" (hoten, cccd, diachi, namsinh,trangthai, dieutri_id) VALUES ('trịnh văn minh','0123456789', 'xã Hoà Phú, huyện Củ Chi, HCM', '1998/11/26', 'F2', 1);
-INSERT INTO "Nguoi" (hoten, cccd, diachi, namsinh,trangthai, dieutri_id) VALUES ('lê quang nam','111111111', 'Linh Trung Ward, Thu Duc District, Ho Chi Minh City', '2000/1/3', 'F3', 2);
-INSERT INTO "Nguoi" (hoten, cccd, diachi, namsinh,trangthai, dieutri_id) VALUES ('nguyễn hoàng mẫn','222222222', '366E Cach Mang Thang Tam Street, An Thoi Ward, Can Tho City', '1998/11/26','F3',3);
-INSERT INTO "Nguoi" (hoten, cccd, diachi, namsinh,trangthai, dieutri_id) VALUES ('nguyễn văn a','33333333', 'zzzzzzzzzzz', '1998/11/26','', 3);
+INSERT INTO "Nguoi" (hoten, cccd, city, district, ward, detail, namsinh, trangthai, dieutri_id) VALUES ('trịnh văn minh','0123456789', 'Ho Chi Minh City', 'huyện Củ Chi', 'xã Hoà Phú','', '1998/11/26', 'F2', 1);
+INSERT INTO "Nguoi" (hoten, cccd, city, district, ward, detail, namsinh, trangthai, dieutri_id) VALUES ('lê quang nam','111111111', 'Ho Chi Minh City','Thu Duc District', 'Linh Trung Ward','', '2000/1/3', 'F3', 2);
+INSERT INTO "Nguoi" (hoten, cccd, city, district, ward, detail, namsinh, trangthai, dieutri_id) VALUES ('nguyễn hoàng mẫn','222222222', 'Can Tho City', 'Bình Thủy', 'An Thoi Ward', '366E Cach Mang Thang Tam Street', '1998/11/26','F3',3);
+INSERT INTO "Nguoi" (hoten, cccd, city, district, ward, detail, namsinh, trangthai, dieutri_id) VALUES ('nguyễn văn a','33333333', 'Ha Noi city','Ba Dinh District','Thanh Binh Ward','36A Doi Can Street', '1998/11/26','', 3);
 COMMIT;
 
 

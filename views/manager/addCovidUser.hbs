@@ -55,21 +55,22 @@
       <select name="city">
         <option>--Select Tỉnh/TP</option>
         {{#each dataAddress}}
-          <option value="{{this.id}}">{{this.name}}</option>
+          <option value="{{this.name}}">{{this.name}}</option>
         {{/each}}
       </select>
       <select name="district">
         <option>--Select Huyện</option>
         {{#each dataDistrict}}
-          <option value="{{this.id}}">{{this.name}}</option>
+          <option value="{{this.name}}">{{this.name}}</option>
         {{/each}}
       </select>
       <select name="ward">
         <option>--Select Xã</option>
         {{#each dataWard}}
-          <option value="{{this.id}}">{{this.name}}</option>
+          <option value="{{this.name}}">{{this.name}}</option>
         {{/each}}
       </select>
+      <input type="text" placeholder="162 đường số 8,...." name="detail" />
       {{! <input
         type="text"
         class="form-control"
