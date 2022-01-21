@@ -1,5 +1,705 @@
 const LocalStorage = require("node-localstorage").LocalStorage,
   localStorage = new LocalStorage("./scratch");
+const axios = require("axios");
+
+const dataAddress = [
+  {
+    id: "hochiminh",
+    name: "Hồ Chí Minh",
+    districts: [
+      {
+        id: "1",
+        name: "Quận 1",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ],
+      },
+      {
+        id: "2",
+        name: "Quận 2",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ],
+      },
+      {
+        id: "3",
+        name: "Quận 3",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ],
+      },
+      {
+        id: "4",
+        name: "Quận 4",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ],
+      },
+      {
+        id: "5",
+        name: "Quận 5",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ],
+      },
+    ],
+  },
+  { 
+    id: "dongnai",
+    name: "Đồng Nai",
+    districts: [
+      {
+        id: "1",
+        name: "Biên Hòa",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ],
+      },
+      {
+        id: "2",
+        name: "Long Khánh",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },
+      {
+        id: "3",
+        name: "Cẩm Mỹ",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },
+      {
+        id: "4",
+        name: "Long Thành",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },
+      {
+        id: "5",
+        name: "Định Quán",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },]
+  },
+  { 
+    id: "binhduong",
+    name: "Bình Dương",
+    districts: [
+      {
+        id: "1",
+        name: "Bến Cát",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ],
+      },
+      {
+        id: "2",
+        name: "Dầu Tiếng",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },
+      {
+        id: "3",
+        name: "Dĩ An",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },
+      {
+        id: "4",
+        name: "Phú Giáo",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },
+      {
+        id: "5",
+        name: "Tân Uyên",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },]
+  },
+  { 
+    id: "tayninh",
+    name: "Tây Ninh",
+    districts: [
+      {
+        id: "1",
+        name: "Tân Biên",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ],
+      },
+      {
+        id: "2",
+        name: "Tân Châu",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },
+      {
+        id: "3",
+        name: "Hòa Thành",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },
+      {
+        id: "4",
+        name: "Châu Thành",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },
+      {
+        id: "5",
+        name: "Trảng Bàng",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },]
+  },
+  { 
+    id: "longan",
+    name: "Long An",
+    districts: [
+      {
+        id: "1",
+        name: "Bến Lức",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ],
+      },
+      {
+        id: "2",
+        name: "Thủ Thừa",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },
+      {
+        id: "3",
+        name: "Tân Trụ",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },
+      {
+        id: "4",
+        name: "Thạnh Hóa",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },
+      {
+        id: "5",
+        name: "Mộc Hóa",
+        wards: [
+          {
+            id: "1",
+            name: "Phường 1",
+          },
+          ,
+          {
+            id: "2",
+            name: "Phường 2",
+          },
+          {
+            id: "3",
+            name: "Phường 3",
+          },
+          {
+            id: "4",
+            name: "Phường 4",
+          },
+          {
+            id: "5",
+            name: "Phường 5",
+          },
+        ]
+      },]
+  },
+];
 
 class ManagerController {
   // GET /related-covid/list
@@ -117,32 +817,39 @@ class ManagerController {
       });
   }
   // [GET]  /related-covid/list/add
-  addCovidUser(req, res, next) {
-    if (!req.authenticated) {
-      res.redirect("/");
-    } else {
-      require("../db")
-        .query('SELECT * FROM public."NoiDieuTri"')
-        .then((data) => {
-          if (data.rowCount == 0) {
-            console.log("khong co du lieu");
-            res.render("manager/addCovidUser", {
-              authenticated: req.authenticated,
-            });
-          } else {
-            require("../db")
-              .query('SELECT * FROM public."Nguoi" ORDER BY "Nguoi_id" ASC')
-              .then((nguoi) => {
-                res.render("manager/addCovidUser", {
-                  authenticated: req.authenticated,
-                  DSnoidieutri: data.rows,
-                  DSNguoi: nguoi.rows,
-                  maxNguoiId: nguoi.rows[nguoi.rows.length - 1].Nguoi_id,
-                });
+  async addCovidUser(req, res, next) {
+    try {
+      if (!req.authenticated) {
+        res.redirect("/");
+      } else {
+        require("../db")
+          .query('SELECT * FROM public."NoiDieuTri"')
+          .then((data) => {
+            if (data.rowCount == 0) {
+              console.log("khong co du lieu");
+              res.render("manager/addCovidUser", {
+                authenticated: req.authenticated,
               });
-          }
-        })
-        .catch((err) => console.log(err));
+            } else {
+              require("../db")
+                .query('SELECT * FROM public."Nguoi" ORDER BY "Nguoi_id" ASC')
+                .then((nguoi) => {
+                  res.render("manager/addCovidUser", {
+                    authenticated: req.authenticated,
+                    DSnoidieutri: data.rows,
+                    DSNguoi: nguoi.rows,
+                    maxNguoiId: nguoi.rows[nguoi.rows.length - 1].Nguoi_id,
+                    dataAddress,
+                    dataDistrict: dataAddress[0].districts,
+                    dataWard: dataAddress[0].districts[0].wards,
+                  });
+                });
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
   // [POST]  /related-covid/list/add
@@ -378,7 +1085,7 @@ class ManagerController {
     } else {
       res.render("manager/editPaymentLevel", {
         authenticated: req.authenticated,
-        hanMucThanhToanCu
+        hanMucThanhToanCu,
       });
     }
   }
@@ -407,7 +1114,6 @@ class ManagerController {
       });
     }
   }
-
 }
 
 module.exports = new ManagerController();
