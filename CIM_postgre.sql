@@ -203,7 +203,6 @@ ALTER TABLE "NguoiLienQuan" ADD CONSTRAINT "FK_Nguoi_NlqId" FOREIGN KEY (nlq_id)
 -- Foreign Keys structure for table Nguoi
 -- ----------------------------
 ALTER TABLE "Nguoi" ADD CONSTRAINT "FK_Nguoi_NoiDieuTri" FOREIGN KEY ("dieutri_id") REFERENCES "NoiDieuTri"("DieuTri_id") on delete SET NULL;
-
 -- ----------------------------
 -- Foreign Keys structure for table Goi_SP
 -- ----------------------------
