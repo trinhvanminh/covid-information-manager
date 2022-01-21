@@ -94,7 +94,7 @@
                 <strong>16/01/2022(11:52)</strong>
               </td>
               <td>
-                <strong>Trịnh Văn Minh</strong>
+                <strong>Lê Quang Nam</strong>
               </td>
               <td>
                 <strong>Active</strong>
@@ -135,9 +135,6 @@
       <div class="table-responsive">
         <table class="table">
           <thead class="text-primary">
-            <th width="20%">
-              <strong>Thời Gian</strong>
-            </th>
             <th width="65%">
               <strong>Tên Gói</strong>
             </th>
@@ -146,48 +143,21 @@
             </th>
           </thead>
           <tbody>
+            
             <tr>
               <td>
-                <strong>20/01/2022(15:29)</strong>
+                <strong>Gói combo ăn chay rau củ</strong>
               </td>
               <td>
-                <strong>Gói 2</strong>
-              </td>
-              <td>
-                <strong>1</strong>
+                <strong>2</strong>
               </td>
             </tr>
             <tr>
               <td>
-                <strong>20/01/2022(15:29)</strong>
+                <strong>Gói ăn thịt</strong>
               </td>
               <td>
-                <strong>Gói 2</strong>
-              </td>
-              <td>
-                <strong>1</strong>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>20/01/2022(15:29)</strong>
-              </td>
-              <td>
-                <strong>Gói 2</strong>
-              </td>
-              <td>
-                <strong>1</strong>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>20/01/2022(15:29)</strong>
-              </td>
-              <td>
-                <strong>Gói 2</strong>
-              </td>
-              <td>
-                <strong>1</strong>
+                <strong>0</strong>
               </td>
             </tr>
           </tbody>
@@ -204,7 +174,7 @@
         <table class="table">
           <thead class="text-primary">
             <th width="20%">
-              <strong>Thời Gian</strong>
+              <strong>ID-Payment</strong>
             </th>
             <th width="35%">
               <strong>Loại Hàng</strong>
@@ -213,81 +183,26 @@
               <strong>Số Lượng</strong>
             </th>
             <th width="15%">
-              <strong>Giá</strong>
-            </th>
-            <th width="15%">
               <strong>Thành Tiền</strong>
             </th>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <strong>19/01/2022(19:30)</strong>
-              </td>
-              <td>
-                <strong>Gói Nhu Yếu Phẩm</strong>
-              </td>
-              <td>
-                <strong>1</strong>
-              </td>
-              <td>
-                <strong>120000 vnđ</strong>
-              </td>
-              <td>
-                <strong>120000 vnđ</strong>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>19/01/2022(19:30)</strong>
-              </td>
-              <td>
-                <strong>Gói Nhu Yếu Phẩm</strong>
-              </td>
-              <td>
-                <strong>1</strong>
-              </td>
-              <td>
-                <strong>120000 vnđ</strong>
-              </td>
-              <td>
-                <strong>120000 vnđ</strong>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>19/01/2022(19:30)</strong>
-              </td>
-              <td>
-                <strong>Gói Nhu Yếu Phẩm</strong>
-              </td>
-              <td>
-                <strong>1</strong>
-              </td>
-              <td>
-                <strong>120000 vnđ</strong>
-              </td>
-              <td>
-                <strong>120000 vnđ</strong>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>19/01/2022(19:30)</strong>
-              </td>
-              <td>
-                <strong>Gói Nhu Yếu Phẩm</strong>
-              </td>
-              <td>
-                <strong>1</strong>
-              </td>
-              <td>
-                <strong>120000 vnđ</strong>
-              </td>
-              <td>
-                <strong>120000 vnđ</strong>
-              </td>
-            </tr>
+            {{#each history}}
+              <tr>
+                <td>
+                  <strong>{{this.id_history}}</strong>
+                </td>
+                <td>
+                  <strong>Gói Nhu Yếu Phẩm</strong>
+                </td>
+                <td>
+                  <strong>1</strong>
+                </td>
+                <td>
+                  <strong>{{this.amount}} vnđ</strong>
+                </td>
+              </tr>
+            {{/each}}
           </tbody>
         </table>
       </div>
@@ -319,7 +234,7 @@
             </tr>
             <tr>
               <td>
-                <strong>Thanh Toán</strong>
+                <strong>Số Tiền Đã Thanh Toán</strong>
               </td>
               <td>
                 <strong>0 vnđ</strong>

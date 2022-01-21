@@ -7,23 +7,43 @@ const bcrypt = require("bcrypt");
 
 class UserSystemController {
   // GET Information User /
-  viewInforUser(req, res) {
-    const role = localStorage.getItem("role");
-    const sodu = localStorage.getItem("sodu");
-    res.render("./user/informationUser", {
-      authenticated: req.authenticated,
-      sodu,
-      role,
-    });
+  async viewInforUser(req, res) {
+    try {
+      const role = localStorage.getItem("role");
+      const sodu = localStorage.getItem("sodu");
+      const idWallet = localStorage.getItem("idPayMent");
+      let response = await axios.put(`http://localhost:3003/api/history`, {
+        id: idWallet,
+      });
+
+      res.render("./user/informationUser", {
+        authenticated: req.authenticated,
+        sodu,
+        role,
+        history: response.data.data.rows,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // GET Notify Payment User /
-  notifyPaymentUser(req, res) {
-    const role = localStorage.getItem("role");
-    res.render("./user/notifyPayment", {
-      authenticated: req.authenticated,
-      role,
-    });
+  async notifyPaymentUser(req, res) {
+    try {
+      const role = localStorage.getItem("role");
+      const idWallet = localStorage.getItem("idPayMent");
+      let response = await axios.put(`http://localhost:3003/api/history`, {
+        id: idWallet,
+      });
+
+      res.render("./user/notifyPayment", {
+        authenticated: req.authenticated,
+        role,
+        history: response.data.data.rows,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // GET Cart User /
@@ -38,11 +58,11 @@ class UserSystemController {
   // GET Checkout User /
   checkoutUser(req, res) {
     const role = localStorage.getItem("role");
-    const sodu = localStorage.getItem("sodu")
+    const sodu = localStorage.getItem("sodu");
     res.render("./user/checkoutPayment", {
       authenticated: req.authenticated,
       role,
-      sodu
+      sodu,
     });
   }
   // patch Checkout Cart / - Thanh Toán Đơn Hàng Qua Hệ Thống Bên Kia
@@ -50,7 +70,7 @@ class UserSystemController {
     try {
       const role = localStorage.getItem("role");
       const idWallet = localStorage.getItem("idPayMent");
-      const amount = 100009;
+      const amount = 120000;
       const hanMucThanhToan = localStorage.getItem("hanMucThanhToan");
       if (amount < hanMucThanhToan) {
         res.render("./user/checkoutPayment", {

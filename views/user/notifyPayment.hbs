@@ -15,11 +15,6 @@
         href="/user/information"
         role="button"
       >Go Back</a>
-      <a
-        class="btn btn-primary covid-list-btn-add btn-sm list-product-button"
-        href="/xxx"
-        role="button"
-      >Liên Kết Thanh Toán</a>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -36,39 +31,19 @@
             </th>
           </thead>
           <tbody>
+            {{#each history}}
             <tr>
               <td>
-                <strong>TB-001</strong>
+                <strong>TB-{{this.id_history}}</strong>
               </td>
               <td>
-                <strong>Thanh Toán Hóa Đơn HD-002 Gói Nhu Yếu Phẩm </strong>
-              </td>
-              <td>
-                <strong>Chưa</strong>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>TB-003</strong>
-              </td>
-              <td>
-                <strong>Thanh Toán Hóa Đơn HD-008 Gói Nhu Yếu Phẩm </strong>
+                <strong>Thanh Toán Hóa Đơn HD-{{this.id_history}} - Gói Nhu Yếu Phẩm </strong>
               </td>
               <td>
                 <strong>Xong</strong>
               </td>
             </tr>
-            <tr>
-              <td>
-                <strong>TB-005</strong>
-              </td>
-              <td>
-                <strong>Thanh Toán Hóa Đơn HD-010 Gói Nhu Yếu Phẩm </strong>
-              </td>
-              <td>
-                <strong>Chưa</strong>
-              </td>
-            </tr>
+            {{/each}}
           </tbody>
         </table>
       </div>
